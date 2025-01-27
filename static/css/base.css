@@ -1,314 +1,222 @@
-/* Importaciones de fuentes */
-@import url("https://fonts.googleapis.com/css2?family=Gloock&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gloock&family=Montserrat:wght@400;600&display=swap");
-
-/* Estilo global */
-* {
-  font-family: "Montserrat", sans-serif;
+body {
+  color: #f1f1f1; /* Gris muy suave */
 }
 
-/* Tablas */
-tr, .dataTables_scrollHead {
-  border: 1px solid #dddddd; /* Borde gris */
+#sidebarMenu {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
+    width 0.3s ease-in-out;
+  width: 280px;
+  height: auto; /* Cambiado para que se ajuste automáticamente al contenido */
+  min-height: 100vh; /* Asegura que el sidebar siempre ocupe al menos toda la altura de la pantalla */
+  opacity: 1;
+  transform: translateX(0);
+  background: linear-gradient(180deg, #000000, #180081); /* Gradiente azul-morado */
+  color: white;
+  padding: 1rem 0;
 }
 
-td, th {
-  font-size: 12px;
-  border: 1px solid #ccc; /* Borde gris */
+#sidebarMenu.hidden {
+  transform: translateX(-100%);
+  opacity: 0;
+  width: 0;
 }
 
-th {
-  min-width: 150px;
+.navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #53006c;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: linear-gradient(180deg, #21004c, #7252ff);
 }
 
-#miTabla_info,
-#miTabla_length,
-#miTabla_filter,
-#miTabla_paginate {
-  font-size: 12px;
+.navbar .nav-link {
+  color: #b0b0b0; /* Gris suave para los enlaces */
+  transition: color 0.3s, text-decoration 0.3s;
 }
 
-/* Dropdown con animación */
-.my-dropdown-class {
-  animation: fade-in 0.5s ease;
+
+.btn-outline-secondary {
+  color: #fff;
+  border-color: #fff;
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.btn-outline-secondary:hover {
+  background-color: #fff;
+  color: #000;
 }
 
-/* Select personalizado */
-.select2-container .select2-selection--single {
-  height: 42px;
+#logoutBtn {
+  background-color: transparent;
+  color: #e63946; /* Rojo suave */
+  border: none;
+  font-size: 1.5rem;
+  padding: 0;
+  transition: transform 0.3s ease;
 }
 
-/* Contenedor de gráficos */
-.chart-container {
-  width: 100%; /* Ajustar al contenedor */
-  height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Íconos */
-i {
-  color: #73b4f9;
-  font-size: 1.2em;
-}
-
-.form-floating i {
-  font-size: 1.3em;
-}
-
-/* Slider personalizado */
-.form-range::-webkit-slider-thumb {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background-color: #007bff;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.form-range::-webkit-slider-thumb:hover {
-  background-color: #0056b3;
+#logoutBtn:hover {
+  color: #d62c1a; /* Rojo oscuro para el hover */
   transform: scale(1.2);
 }
 
-.form-range::-webkit-slider-thumb:active {
-  transform: scale(1.1);
+#sidebarMenu .nav-item {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: opacity 0.3s, transform 0.3s ease-out;
 }
 
-.form-range::-webkit-slider-runnable-track {
-  background: linear-gradient(to right, #007bff, #80d0ff);
-  height: 10px;
-  border-radius: 5px;
+#sidebarMenu:not(.hidden) .nav-item {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-.form-range:focus {
-  outline: none;
-  box-shadow: 0 0 10px rgba(0, 204, 255, 0.75);
+#content {
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
-/* Controles de formulario */
-.form-select:focus, .form-control:focus {
-  outline: none;
-  box-shadow: 0 0 10px rgba(0, 204, 255, 0.75);
+#wrapper:not(.hidden) #content {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Botón flotante */
-.fab {
-  transition: transform 0.6s ease;
+#sidebarMenu .nav-link {
+  opacity: 0.8; /* Hacer el texto un poco menos opaco */
+  transition: opacity 0.3s ease;
 }
 
-.fab:hover, .icon-image:hover {
-  transform: scale(1.4);
+#sidebarMenu .nav-link:hover {
+  opacity: 1; /* Restablecer la opacidad al hacer hover */
 }
 
-/* Botón personalizado */
-.btn-custom {
-  background-color: #7F7FFF;
-  border: none;
-  border-radius: 30px;
-  padding: 15px 40px;
-  transition: transform 0.4s ease, background-color 0.3s ease;
-}
-
-.btn-custom:hover {
-  background-color: #00BFFF;
-  transform: scale(1.3);
-}
-
-.btn-custom i {
-  margin-right: 10px;
-}
-
-/* Botón circular flotante */
-.btn-circle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #be4ec8;
-  color: white;
-  font-size: 30px;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 15px 20px rgba(79, 0, 103, 0.1);
-  cursor: pointer;
-  animation: bounce 3s infinite ease-in-out;
-}
-
-.btn-circle:hover {
-  background-color: #0056b3;
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-/* Animaciones iniciales */
-#formDataPredic {
-  animation: slideFromLeft 1s ease-out forwards;
-}
-
-@keyframes slideFromLeft {
-  0% {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-#welcomePage {
-  animation: slideInUp 2s ease-out;
-}
-
-@keyframes slideInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Botón flotante de envío */
-#submitFlex {
-  position: fixed;
-  bottom: 20px;
-  right: 80px;
-  background-color: #285ba7;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  font-size: 14px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  cursor: pointer;
-  animation: bounce 3s infinite ease-in-out;
-}
-
-#submitFlex:hover {
-  background-color: #090084;
-}
-
-/* Modales */
-.modal-backdrop {
-  z-index: 1050 !important;
-}
-
-.modal {
-  z-index: 1060 !important;
-}
-
-#closeModal {
-  background-color: white; /* White background for the button */
-  border: none; /* Remove border */
-}
-#closeModal::before {
-  color: white; /* Make the "X" white */
-}
-
-.metadata-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilo para el título de los metadatos */
-.metadata-title {
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-/* Estilo para cada tarjeta de metadatos */
-.card-style {
-  padding: 1.5rem;
-  margin: 1rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Estilo para las etiquetas dentro de las tarjetas */
-.metadata-label {
-  font-weight: bold;
-  color: #333;
-  font-size: 1rem;
-}
-
-/* Estilo para los valores dentro de las tarjetas */
-.metadata-value {
-  color: #777;
-  font-size: 0.9rem;
-}
-
-/* Efecto hover para las tarjetas */
-.card-style:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 10px 4px rgba(0, 191, 255, 0.6); /* Sombra celeste */
-}
-
-
-
-
-
-
-
-@keyframes slideInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(100%); /* Empieza desde abajo */
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0); /* Se mueve a su posición final */
-  }
-}
-
-#depositPredictionPage {
-  animation: slideInUp 0.8s ease-out;
-  animation-fill-mode: forwards;
-}
-
-.btn:hover {
-  transform: scale(1.02);
+#dashboardArrow {
+  font-size: 1.2rem;
   transition: transform 0.3s ease-in-out;
 }
 
-
-.fas.fa-upload, .fas.fa-download {
-  transition: color 0.3s ease-in-out;
+#scrollToTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px; /* Cambiado de left a right */
+  z-index: 2000;
+  display: none; /* Oculto por defecto */
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  background-color: #007bff; /* Azul más suave para el botón */
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
-.btn:hover .fas {
-  color: #fff;
+#scrollToTopBtn i {
+  font-size: 1.5rem;
+}
+
+#scrollToTopBtn:hover {
+  background-color: #0056b3; /* Azul más oscuro en hover */
+}
+
+/* Estilos para el enlace activo con fondo transparente y blur */
+.custom-active {
+  background-color: rgba(255, 255, 255, 0.361); 
+  color: #ffffff; /* Color del texto cuando esté activo */
+  border: 2px solid #3e006b; /* Un borde de color para resaltar el enlace activo */
+  border-radius: 15px; /* Bordes más redondeados */
+  padding: 10px 15px; /* Ajustar el padding para que se vea bien */
+  backdrop-filter: blur(8px); /* Desenfoque de fondo */
+}
+
+/* Estilos para el enlace activo con fondo transparente y blur */
+.custom-active-sub {
+  background-color: rgba(91, 0, 202, 0.361); 
+  color: #ffffff; /* Color de texto más claro cuando esté activo */
+  border: 2px solid #6e00cf; /* Bordes con un color morado para contrastar con el fondo */
+  border-radius: 15px; /* Bordes más redondeados */
+  padding: 10px 15px; /* Ajustar el padding para que se vea bien */
+  backdrop-filter: blur(5px); /* Desenfoque de fondo */
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  margin-top: 2px;
+}
+
+
+
+
+/* Estilo para la bienvenida compacta */
+.welcome-container {
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.welcome-message {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.welcome-container i {
+  margin-right: 7px;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-lg {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rounded {
+  border-radius: 8px;
+}
+
+.card-header {
+  background: linear-gradient(45deg, #6e00cf, #a400d6); /* Gradiente de morado */
+  color: #fff; /* Texto blanco */
+}
+
+
+#contenidoModulo {
+  max-height: 90vh; 
+  overflow-y: auto;
+}
+
+/* Personalización del scrollbar */
+#contenidoModulo::-webkit-scrollbar {
+  width: 8px; /* Hace el scrollbar más compacto */
+  height: 8px; /* También puedes modificar la altura del scrollbar horizontal si lo necesitas */
+}
+
+#contenidoModulo::-webkit-scrollbar-thumb {
+  background-color: #6e00cf; /* Color morado para el "dedo" del scrollbar */
+  border-radius: 10px; /* Hace que el thumb sea redondeado */
+}
+
+#contenidoModulo::-webkit-scrollbar-track {
+  background: transparent; /* Hace que la pista del scrollbar sea invisible o transparente */
+}
+
+.container-fluid {
+  min-height: 90vh; /* 100% del alto de la ventana */
+  display: flex;
+  flex-direction: column;
+}
+
+#toggleSidebarBtn {
+  background-color: rgba(251, 253, 254, 0.479); /* Azul con opacidad del 50% */
+  border: none; /* Elimina el borde por defecto */
+  color: white; /* Cambia el color del texto a blanco */
+  transition: background-color 0.3s ease; /* Transición suave al cambiar el fondo */
+}
+
+#toggleSidebarBtn:hover {
+  background-color: rgba(99, 174, 255, 0.7); /* Aumenta la opacidad al hacer hover */
 }
 

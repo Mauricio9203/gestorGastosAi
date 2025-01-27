@@ -1,95 +1,33 @@
-{% extends './base.html' %}
-
-{% block title %} Welcome {% endblock %}
-
-{% block body %}
-
-<div class="container text-center" id="welcomePage" style="margin-top: 50px;">
-
-    <!-- Main Header -->
-    <div class="row">
-        <div class="col">
-            <h1 class="display-5 fw-bold text-gradient" style="background: linear-gradient(to right, #7F7FFF, #A5A5FF); -webkit-background-clip: text; color: transparent;">
-                Welcome to the Predictive Banking App!
-            </h1>
-            <p class="lead text-muted" style="margin-top: 10px;">
-                Harnessing AI to predict customer behavior in banking.
-            </p>
+{% extends 'base.html' %} {% block title %}Data Analysis{% endblock %} {% block
+body %}
+<div class="container-fluid py-4">
+  <!-- Título del módulo -->
+  <h3 class="text-dark d-flex align-items-center text-shadow mb-4">
+    <i class="fas fa-chart-line mr-2"></i>
+    <!-- Icono de análisis de datos -->
+    Overview
+  </h3>
+  <!-- Fila de las tarjetas -->
+  <div class="row">
+    <!-- Card 1 -->
+    <div class="col-12">
+      <div class="card rounded-lg shadow-lg border-0">
+        <div class="card-header text-white text-shadow">
+          Título de la Card 1
         </div>
-    </div>
-
-    <!-- Modules Explanation Section -->
-    <div class="row mt-5">
-        <div class="col-12 col-md-10 offset-md-1">
-            <div class="card shadow-lg" style="border: none; border-radius: 20px; background: #F7F7FF;">
-                <div class="card-body">
-                    <h5 class="card-title fw-bold" style="color: #6161FF;">
-                        Explore Our Modules
-                    </h5>
-                    <p class="card-text text-muted">
-                        This application offers two main modules to predict customer behavior:
-                    </p>
-                    <ul class="list-group list-group-flush text-start">
-                        <li class="list-group-item" style="border: none; background: transparent;">
-                            <strong style="color: #4A4EAE;">Deposit Approval Predictor:</strong> This module is designed for individual predictions. Enter customer details directly into the interface to get instant results.
-                        </li>
-                        <li class="list-group-item" style="border: none; background: transparent;">
-                            <strong style="color: #4A4EAE;">Massive Predictions:</strong> This module processes predictions in bulk. Upload an Excel file containing customer data to receive a detailed report with predictions for all entries.
-                        </li>
-                    </ul>
-                    <p class="text-muted mt-3">
-                        Choose the module that fits your needs and let our AI handle the predictions!
-                    </p>
-                </div>
-            </div>
+        <div class="card-body">
+          <h5 class="card-title text-dark">Título Principal</h5>
+          <p class="card-text text-dark">
+            Este es el contenido dentro de la card. Puedes colocar cualquier
+            tipo de información o componente aquí.
+          </p>
         </div>
+      </div>
     </div>
+  </div>
+  <!-- End row -->
 
-<!-- Start Prediction Buttons -->
-<div class="row mt-5">
-    <div class="col text-center">
-        <a href="{{ url_for('deposit_approval_predictor_view') }}" 
-           class="btn btn-lg mx-3 mb-3" 
-           style="background: #7F7FFF; color: white; border: none; border-radius: 30px; 
-                  padding: 15px 40px; font-size: 1.1rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-            <i class="fas fa-user"></i> Individual Prediction
-        </a>
-        <a href="{{ url_for('massive_predictions_view') }}" 
-           class="btn btn-lg mx-3 mb-3" 
-           style="background: #FFD700; color: black; border: none; border-radius: 30px; 
-                  padding: 15px 40px; font-size: 1.1rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-            <i class="fas fa-file-upload"></i> Massive Prediction
-        </a>
-    </div>
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+  {% endblock %}
 </div>
-
-
-
-    <!-- Technologies Used -->
-    <div class="row mt-5">
-        <div class="col">
-            <h5 class="fw-bold" style="color: #6161FF;">Technologies Used</h5>
-            <div class="mt-3">
-                <i class="fab fa-python" style="font-size: 40px; color: #306998;"></i>
-                <i class="fab fa-bootstrap" style="font-size: 40px; color: #563D7C;"></i>
-                <i class="fab fa-js" style="font-size: 40px; color: #F0DB4F;"></i>
-                <i class="fab fa-css3-alt" style="font-size: 40px; color: #1572B6;"></i> 
-            </div>
-        </div>
-    </div>
-
-    <!-- GitHub Icon with Link -->
-    <div class="row mt-5">
-        <div class="col">
-            <h5 class="fw-bold" style="color: #6161FF;">Project Repository</h5>
-            <div class="mt-3">
-                <a href="https://github.com/Mauricio9203/predictiveBanking" target="_blank" style="text-decoration: none;">
-                    <i class="fab fa-github" style="font-size: 50px; color: #000000;"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-{% endblock %}
