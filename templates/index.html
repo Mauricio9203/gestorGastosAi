@@ -2,21 +2,20 @@
 body %}
 <div class="container-fluid py-4">
   <!-- Título del módulo -->
-  <h3 class="text-dark d-flex align-items-center text-shadow mb-4">
+  <h3 class="text-dark d-flex align-items-center text-shadow">
     <i class="fas fa-chart-line mr-2"></i>
     <!-- Icono de análisis de datos -->
     Overview
   </h3>
+
   <!-- Fila de las tarjetas -->
-  <div class="row">
+  <div class="row mt-3">
     <!-- Card 1 -->
     <div class="col-12">
       <div class="card rounded-lg shadow-lg border-0">
-        <div class="card-header text-white text-shadow">
-          Título de la Card 1
-        </div>
         <div class="card-body">
           <h5 class="card-title text-dark">Título Principal</h5>
+          <hr />
           <p class="card-text text-dark">
             Este es el contenido dentro de la card. Puedes colocar cualquier
             tipo de información o componente aquí.
@@ -25,6 +24,7 @@ body %}
       </div>
     </div>
   </div>
+
   <!-- End row -->
 
   <script src="{{ url_for('static', filename='js/index.js') }}"></script>

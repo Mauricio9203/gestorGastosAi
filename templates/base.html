@@ -9,6 +9,8 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script
       src="https://kit.fontawesome.com/7f5bb65cb8.js"
       crossorigin="anonymous"
@@ -19,6 +21,11 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/base.css') }}"
     />
+
+    <!-- Incluir CSS de DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+ <!-- Cargar jQuery primero -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
 
   <body>
@@ -30,6 +37,7 @@
           </h5>
         </div>
 
+        <!-- Primer UL: Dashboard -->
         <ul class="nav flex-column mt-1">
           <li class="nav-item">
             <a
@@ -48,19 +56,51 @@
             <div class="collapse" id="dashboard">
               <ul class="nav flex-column ml-3">
                 <li class="nav-item" id="overviewOption">
-                  <a id="overviewLink" class="nav-link text-white" href="{{ url_for('index') }}">
-                    <i class="fa-solid fa-eye"></i> Overview
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a id="holaMundoLink" class="nav-link text-white act" href="{{ url_for('hola_mundo_page') }}">
-                    <i class="fa-solid fa-chart-bar"></i> Hello World
+                  <a
+                    id="overviewLink"
+                    class="nav-link text-white"
+                    href="{{ url_for('index') }}"
+                  >
+                    <i class="fa-solid fa-eye"></i> Dashboard
                   </a>
                 </li>
               </ul>
             </div>
           </li>
         </ul>
+
+        <!-- Segundo UL: Configuraciones -->
+        <ul class="nav flex-column mt-4">
+          <li class="nav-item">
+            <a
+              class="nav-link text-white"
+              href="#configuraciones"
+              data-toggle="collapse"
+              aria-expanded="false"
+              id="configuracionesLink"
+            >
+              <i class="fa-solid fa-cogs"></i> Configuraciones
+              <i
+                class="fa-solid fa-angle-down float-right"
+                id="configuracionesArrow"
+              ></i>
+            </a>
+            <div class="collapse" id="configuraciones">
+              <ul class="nav flex-column ml-3">
+                <li class="nav-item">
+                  <a
+                    id="usuarios"
+                    class="nav-link text-white"
+                    href="{{ url_for('usuarios_page') }}"
+                  >
+                    <i class="fa-solid fa-users"></i> Usuarios
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+
       </div>
 
       <div class="container-fluid p-0" id="content">
@@ -70,20 +110,28 @@
             <i class="fa-solid fa-chevron-left"></i>
           </button>
 
-          <button class="btn" id="logoutBtn">
-            <i class="fa-solid fa-sign-out-alt"></i>
+          <!-- Botón Stand By -->
+          <button class="btn btn-outline-warning" id="logoutBtn">
+            <i class="fa-solid fa-power-off"></i>
           </button>
         </nav>
 
-        <div class="container-fluid" id="contenidoModulo" style="margin-top: 54px">
+        <div
+          class="container-fluid"
+          id="contenidoModulo"
+          style="margin-top: 54px"
+        >
           {% block body %} {% endblock %}
         </div>
       </div>
     </div>
+
     <button id="scrollToTopBtn" class="btn btn-primary rounded-circle">
       <i class="fa-solid fa-arrow-up"></i>
     </button>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Cargar DataTables después de jQuery -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>

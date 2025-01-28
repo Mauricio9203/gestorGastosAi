@@ -3,17 +3,43 @@ body {
 }
 
 #sidebarMenu {
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
-    width 0.3s ease-in-out;
-  width: 280px;
-  height: auto; /* Cambiado para que se ajuste automáticamente al contenido */
-  min-height: 100vh; /* Asegura que el sidebar siempre ocupe al menos toda la altura de la pantalla */
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, width 0.3s ease-in-out;
+  width: 300px;
+  height: auto;
+  min-height: 100vh;
   opacity: 1;
   transform: translateX(0);
-  background: linear-gradient(180deg, #000000, #180081); /* Gradiente azul-morado */
+  background: linear-gradient(180deg, #4A148C, #5938a4, #283593);
   color: white;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3); /* Sombra a la derecha */
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
 }
+
+/* Media query para dispositivos pequeños (máximo 768px de ancho) */
+@media (max-width: 768px) {
+  #sidebarMenu {
+    width: 300px; /* Ajuste del ancho del sidebar en pantallas pequeñas */
+  }
+}
+
+
+#sidebarMenu a {
+  display: block;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Separadores */
+}
+
+#sidebarMenu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #EDE7F6;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+
 
 #sidebarMenu.hidden {
   transform: translateX(-100%);
@@ -23,13 +49,13 @@ body {
 
 .navbar {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-bottom: 2px solid #53006c;
+  border-bottom: 2px solid #9881ff;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  background: linear-gradient(180deg, #21004c, #7252ff);
+  background: linear-gradient(180deg, #9881ff, #9881ff);
 }
 
 .navbar .nav-link {
@@ -126,24 +152,38 @@ body {
 
 /* Estilos para el enlace activo con fondo transparente y blur */
 .custom-active {
-  background-color: rgba(255, 255, 255, 0.361); 
-  color: #ffffff; /* Color del texto cuando esté activo */
-  border: 2px solid #3e006b; /* Un borde de color para resaltar el enlace activo */
-  border-radius: 15px; /* Bordes más redondeados */
-  padding: 10px 15px; /* Ajustar el padding para que se vea bien */
-  backdrop-filter: blur(8px); /* Desenfoque de fondo */
+  background-color: rgba(62, 0, 107, 0.5); /* Fondo con más armonía */
+  color: #ffffff; /* Texto blanco puro */
+  border: 1px solid #3e006b; /* Borde más delgado */
+  border-radius: 10px; /* Bordes ligeramente redondeados */
+  padding: 10px 15px; /* Espaciado */
+  backdrop-filter: blur(8px); /* Fondo desenfocado */
+  transition: all 0.3s ease-in-out; /* Transición suave */
+}
+
+.custom-active:hover {
+  background-color: rgba(62, 0, 107, 0.7); /* Fondo más intenso al pasar el mouse */
+  border-color: #6f00cc; /* Borde más claro en hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
 }
 
 /* Estilos para el enlace activo con fondo transparente y blur */
 .custom-active-sub {
-  background-color: rgba(91, 0, 202, 0.361); 
-  color: #ffffff; /* Color de texto más claro cuando esté activo */
-  border: 2px solid #6e00cf; /* Bordes con un color morado para contrastar con el fondo */
-  border-radius: 15px; /* Bordes más redondeados */
-  padding: 10px 15px; /* Ajustar el padding para que se vea bien */
-  backdrop-filter: blur(5px); /* Desenfoque de fondo */
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  margin-top: 2px;
+  background-color: rgba(91, 0, 202, 0.5); /* Fondo más vivo */
+  color: #ffffff; /* Texto blanco puro */
+  border: 1px solid #6e00cf; /* Borde más delgado */
+  border-radius: 10px; /* Bordes ligeramente redondeados */
+  padding: 10px 15px; /* Espaciado */
+  backdrop-filter: blur(8px); /* Fondo desenfocado */
+  margin-top: 2px; /* Separación vertical */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s; /* Transición más completa */
+}
+
+.custom-active-sub:hover {
+  background-color: rgba(91, 0, 202, 0.7); /* Fondo más intenso al pasar el mouse */
+  border-color: #8e2df5; /* Borde más brillante en hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra más marcada */
 }
 
 
@@ -178,8 +218,8 @@ body {
 }
 
 .card-header {
-  background: linear-gradient(45deg, #6e00cf, #a400d6); /* Gradiente de morado */
-  color: #fff; /* Texto blanco */
+  background-color: #d1c4e9;
+  color: #1e293b; /* Texto gris oscuro */
 }
 
 
@@ -210,7 +250,7 @@ body {
 }
 
 #toggleSidebarBtn {
-  background-color: rgba(251, 253, 254, 0.479); /* Azul con opacidad del 50% */
+  background-color: rgba(251, 253, 254, 0.176); /* Azul con opacidad del 50% */
   border: none; /* Elimina el borde por defecto */
   color: white; /* Cambia el color del texto a blanco */
   transition: background-color 0.3s ease; /* Transición suave al cambiar el fondo */

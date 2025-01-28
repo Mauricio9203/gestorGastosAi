@@ -1,0 +1,107 @@
+{% extends 'base.html' %} {% block title %}Data Analysis{% endblock %} {% block
+body %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/users.css') }}"
+/>
+
+<div class="container-fluid py-4">
+  <h3 class="text-dark d-flex align-items-center text-shadow">
+    <i class="fas fa-chart-line mr-2"></i>
+    Usuarios
+  </h3>
+
+  <!-- Formulario para agregar usuario -->
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="card rounded-lg shadow-lg border-0">
+        <div class="card-body">
+          <h5 class="card-title text-dark">Agregar Usuario</h5>
+          <hr />
+          <form action="/add_user" method="POST">
+            <div class="row">
+              <!-- Nombre Completo -->
+              <div class="col-md-4 mb-3">
+                <label for="username" class="form-label text-dark"
+                  >Nombre Completo</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  required
+                />
+              </div>
+
+              <!-- Correo Electrónico -->
+              <div class="col-md-4 mb-3">
+                <label for="email" class="form-label text-dark"
+                  >Correo Electrónico</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  required
+                />
+              </div>
+
+              <!-- Contraseña -->
+              <div class="col-md-4 mb-3">
+                <label for="password" class="form-label text-dark"
+                  >Contraseña</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Botón de submit centrado -->
+            <div class="d-flex justify-content-center mt-3">
+              <button type="submit" class="btn btn-primary">
+                Agregar Usuario
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla de Usuarios -->
+  <div class="row mt-3">
+    <div class="col-12 mb-3">
+      <div class="card rounded-lg shadow-lg border-0">
+        <div class="card-body">
+          <h5 class="card-title text-dark">Usuarios</h5>
+          <hr />
+          <div class="table-responsive">
+            <table id="myTable" class="display text-dark w-100">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Correo Electrónico</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Aquí se insertarán las filas de usuarios dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/users.js') }}"></script>
+
+{% endblock %}

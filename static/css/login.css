@@ -1,0 +1,143 @@
+/* Fondo con gradiente animado */
+body {
+    background: linear-gradient(135deg, #6a11cb, #2575fc, #1f5ef2, #9b4dca);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    color: #fff;
+}
+
+/* Animación del gradiente */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Estilo de la tarjeta de login con efecto glass */
+.card {
+    background: rgba(255, 255, 255, 0.15); /* Fondo translúcido */
+    backdrop-filter: blur(8px); /* Efecto glass sutil */
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease-in-out;
+}
+
+/* Estilo para los campos del formulario */
+.form-control {
+    background: rgba(255, 255, 255, 0.1); /* Fondo translúcido en los inputs */
+    border: 1px solid rgba(242, 171, 171, 0.3);
+    color: #fff;
+}
+
+/* Efecto cuando el input está en foco */
+.form-control:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+/* Título del formulario */
+h2 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* Estilo del ícono en el título */
+.fas {
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+/* Botón de inicio de sesión con colores personalizados */
+.btn-primary {
+    background-color: #6a11cb; /* Color morado más suave */
+    border-color: #6a11cb; /* Alineamos el borde con el fondo */
+    color: white; /* Texto en blanco */
+    font-weight: 600; /* Peso de la fuente para más énfasis */
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover sobre el botón */
+.btn-primary:hover {
+    background-color: #2575fc; /* Color azul más intenso */
+    border-color: #2575fc;
+    transform: scale(1.05); /* Le da un efecto de agrandarse un poco */
+    box-shadow: 0px 5px 15px rgba(38, 143, 255, 0.3); /* Sombra suave cuando el botón está en hover */
+}
+
+/* Foco en el botón */
+.btn-primary:focus {
+    outline: none; /* Quitamos el borde predeterminado */
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Añadimos un foco suave azul */
+}
+
+
+
+/* Estilo para el título con ícono */
+.title {
+    font-size: 2.5rem; /* Tamaño más grande para destacar */
+    font-weight: 600; /* Peso de fuente más pesado */
+    color: #fff; /* Color blanco */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Transición suave para animaciones */
+}
+
+/* Estilo para el ícono */
+.title .fas {
+    margin-right: 15px; /* Espacio entre el ícono y el texto */
+    font-size: 2.5rem; /* Tamaño del ícono ajustado */
+    color: #fff; /* Color blanco para el ícono */
+    transition: transform 0.3s ease; /* Transición suave para el ícono */
+}
+
+/* Efecto de animación cuando el título o el ícono son hover */
+.title:hover {
+    transform: translateY(-5px); /* Movimiento hacia arriba cuando el cursor está sobre el título */
+    opacity: 0.9; /* Efecto de opacidad */
+}
+
+/* Efecto para el ícono en hover */
+.title:hover .fas {
+    transform: rotate(360deg); /* Rotación del ícono al hacer hover */
+}
+
+.password-container {
+    position: relative;
+}
+
+
+.password-container .position-relative {
+    position: relative;
+}
+
+/* Efecto de la contraseña y el ícono del ojo */
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10; /* Asegurarse de que esté sobre el input */
+    color: #fff; /* Cambiar el color a blanco */
+    font-size: 1.2rem; /* Reducir el tamaño del ícono */
+}
+
+.password-toggle:hover {
+    color: #ddd; /* Color más claro cuando el mouse pasa por encima */
+}

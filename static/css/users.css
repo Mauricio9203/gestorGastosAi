@@ -1,0 +1,37 @@
+ /* Hacer la tabla más compacta */
+ table.dataTable {
+    font-size: 12px;  /* Reducir el tamaño de la fuente */
+    width: 100% !important;  /* Asegurarse de que la tabla ocupe todo el ancho disponible */
+  }
+
+  table.dataTable th, table.dataTable td {
+    padding: 5px 10px;  /* Reducir el padding */
+  }
+
+  /* Hacer que los botones se vean más pequeños */
+  .btn-sm {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  /* Ajustar los iconos de los botones */
+  .btn i {
+    font-size: 16px;
+  }
+
+  /* Mejorar el diseño de los botones */
+  .btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .btn-info {
+    background-color: #17a2b8;
+    color: white;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+  }

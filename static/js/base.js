@@ -82,9 +82,6 @@ document.getElementById("dashboardLink").addEventListener("click", function () {
   }
 });
 
-document.getElementById("logoutBtn").addEventListener("click", function () {
-  alert("¡Cerrando sesión!");
-});
 
 // Mostrar el botón al hacer scroll
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
@@ -103,3 +100,38 @@ scrollToTopBtn.addEventListener("click", () => {
     behavior: "smooth",
   });
 });
+
+//cierre de sesión
+document.addEventListener("DOMContentLoaded", function() {
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", function() {
+      // Mostramos la confirmación con SweetAlert2
+      swal.fire({
+        title: '¿Estás seguro?',
+        text: "Se cerrará tu sesión.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, cerrar sesión',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Si el usuario confirma, hacemos la solicitud para cerrar sesión
+          fetch("/logout", {
+            method: "GET",
+          })
+          .then(response => {
+            // Redirigir al login después de cerrar sesión
+            window.location.href = "/login"; // Redirige al login
+          })
+          .catch(error => {
+            console.error("Error al cerrar sesión:", error);
+          });
+        }
+      });
+    });
+  }
+});
+
