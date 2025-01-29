@@ -260,3 +260,17 @@ body {
   background-color: rgba(99, 174, 255, 0.7); /* Aumenta la opacidad al hacer hover */
 }
 
+  /* Cambiar color de texto en el modal */
+  #userModal .modal-header, 
+  #userModal .modal-body, 
+  #userModal .modal-footer {
+    color: black;
+  }
+
+  /* También puedes cambiar el color del texto de los campos */
+  #userModal .form-label {
+    color: black;
+  }
+  #userModal .form-control {
+    color: black;
+  }

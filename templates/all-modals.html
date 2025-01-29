@@ -1,0 +1,32 @@
+<!-- Modal para Agregar o Editar Usuario -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userModalLabel">Agregar Usuario</h5>
+        </div>
+        <div class="modal-body">
+          <form id="userForm">
+            <div class="mb-3">
+              <label for="username" class="form-label">Nombre de Usuario</label>
+              <input type="text" class="form-control" id="username" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="closeModalUsuarioBtn">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="saveUser">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+      

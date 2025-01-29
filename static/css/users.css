@@ -35,3 +35,16 @@
     background-color: #dc3545;
     color: white;
   }
+
+
+  #loadingSpinner {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: gray;  /* Color gris para el texto */
+  }
+  
+  #loadingSpinner .fa-spinner {
+    color: gray;  /* Color gris para el spinner */
+  }
+  
