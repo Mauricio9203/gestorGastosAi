@@ -1,4 +1,4 @@
 Flask==3.1.0
 Flask_Cors==5.0.0
-python_bcrypt==0.3.2
+bcrypt==4.2.1
 supabase==2.12.0
