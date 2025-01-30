@@ -274,3 +274,12 @@ body {
   #userModal .form-control {
     color: black;
   }
+
+
+  @media (max-width: 576px) { /* Para pantallas pequeñas */
+    .modal-dialog {
+      max-width: 90%; /* Ajusta el ancho del modal */
+      margin: auto;  /* Centrar */
+      margin-top: 10vh;
+    }
+  }

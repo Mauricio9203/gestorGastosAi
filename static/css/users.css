@@ -48,3 +48,82 @@
     color: gray;  /* Color gris para el spinner */
   }
   
+
+
+
+
+  /* Estilos generales para la tabla */
+table.dataTable {
+  border-collapse: collapse;
+  border-spacing: 0; /* Sin espaciado entre las celdas */
+}
+
+table.dataTable thead {
+  background-color: #818181; /* Azul para el encabezado */
+  color: white;
+  text-align: center; /* Centrado de texto en los encabezados */
+}
+
+table.dataTable tbody tr {
+  background-color: #ffffff; /* Fondo blanco para las filas */
+  border-bottom: 1px solid #ddd; /* Borde sutil entre filas */
+  transition: background-color 0.3s ease-in-out; /* Transición suave al pasar el mouse */
+}
+
+table.dataTable tbody tr:hover {
+  background-color: #f1f1f1; /* Fondo suave al pasar el mouse */
+}
+
+table.dataTable td, table.dataTable th {
+  padding: 8px 10px; /* Menos espacio en las celdas */
+  text-align: center; /* Centrado de texto en las celdas */
+  font-size: 0.8rem; /* Tamaño de fuente más pequeño */
+}
+
+table.dataTable td:first-child, table.dataTable th:first-child {
+  text-align: left; /* Alinear el primer elemento (nombre) a la izquierda */
+}
+
+/* Eliminar espacio extra entre el borde de las celdas */
+table.dataTable td {
+  border-right: 1px solid #ddd; /* Borde sutil entre celdas */
+}
+
+/* Evitar bordes en la última columna */
+table.dataTable td:last-child {
+  border-right: none;
+}
+
+
+/* Estilos para el botón "Add User" */
+#btnAddUser {
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 50px; /* Bordes redondeados */
+  background-color: #28a745; /* Verde para el botón de agregar */
+  color: white;
+  border: none;
+}
+
+#btnAddUser:hover {
+  background-color: #218838; /* Verde más oscuro al pasar el ratón */
+}
+
+/* Estilos de la tabla cuando se está cargando */
+#loadingSpinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #007bff;
+  margin: 20px 0;
+}
+
+/* Estilo para la tabla responsive */
+.table-responsive {
+  margin-top: 20px; /* Separar un poco más la tabla */
+}
+
+.table-sm {
+  font-size: 0.75rem; /* Reducir un poco el tamaño de la fuente para mayor legibilidad */
+}

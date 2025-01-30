@@ -111,12 +111,12 @@ document.addEventListener("DOMContentLoaded", function () {
       // Mostramos la confirmación con SweetAlert2
       swal
         .fire({
-          title: "¿Estás seguro?",
-          text: "Se cerrará tu sesión.",
+          title: "You're sure?",
+          text: "You will be logged out.",
           icon: "warning",
           showCancelButton: true,
-          confirmButtonText: "Sí, cerrar sesión",
-          cancelButtonText: "Cancelar",
+          confirmButtonText: "Yes, log out",
+          cancelButtonText: "Cancel",
           reverseButtons: true,
         })
         .then((result) => {
@@ -149,6 +149,7 @@ const cargarTabla = (tableData, tablaId) => {
   $("#" + tablaId).DataTable({
     data: tableData,
     responsive: true,
+  /* spanish
     language: {
       sEmptyTable: "No hay datos disponibles",
       sInfo: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
@@ -166,8 +167,13 @@ const cargarTabla = (tableData, tablaId) => {
         sPrevious: "Anterior",
       },
     },
+*/
+
   });
 };
 
 
 const convertirFecha = (fechaStr) => new Date(fechaStr).toLocaleString();
+
+
+

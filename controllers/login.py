@@ -7,6 +7,16 @@ SUPABASE_URL = "https://anvmidwmtgkhtesxtdsk.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFudm1pZHdtdGdraHRlc3h0ZHNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgwNDgxOTMsImV4cCI6MjA1MzYyNDE5M30.848n_1vRqoMJXUPtdzQKffW1DJkZYG53rt7TXMbVWSE"
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
+def buscar_usuario_por_email(email):
+    # Buscar el usuario por email
+    response = supabase.table('users').select('id').eq('email', email).execute()
+
+    # Verificar si se encontró el usuario
+    if response.data:
+        return True  # Usuario encontrado
+    else:
+        return False  # Usuario no encontrado
+
 # Definir el Blueprint
 login_bp = Blueprint('login', __name__)
 
@@ -20,9 +30,13 @@ def login():
     email = data.get('email')
     password = data.get('password')
 
+    # Usar la función buscar_usuario_por_email para verificar si el usuario existe
+    if not buscar_usuario_por_email(email):
+        return jsonify({'success': False, 'message': 'User not found'}), 200
+
     # Buscar al usuario por correo en la tabla 'users'
     response = supabase.table('users').select('*').eq('email', email).single().execute()
-
+    
     # Verificar si el usuario existe
     if response.data:
         user = response.data
@@ -31,11 +45,12 @@ def login():
         password_hash = user['password_hash']
         if bcrypt.checkpw(password.encode('utf-8'), password_hash.encode('utf-8')):
             session['email'] = email  # Guardamos el email en la sesión
-            return jsonify({'success': True, 'message': 'Inicio de sesión exitoso'})
+            session['username'] = user["username"]  # Guardamos el nombre en la sesión
+            return jsonify({'success': True, 'message': 'Login successful'})
         else:
-            return jsonify({'success': False, 'message': 'Contraseña incorrecta'})
+            return jsonify({'success': False, 'message': 'Incorrect password'})
     else:
-        return jsonify({'success': False, 'message': 'Usuario no encontrado'})
+       return jsonify({'success': False, 'message': 'There is no registered user with this email'}), 200
 
 # Ruta para la página de login (GET)
 @login_bp.route('/login', methods=['GET'])

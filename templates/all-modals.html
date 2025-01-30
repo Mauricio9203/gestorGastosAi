@@ -1,32 +1,54 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/all-modals.css') }}" />
+
 <!-- Modal para Agregar o Editar Usuario -->
 <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="userModalLabel">Agregar Usuario</h5>
-        </div>
-        <div class="modal-body">
-          <form id="userForm">
-            <div class="mb-3">
-              <label for="username" class="form-label">Nombre de Usuario</label>
-              <input type="text" class="form-control" id="username" required>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel" data-use="addUser">Add User</h5>
+      </div>
+      <div class="modal-body">
+        <form id="userForm">
+          <!-- Campo oculto para la ID del usuario -->
+          <input type="hidden" id="idUser" name="idUser" value="" />
+          
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="user_roles" class="form-label">Role</label>
+            <select class="form-control" id="user_roles" required></select>
+          </div>
+
+          <!-- Campo de contraseña con el ícono de ojo dentro -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="password" required />
+              <span class="input-group-text" id="togglePassword">
+                <i class="fas fa-eye"></i> <!-- Ícono de ojo -->
+              </span>
             </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Correo Electrónico</label>
-              <input type="email" class="form-control" id="email" required>
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="password" required>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" id="closeModalUsuarioBtn">Cerrar</button>
-          <button type="button" class="btn btn-primary" id="saveUser">Guardar</button>
-        </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="closeModalUsuarioBtn">Close</button>
+        <button type="button" class="btn btn-primary" id="saveUser">Save</button>
       </div>
     </div>
   </div>
-  
-      
+</div>
+
+
+
+<script src="{{ url_for('static', filename='js/all-modals.js') }}"></script>
+
+

@@ -1,103 +1,102 @@
 document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("loginForm");
-    const passwordField = document.getElementById("password");  // Asegúrate de que el campo de contraseña está correctamente seleccionado
+    const passwordField = document.getElementById("password");
     const loginButton = document.getElementById("loginButton");
 
-    // Verifica si los elementos del DOM están cargados correctamente
-    console.log("loginForm:", loginForm);
-    console.log("passwordField:", passwordField);
-    console.log("loginButton:", loginButton);
-
-    // Toggle password visibility
-    const togglePassword = document.getElementById("togglePassword");
-    if (togglePassword) {
-        togglePassword.addEventListener("click", () => {
-            const type = passwordField.type === "password" ? "text" : "password";
-            passwordField.type = type;
-            togglePassword.classList.toggle("fa-eye-slash");
+    const showAlert = (icon, title, text) => {
+        Swal.fire({
+            icon,
+            title,
+            text,
+            customClass: {
+                popup: 'swal-popup',
+                title: 'swal-title',
+                content: 'swal-content',
+                confirmButton: 'swal-btn',
+            },
+            width: '300px',
+            padding: '15px',
         });
-    }
+    };
 
-    // Verifica si el evento submit está correctamente agregado al formulario
+    const toggleLoadingState = (isLoading) => {
+        if (isLoading) {
+            loginButton.disabled = true; // Deshabilitar el botón
+            loginButton.innerHTML = 'Login <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'; // Mostrar el ícono de carga
+        } else {
+            loginButton.disabled = false; // Habilitar el botón
+            loginButton.innerHTML = 'Login'; // Volver al texto original
+        }
+    };
+
     loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();  // Prevenimos el comportamiento por defecto del formulario
-        console.log("Formulario enviado");
+        e.preventDefault(); // Prevenimos el comportamiento por defecto del formulario
 
         const email = document.getElementById("email").value.trim();
         const password = passwordField.value.trim();
 
-        // Validación de campos
-        console.log("Email:", email);
-        console.log("Contraseña:", password);
-
+        // Validación de campos vacíos
         if (!email || !password) {
-            console.log("Campos vacíos detectados");
-            Swal.fire({
-                icon: "error",
-                title: "Campos vacíos",
-                text: "Por favor, complete todos los campos.",
-            });
+            showAlert("info", "Empty fields", "Please complete all fields.");
             return;
         }
 
+        // Validación del formato del correo
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        console.log("Expresión regular para el correo:", emailRegex);
-
         if (!emailRegex.test(email)) {
-            console.log("Correo inválido detectado");
-            Swal.fire({
-                icon: "error",
-                title: "Correo inválido",
-                text: "Por favor, ingrese un correo electrónico válido.",
-            });
+            showAlert("info", "Invalid email", "Please enter a valid email.");
             return;
         }
+
+        // Activar el estado de carga mientras se espera la respuesta
+        toggleLoadingState(true);
 
         // Realizamos la solicitud al servidor para autenticar al usuario
-        console.log("Enviando solicitud al servidor...");
         fetch("/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
+            body: JSON.stringify({ email, password })
         })
         .then(response => {
-            console.log("Respuesta del servidor:", response);
+            if (!response.ok) {
+                throw new Error("Network or server unavailable error");
+            }
             return response.json();
         })
         .then(data => {
-            console.log("Datos recibidos del servidor:", data);
+            console.log(data); // Mostrar respuesta del servidor para depuración
 
+            // Si la autenticación es exitosa
             if (data.success) {
-                Swal.fire({
-                    icon: "success",
-                    title: "Inicio de sesión exitoso",
-                    text: `Bienvenido, ${email}!`,
-                }).then(() => {
-                    // Redirigir a la página principal después de la autenticación exitosa
-                    console.log("Redirigiendo a la página principal...");
-                    window.location.href = "/";
-                });
+                window.location.href = "/"; // Redirigir a la página principal
             } else {
-                console.log("Error de autenticación:", data.message);
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: data.message,
-                });
+                showAlert("info", "Error", data.message); // Mostrar mensaje del servidor
             }
         })
         .catch(error => {
-            console.log("Error de red o en la solicitud:", error);
-            Swal.fire({
-                icon: "error",
-                title: "Error de red",
-                text: "Hubo un problema al intentar iniciar sesión. Intenta nuevamente.",
-            });
+            showAlert("error", "Error", error.message || "There was a problem trying to log in. Try again.");
+        })
+        .finally(() => {
+            // Restaurar el estado del botón una vez que se haya recibido la respuesta
+            toggleLoadingState(false);
         });
     });
+});
+
+
+
+document.getElementById("togglePassword").addEventListener("click", function () {
+    let passwordInput = document.getElementById("password");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        this.classList.remove("fa-eye");
+        this.classList.add("fa-eye-slash");
+    } else {
+        passwordInput.type = "password";
+        this.classList.remove("fa-eye-slash");
+        this.classList.add("fa-eye");
+    }
 });
