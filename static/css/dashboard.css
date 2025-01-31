@@ -1,0 +1,12 @@
+.spin_dashboard {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.spinner_dashboard {
+    font-size: 3rem; 
+    position: absolute; 
+}

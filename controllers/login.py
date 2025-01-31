@@ -1,10 +1,15 @@
 from flask import Blueprint, render_template, request, jsonify, session, redirect, url_for
 from supabase import create_client, Client
 import bcrypt
+from dotenv import load_dotenv
+import os
 
-# Configuración de Supabase
-SUPABASE_URL = "https://anvmidwmtgkhtesxtdsk.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFudm1pZHdtdGdraHRlc3h0ZHNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgwNDgxOTMsImV4cCI6MjA1MzYyNDE5M30.848n_1vRqoMJXUPtdzQKffW1DJkZYG53rt7TXMbVWSE"
+# Cargar las variables de entorno desde el archivo .env
+load_dotenv()
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def buscar_usuario_por_email(email):
@@ -35,7 +40,7 @@ def login():
         return jsonify({'success': False, 'message': 'User not found'}), 200
 
     # Buscar al usuario por correo en la tabla 'users'
-    response = supabase.table('users').select('*').eq('email', email).single().execute()
+    response = supabase.table('users').select('*, user_roles(*)').eq('email', email).single().execute()
     
     # Verificar si el usuario existe
     if response.data:
@@ -46,6 +51,7 @@ def login():
         if bcrypt.checkpw(password.encode('utf-8'), password_hash.encode('utf-8')):
             session['email'] = email  # Guardamos el email en la sesión
             session['username'] = user["username"]  # Guardamos el nombre en la sesión
+            session['user_roles'] = user["user_roles"]  # Guardamos el nombre en la sesión
             return jsonify({'success': True, 'message': 'Login successful'})
         else:
             return jsonify({'success': False, 'message': 'Incorrect password'})

@@ -18,24 +18,33 @@
         <div class="card-body">
           <h5 class="card-title text-dark">Users</h5>
           
-          <!-- Botón de agregar usuario en la esquina superior derecha -->
+        
+
+          {% if session['user_roles']['can_create'] %}
           <button class="btn btn-primary position-absolute" style="top: 10px; right: 10px;" id="btnAddUser">
             <i class="fas fa-plus"></i> Add User
           </button>
+          {% else %}
+
+          {% endif %}
 
           <hr />
           <div id="loadingSpinner" style="display: block;">
             <i class="fas fa-spinner fa-spin"></i> Loading...
           </div>
           <div class="table-responsive table-sm">
-            <table id="tableUsers" class="display text-dark w-100">
-              <thead>
-                <tr>
+            <table id="tableUsers" class="display text-dark w-100" style="table-layout: auto; width: 100%;">
+              <thead >
+                <tr >
                   <th>Name</th>
-                  <th>Email</th>
+                  <th >Email</th>
                   <th>created at</th>
                   <th>Updated At</th>
                   <th>Role</th>
+                  <th>Can Read</th>
+                  <th>Can Edit</th>
+                  <th>Can Create</th>
+                  <th>Can Delete</th>
                   <th>Actions</th>
                 </tr>
               </thead>

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+ document.addEventListener("DOMContentLoaded", () => {
   addCustomActiveClass(); // Llama a la función cuando la página cargue
   cargarUsuarios(); // Llama la función para cargar los usuarios
 
@@ -70,7 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Manejo del formulario de agregar usuario
 
-  document.getElementById("saveUser").addEventListener("click", function () {
+   document.getElementById("saveUser").addEventListener("click", function () {
+  
+    
+
     const modalTitle = document.getElementById("userModalLabel");
     const dataUseValue = modalTitle.getAttribute("data-use");
 
@@ -98,59 +101,25 @@ document.addEventListener("DOMContentLoaded", () => {
           id_rol: rol_user,
           password_hash: password, // Enviar la contraseña sin encriptar
         };
+        agregarUsuario(userData)
 
-        // Enviar los datos al backend
-        fetch("/users/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        })
-          .then((response) => {
-            return response.json(); // Siempre intentamos convertir la respuesta en JSON
-          })
-          .then((data) => {
-            // Verificamos si la respuesta contiene un error
-            if (data.error) {
-              // Si el error es por email duplicado
-              if (data.error.includes("El email ya está registrado")) {
-                Swal.fire({
-                  icon: "info",
-                  title: "Error adding user",
-                  text: "The email is already registered in the system.",
-                  showConfirmButton: true,
-                });
-              } else {
-                // Si hay otro tipo de error, lo mostramos genéricamente
-                Swal.fire({
-                  icon: "error",
-                  title: "Error adding user",
-                  text: data.error,
-                  showConfirmButton: true,
-                });
-              }
-            } else {
-              // Si no hubo error, mostrar mensaje de éxito
-              Swal.fire({
-                icon: "success",
-                title: "Added User",
-                showConfirmButton: false,
-                timer: 2000,
-              }).then(() => {
-                document.getElementById("closeModalUsuarioBtn").click();
-                cargarUsuarios();
-              });
-            }
-          })
-          .catch((error) => {
-            // En caso de que algo falle al procesar la respuesta
-            console.error("Error:", error);
-            alert("There was a problem adding the user.");
-          });
+
       }
     } else {
-      editarUsuario(idUser, username, email, password, rol_user);
+      if (!username || !email || !rol_user ) {
+        Swal.fire({
+          icon: "info",
+          title: "Missing Fields",
+          text: "Please fill in all fields before submitting.",
+          showConfirmButton: true,
+        });
+        return; // Detener la ejecución si algún campo está vacío
+      } else {
+         editarUsuario(idUser, username, email, password, rol_user);
+      }
+
+
+      
     }
   });
 });
@@ -179,19 +148,40 @@ const cargarUsuarios = () => {
   fetch("/users/list")
     .then((response) => response.json())
     .then((data) => {
+      console.log(data)
+
       document.getElementById("loadingSpinner").style.display = "none";
 
+      let roles = data.user_roles
+
+      data = data["users"]
       if (data && data.length > 0) {
         var tableData = [];
         data.forEach((usuario) => {
+          
+          let botones = '';
+
+          // Si el rol tiene permisos de editar y eliminar, mostramos los botones
+          if (roles.can_update == true) {
+            botones += `<button class="btn btn-outline-info btn-sm mr-2" data-id="${usuario.id}"><i class="fas fa-edit"></i></button>`;
+          }
+        
+          if (roles.can_delete == true) {
+            botones += `<button class="btn btn-outline-danger btn-sm" data-id="${usuario.id}"><i class="fas fa-trash"></i></button>`;
+          }
+
+
           tableData.push([
             usuario.username,
             usuario.email,
             convertirFecha(usuario.created_at),
             convertirFecha(usuario.updated_at),
             usuario.user_roles.rol_name,
-            `<button class="btn btn-outline-info btn-sm mr-2" data-id="${usuario.id}"><i class="fas fa-edit"></i></button>
-             <button class="btn btn-outline-danger btn-sm" data-id="${usuario.id}"><i class="fas fa-trash"></i></button>`,
+            convertirACheckbox(usuario.user_roles.can_read),
+            convertirACheckbox(usuario.user_roles.can_update),
+            convertirACheckbox(usuario.user_roles.can_create),
+            convertirACheckbox(usuario.user_roles.can_delete),
+            botones,
           ]);
         });
 
@@ -265,6 +255,9 @@ function eliminarUsuario(userId) {
 }
 
 const editarUsuario = async (userId, username, email, password, id_rol) => {
+  document.getElementById("saveUser").style.display = "none";
+  document.getElementById("saveUserWithSpinner").style.display = "block";
+
   // Verificamos primero si el email ya está registrado en otro usuario
   const emailDuplicado = await verificarEmailDuplicado(email, userId);
 
@@ -274,6 +267,8 @@ const editarUsuario = async (userId, username, email, password, id_rol) => {
       title: "Error",
       text: "The email is already registered with another user. Please use another.",
     });
+    document.getElementById("saveUser").style.display = "block";
+    document.getElementById("saveUserWithSpinner").style.display = "none";
     return false; // Si el email está duplicado, detenemos la ejecución
   }
 
@@ -311,7 +306,10 @@ const editarUsuario = async (userId, username, email, password, id_rol) => {
         showConfirmButton: false,
       });
       cargarUsuarios();
+      document.getElementById("saveUser").style.display = "block";
+      document.getElementById("saveUserWithSpinner").style.display = "none";
       document.getElementById("closeModalUsuarioBtn").click();
+      
 
       return true; // Actualización exitosa
     } else {
@@ -321,7 +319,11 @@ const editarUsuario = async (userId, username, email, password, id_rol) => {
         text: "There was an error updating the user.",
       });
       return false; // Error al actualizar
+      document.getElementById("saveUser").style.display = "block";
+      document.getElementById("saveUserWithSpinner").style.display = "none";
     }
+
+    
   } catch (error) {
     console.error("Error en la solicitud:", error);
     Swal.fire({
@@ -329,14 +331,21 @@ const editarUsuario = async (userId, username, email, password, id_rol) => {
       title: "Error",
       text: "There was an error in the request.",
     });
+    document.getElementById("saveUser").style.display = "block";
+    document.getElementById("saveUserWithSpinner").style.display = "none";
     return false; // Error en la solicitud
   }
 };
 
 const verificarEmailDuplicado = async (email, userId) => {
+
   try {
     const response = await fetch(`/users/list`);
-    const usuarios = await response.json();
+    const usersList = await response.json();
+
+    console.log(usersList.users)
+
+    let usuarios =usersList.users
 
     userId = Number(userId); // Convertimos userId a número
 
@@ -382,3 +391,64 @@ const cargarRoles = async () => {
     console.error("Error loading roles:", error); // Manejo de errores
   }
 };
+
+ const agregarUsuario = async (userData) => {
+    document.getElementById("saveUser").style.display = "none";
+    document.getElementById("saveUserWithSpinner").style.display = "block";
+
+    // Enviar los datos al backend
+    await fetch("/users/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((response) => {
+        return response.json(); // Siempre intentamos convertir la respuesta en JSON
+      })
+      .then((data) => {
+        // Verificamos si la respuesta contiene un error
+        if (data.error) {
+          // Si el error es por email duplicado
+          if (data.error.includes("El email ya está registrado")) {
+            Swal.fire({
+              icon: "info",
+              title: "Error adding user",
+              text: "The email is already registered in the system.",
+              showConfirmButton: true,
+            });
+          } else {
+            // Si hay otro tipo de error, lo mostramos genéricamente
+            Swal.fire({
+              icon: "error",
+              title: "Error adding user",
+              text: data.error,
+              showConfirmButton: true,
+            });
+          }
+        } else {
+          // Si no hubo error, mostrar mensaje de éxito
+          Swal.fire({
+            icon: "success",
+            title: "Added User",
+            showConfirmButton: false,
+            timer: 2000,
+          }).then(() => {
+            document.getElementById("closeModalUsuarioBtn").click();
+            cargarUsuarios();
+          });
+        }
+      })
+      .catch((error) => {
+        // En caso de que algo falle al procesar la respuesta
+        console.error("Error:", error);
+        alert("There was a problem adding the user.");
+      });
+
+      document.getElementById("saveUser").style.display = "block";
+      document.getElementById("saveUserWithSpinner").style.display = "none";
+}
+
+const convertirACheckbox = (valor) => 
+  valor ? `<i class="fas fa-check-circle" style="color: green;"></i>` : `<i class="fas fa-times-circle" style="color: red;"></i>`;

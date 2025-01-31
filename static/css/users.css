@@ -1,8 +1,13 @@
- /* Hacer la tabla más compacta */
- table.dataTable {
-    font-size: 12px;  /* Reducir el tamaño de la fuente */
-    width: 100% !important;  /* Asegurarse de que la tabla ocupe todo el ancho disponible */
-  }
+table.dataTable {
+  table-layout: fixed; /* Esto garantiza que las columnas tengan un ancho fijo */
+  width: 100% !important;  /* Fuerza que la tabla ocupe todo el ancho disponible */
+}
+
+
+/* Hacer la tabla más compacta */
+table.dataTable {
+  font-size: 11px;  /* Reducir el tamaño de la fuente */
+}
 
   table.dataTable th, table.dataTable td {
     padding: 5px 10px;  /* Reducir el padding */

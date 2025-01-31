@@ -100,3 +100,11 @@ document.getElementById("togglePassword").addEventListener("click", function () 
         this.classList.add("fa-eye");
     }
 });
+
+
+// Asegúrate de que el DOM esté completamente cargado
+document.addEventListener('DOMContentLoaded', function () {
+    // Inicializa el tooltip en el elemento con id "testUserTooltip"
+    var tooltipTriggerEl = document.getElementById('testUserTooltip');
+    var tooltip = new bootstrap.Tooltip(tooltipTriggerEl);
+});

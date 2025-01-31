@@ -30,6 +30,7 @@
  <!-- Cargar jQuery primero -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
   </head>
 
@@ -40,7 +41,7 @@
           <h5 class="text-white mb-0 text-shadow">
             <i class="fa-solid fa-tools"></i> MG System
           </h5>
-         <h6 class="text-shadow mt-1">Welcome, {{ session.get('username', 'Invitado') }}!</h6>
+         <h6 class="text-shadow mt-1">Welcome, {{ session.get('username') }}!</h6>
         </div>
 
         <!-- Primer UL: Dashboard -->

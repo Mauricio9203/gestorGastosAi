@@ -149,7 +149,28 @@ const cargarTabla = (tableData, tablaId) => {
   $("#" + tablaId).DataTable({
     data: tableData,
     responsive: true,
-  /* spanish
+    autoWidth: false,
+    columnDefs: [
+      {
+        targets: [0], // Otra columna
+        width: "200px", // Ancho fijo de la columna en px
+      },
+      {
+        targets: [2], // Otra columna
+        width: "250px", // Ancho fijo de la columna en px
+      },
+      {
+        targets: [3], // Otra columna
+        width: "250px", // Ancho fijo de la columna en px
+      },
+      {
+        targets: [9], // Otra columna
+        width: "100px", // Ancho fijo de la columna en px
+      },
+      // Agregar más definiciones de columnas si es necesario
+    ],
+
+    /* spanish
     language: {
       sEmptyTable: "No hay datos disponibles",
       sInfo: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
@@ -168,12 +189,7 @@ const cargarTabla = (tableData, tablaId) => {
       },
     },
 */
-
   });
 };
 
-
 const convertirFecha = (fechaStr) => new Date(fechaStr).toLocaleString();
-
-
-

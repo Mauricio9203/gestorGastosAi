@@ -1,11 +1,15 @@
-from flask import Blueprint, render_template, jsonify, request
+from flask import Blueprint, render_template, jsonify, request, session
 from supabase import create_client, Client
 import bcrypt
+from dotenv import load_dotenv
+import os
 
-# Crear el cliente de Supabase
-url = "https://anvmidwmtgkhtesxtdsk.supabase.co"
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFudm1pZHdtdGdraHRlc3h0ZHNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgwNDgxOTMsImV4cCI6MjA1MzYyNDE5M30.848n_1vRqoMJXUPtdzQKffW1DJkZYG53rt7TXMbVWSE"
-supabase: Client = create_client(url, key)
+# Cargar las variables de entorno desde el archivo .env
+load_dotenv()
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def obtener_usuario_por_id(user_id):
     try:
@@ -73,8 +77,9 @@ def mostrar_usuarios():
 
 @bp.route('/users/list', methods=['GET'])
 def listar_usuarios():
-    response = supabase.table('users').select('*, user_roles(rol_name)').execute()
-    return jsonify(response.data if response.data else [])
+    response = supabase.table('users').select('id, created_at,email,username,updated_at,id_rol, user_roles(*)').execute()
+    return jsonify({"users": response.data if response.data else [], "user_roles": session['user_roles']})
+
 
 @bp.route('/rol_users/list', methods=['GET'])
 def listar_rol_users():
