@@ -1,0 +1,129 @@
+/* Optimización general de la tabla y contenedor */
+.container-fluid {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.custom-tabulator {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Tabulator general */
+.tabulator {
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+/* Encabezado */
+.tabulator .tabulator-header .tabulator-col {
+  background-color: #6a4c9c !important; /* Lila oscuro */
+  color: #fff !important;
+  border-right: 2px solid #5a4292; /* Morado más oscuro para los bordes */
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Filas con fondo uniforme y transición */
+.tabulator .tabulator-row {
+  background-color: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.1s ease-in-out;
+}
+
+/* Hover de fila */
+.tabulator .tabulator-row:hover {
+  background-color: #e9d4f2; /* Lila suave */
+}
+
+/* Filas seleccionadas */
+.tabulator .tabulator-row.tabulator-selected {
+  background-color: #b5a1f5 !important; /* Morado claro */
+}
+
+/* Celdas */
+.tabulator .tabulator-cell {
+
+  font-size: 12px;
+  color: #333;
+  transition: background-color 0.3s ease-in-out;
+}
+
+
+
+/* Checkbox moderno */
+.tabulator input[type="checkbox"] {
+  justify-content: center;  /* Centrado horizontal */
+  align-items: center;      /* Centrado vertical */
+  width: 16px;
+  height: 16px;
+  accent-color: #6a4c9c; /* Lila/morado */
+  cursor: pointer;
+}
+
+/* Estilo del filtro en el encabezado */
+.tabulator .tabulator-header-filter input,
+.tabulator .tabulator-header-filter select {
+  padding: 2px 10px;
+  border: 1px solid #000080;
+  border-radius: 4px;
+  font-size: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+/* Filtro enfocado */
+.tabulator .tabulator-header-filter input:focus,
+.tabulator .tabulator-header-filter select:focus {
+  border-color: #3a75ff;
+  outline: none;
+  background-color: #dcddff;
+}
+
+/* Centrado del checkbox en el encabezado */
+.tabulator-col-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Barra de progreso (barra de carga) */
+.tabulator-footer .tabulator-footer-contents {
+  background-color: #7d5daf; /* Cambia a cualquier color que quieras */
+  color: white; /* Color del texto dentro de la barra */
+  border-radius: 4px;
+}
+
+.tabulator-page{
+  color: #dcddff;
+}
+
+.tabulator .tabulator-footer .tabulator-paginator .tabulator-page.active {
+  background-color: #460096; /* Color de fondo de la página activa */
+  color: white; /* Color del texto de la página activa */
+  font-weight: bold; /* Hacer que el texto sea más prominente */
+}
+
+.tabulator-tableholder {
+  background-color: #ffffff;
+}
+
+/* Cambiar el color del texto del tooltip */
+.tabulator-tooltip {
+  color: #ffffff;  /* Cambia a cualquier color que desees */
+  background-color: #333333;  /* Cambia el fondo del tooltip */
+  border: 1px solid #000000;  /* Opcional: agrega un borde */
+  font-size: 14px;  /* Cambia el tamaño de la fuente si es necesario */
+  padding: 5px;  /* Ajusta el padding para que el texto tenga más espacio */
+}
+
+
+
+
+

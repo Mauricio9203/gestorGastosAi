@@ -1,66 +1,67 @@
-{% extends 'base.html' %} 
-{% block title %}Data Analysis{% endblock %} 
-{% block body %}
+{% extends 'base.html' %} {% block title %}Users{% endblock %} {% block
+body %}
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/users.css') }}" />
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/table-tabulator.css') }}"
+/>
 
 <div class="container-fluid py-4">
+  <!-- Título del módulo -->
   <h3 class="text-dark d-flex align-items-center text-shadow">
-    <i class="fas fa-chart-line mr-2"></i>
-    User Settings
+    <i class="fas fa-user-cog mr-2"></i>
+    <!-- Icono de análisis de datos -->
+    Users
   </h3>
 
-  <!-- Tabla de Usuarios -->
+  <!-- Fila de las tarjetas -->
   <div class="row mt-3">
-    <div class="col-12 mb-3">
+    <!-- Card 1 -->
+    <div class="col-md-12 mt-2">
+      <div class="card rounded-lg border-0 position-relative">
+        <!-- Botón Add User en esquina superior derecha -->
+     
 
-      <div class="card rounded-lg shadow-lg border-0 position-relative">
         <div class="card-body">
-          <h5 class="card-title text-dark">Users</h5>
+           <!-- Flex container para alinear los botones -->
+           <div class="d-flex justify-content-between align-items-center mb-1">
+            <div>
+              <!-- Botones de exportación con Font Awesome -->
+              <button id="download-csv" class="btn btn-outline-primary btn-sm">
+                <i class="fas fa-download"></i> CSV
+              </button>
+              <button id="download-xlsx" class="btn btn-outline-success btn-sm">
+                <i class="fas fa-file-excel"></i> Excel
+              </button>
+              <button id="download-json" class="btn btn-outline-info btn-sm">
+                <i class="fas fa-file-alt"></i> JSON
+              </button>
+            </div>
+            
+             <!-- Botones Add y Eliminar a la derecha -->
+             <div class="d-flex">
+              <!-- Botón para agregar usuario -->
+              <button id="add-user" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                <i class="fas fa-user-plus"></i> Add User
+              </button>
+            
+              <!-- Botón para eliminar selección -->
+              <button id="delete-rows" class="btn btn-outline-danger btn-sm ms-2 ml-1" style="display: none;">
+                <i class="fas fa-trash-alt"></i> Eliminar Selección
+              </button>
+            </div>
+            
+            </div>
+          </div>
+          <div id="users-table" class="ml-2 mr-2 mb-2 custom-tabulator">
+            <i class="fas fa-circle-notch  fa-spin fa-3x color-spin d-flex justify-content-center align-items-center"></i> 
+          </div>
           
-        
-
-          {% if session['user_roles']['can_create'] %}
-          <button class="btn btn-primary position-absolute" style="top: 10px; right: 10px;" id="btnAddUser">
-            <i class="fas fa-plus"></i> Add User
-          </button>
-          {% else %}
-
-          {% endif %}
-
-          <hr />
-          <div id="loadingSpinner" style="display: block;">
-            <i class="fas fa-spinner fa-spin"></i> Loading...
-          </div>
-          <div class="table-responsive table-sm">
-            <table id="tableUsers" class="display text-dark w-100" style="table-layout: auto; width: 100%;">
-              <thead >
-                <tr >
-                  <th>Name</th>
-                  <th >Email</th>
-                  <th>created at</th>
-                  <th>Updated At</th>
-                  <th>Role</th>
-                  <th>Can Read</th>
-                  <th>Can Edit</th>
-                  <th>Can Create</th>
-                  <th>Can Delete</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Aquí se insertarán las filas de usuarios dinámicamente -->
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
-
-<script src="{{ url_for('static', filename='js/users.js') }}"></script>
-
+<script type="module" src="{{ url_for('static', filename='js/users/index.js') }}"></script>
 {% endblock %}

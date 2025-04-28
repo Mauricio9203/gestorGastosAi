@@ -1,0 +1,33 @@
+<div class="modal fade" id="addUserModal-settings" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content rounded-3 border-0 shadow-lg">
+      <!-- Encabezado del modal -->
+      <div class="modal-header bg-lilac text-white header-modal">
+        <h6 class="modal-title" id="addUserLabel-settings">Configuraciones de Cuenta</h6>
+        <button type="button" class="btn-close btn-close-white mt-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <!-- Cuerpo del modal -->
+      <div class="modal-body bg-light-lilac">
+        <form id="add-user-form">
+          <input type="hidden" class="form-control" id="idUser-settings" />
+
+          <div class="mb-3">
+            <label for="userName" class="form-label text-dark">Name</label>
+            <input type="text" class="form-control" id="userName-settings" placeholder="Ej: Jhon Smith" value="{{ session.get('username') }}" />
+          </div>
+          <div class="mb-3">
+            <label for="userEmail" class="form-label text-dark">Email</label>
+            <input type="email" class="form-control" id="userEmail-settings" placeholder="Ej: jhon@mail.com" value="{{ session.get('email') }}" />
+          </div>
+        </form>
+      </div>
+
+      <!-- Pie del modal -->
+      <div class="modal-footer bg-light-lilac">
+        <button class="btn btn-outline-secondary bg-cancel" id="modal-add-user-close-settings" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" id="save-data-user-settings" form="add-user-form" class="btn btn-lilac">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

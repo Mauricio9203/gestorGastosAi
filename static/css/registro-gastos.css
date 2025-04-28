@@ -1,0 +1,80 @@
+.preview-container {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .preview-container img,
+  .preview-container iframe {
+    max-width: 100%;
+    max-height: 400px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+
+  .custom-file-upload {
+    background-color: #f8f9fa;
+    border: 2px dashed #6c757d;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+
+  .custom-file-upload:hover {
+    border-color: #007bff;
+  }
+
+  .custom-file-upload input[type="file"] {
+    display: none;
+  }
+
+  .file-name {
+    margin-top: 1rem;
+    font-style: italic;
+  }
+
+  .form-label {
+    color: #6c757d;
+  }
+
+  .form-check-label {
+    color: #6c757d;
+  }
+
+  
+  input[type="checkbox"]  {
+  width: 16px;
+  height: 16px;
+  accent-color: #6a4c9c; /* Lila/morado */
+  cursor: pointer;
+}
+
+#agregarItem {
+  background-color: #6a4c9c;
+  border-color: black;
+}
+
+#agregarItem:hover {
+  background-color: #5a3b7e; /* Nuevo color de fondo cuando el mouse pasa por encima */
+  border-color: #4e2a66; /* Nuevo color de borde cuando el mouse pasa por encima */
+}
+
+@media (min-width: 767px) { 
+  .row {
+    max-width: 100%
+  }
+ }
+
+ .filepond--file-action-button {
+  cursor: pointer !important;
+}
+
+
+.filepond--drop-label {
+  cursor: pointer !important;
+}
+
+label[id^="filepond--drop-label"] {
+  cursor: pointer !important;
+}

@@ -1,5 +1,41 @@
+:root {
+  --color-body: #f1f1f1;
+  --background-sidebar: linear-gradient(180deg, #4A148C, #5938a4, #283593);
+  --welcome-message-color: white;
+  --divider-color: 1px solid rgba(227, 253, 251, 0.2);
+  --color-border-navbar-bottom: 2px solid #f0f0f0 ;
+  --background-navbar:  #7e56b7  ; 
+  --logout-button-color: #e63946;
+  --logout-button-hover: #d62c1a;
+  --color-module-active: rgba(174, 100, 249, 0.5);
+  --color-module-active-border : 1px solid #3e006b;
+  --color-module-active-hover: rgba(62, 0, 107, 0.7);
+  --color-module-active-hover-border: #6f00cc;
+  --color-module-active-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --color-module-sub-active: rgba(91, 0, 202, 0.5);
+  --color-text-module-sub-active: #ffffff
+  --custom-active-sub-hover-bg: rgba(91, 0, 202, 0.7);
+  --custom-active-sub-hover-border: #8e2df5;
+  --custom-active-sub-hover-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  --card-header-bg: #d1c4e9;
+  --card-header-color: #1e293b;
+  --background-color-scrollbar: #6e00cf; 
+  --toggleSidebarBtn-hover: #b09eff;
+  --btn-bg-color: rgba(251, 253, 254, 0.176); /* Azul con opacidad */
+  --btn-text-color: white;
+  --btn-border: none;
+  --input-hover-border-color: #9c27b0; /* lila */
+  --input-hover-shadow: 0 0 5px rgba(156, 39, 176, 0.5); /* glow suave */
+  --input-transition: all 0.2s ease;
+  --color-spin: #000ed1;
+}
+
+.no-transition {
+  transition: none !important;
+}
+
 body {
-  color: #f1f1f1; /* Gris muy suave */
+  color: var(--color-body);; /* Gris muy suave */
 }
 
 #sidebarMenu {
@@ -9,11 +45,9 @@ body {
   min-height: 100vh;
   opacity: 1;
   transform: translateX(0);
-  background: linear-gradient(180deg, #4A148C, #5938a4, #283593);
-  color: white;
+  background: var(--background-sidebar);
+  color: var(--welcome-message-color);
   padding: 1.5rem 0;
-  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3); /* Sombra a la derecha */
-  font-family: 'Roboto', sans-serif;
   font-size: 1rem;
 }
 
@@ -28,18 +62,9 @@ body {
 #sidebarMenu a {
   display: block;
   padding: 10px 20px;
-  color: white;
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Separadores */
+  border-bottom: var(--divider-color) /* Separadores */
 }
-
-#sidebarMenu a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #EDE7F6;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-
 
 #sidebarMenu.hidden {
   transform: translateX(-100%);
@@ -48,45 +73,21 @@ body {
 }
 
 .navbar {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-bottom: 2px solid #9881ff;
+  border-bottom: var(--color-border-navbar-bottom);
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  background: linear-gradient(180deg, #9881ff, #9881ff);
-}
-
-.navbar .nav-link {
-  color: #b0b0b0; /* Gris suave para los enlaces */
-  transition: color 0.3s, text-decoration 0.3s;
+  background: var(--background-navbar) !important;
+  backdrop-filter: blur(10px) !important; /* Efecto de blur cristalizado */
 }
 
 
 .btn-outline-secondary {
   color: #fff;
-  border-color: #fff;
 }
 
-.btn-outline-secondary:hover {
-  background-color: #fff;
-  color: #000;
-}
-
-#logoutBtn {
-  background-color: transparent;
-  color: #e63946; /* Rojo suave */
-  border: none;
-  font-size: 1.5rem;
-  padding: 0;
-  transition: transform 0.3s ease;
-}
-
-#logoutBtn:hover {
-  color: #d62c1a; /* Rojo oscuro para el hover */
-  transform: scale(1.2);
-}
 
 #sidebarMenu .nav-item {
   opacity: 0;
@@ -108,6 +109,31 @@ body {
 #wrapper:not(.hidden) #content {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* configuración del sidebar */
+#sidebarMenu {
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+/* Estilos para el scroll en Webkit (Chrome, Safari, Edge) */
+#sidebarMenu::-webkit-scrollbar {
+  width: 5px; /* Ancho del scrollbar */
+}
+
+#sidebarMenu::-webkit-scrollbar-thumb {
+  background-color: #7d00a3; /* Color del thumb (la parte que se mueve) */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+#sidebarMenu::-webkit-scrollbar-thumb:hover {
+  background-color: #9e00b9; /* Color del thumb al pasar el cursor */
+}
+
+#sidebarMenu::-webkit-scrollbar-track {
+  background-color: #a5a4a5; /* Color de la pista del scroll */
+  border-radius: 4px; /* Bordes redondeados */
 }
 
 #sidebarMenu .nav-link {
@@ -147,14 +173,14 @@ body {
 }
 
 #scrollToTopBtn:hover {
-  background-color: #0056b3; /* Azul más oscuro en hover */
+  background-color: #4b00b3; /* Azul más oscuro en hover */
 }
 
 /* Estilos para el enlace activo con fondo transparente y blur */
 .custom-active {
-  background-color: rgba(62, 0, 107, 0.5); /* Fondo con más armonía */
+  background-color: var(--color-module-active); /* Fondo con más armonía */
   color: #ffffff; /* Texto blanco puro */
-  border: 1px solid #3e006b; /* Borde más delgado */
+  border: var(--color-module-active-border); /* Borde más delgado */
   border-radius: 10px; /* Bordes ligeramente redondeados */
   padding: 10px 15px; /* Espaciado */
   backdrop-filter: blur(8px); /* Fondo desenfocado */
@@ -162,15 +188,15 @@ body {
 }
 
 .custom-active:hover {
-  background-color: rgba(62, 0, 107, 0.7); /* Fondo más intenso al pasar el mouse */
-  border-color: #6f00cc; /* Borde más claro en hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+  background-color: var(--color-module-active-hover); /* Fondo más intenso al pasar el mouse */
+  border-color: var(--color-module-active-hover-border); /* Borde más claro en hover */
+  box-shadow: var(--color-module-active-hover-shadow); /* Sombra para profundidad */
 }
 
 /* Estilos para el enlace activo con fondo transparente y blur */
 .custom-active-sub {
-  background-color: rgba(91, 0, 202, 0.5); /* Fondo más vivo */
-  color: #ffffff; /* Texto blanco puro */
+  background-color: var(--color-module-sub-active); /* Fondo más vivo */
+  color: var(--color-text-module-sub-active); /* Texto blanco puro */
   border: 1px solid #6e00cf; /* Borde más delgado */
   border-radius: 10px; /* Bordes ligeramente redondeados */
   padding: 10px 15px; /* Espaciado */
@@ -181,11 +207,10 @@ body {
 }
 
 .custom-active-sub:hover {
-  background-color: rgba(91, 0, 202, 0.7); /* Fondo más intenso al pasar el mouse */
-  border-color: #8e2df5; /* Borde más brillante en hover */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra más marcada */
+  background-color: var(--custom-active-sub-hover-bg);
+  border-color: var(--custom-active-sub-hover-border);
+  box-shadow: var(--custom-active-sub-hover-shadow);
 }
-
 
 
 
@@ -210,7 +235,7 @@ body {
 }
 
 .shadow-lg {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgb(199, 11, 11);
 }
 
 .rounded {
@@ -218,8 +243,8 @@ body {
 }
 
 .card-header {
-  background-color: #d1c4e9;
-  color: #1e293b; /* Texto gris oscuro */
+  background-color: var(--card-header-bg);
+  color: var(--card-header-color);
 }
 
 
@@ -235,7 +260,7 @@ body {
 }
 
 #contenidoModulo::-webkit-scrollbar-thumb {
-  background-color: #6e00cf; /* Color morado para el "dedo" del scrollbar */
+  background-color: var(--background-color-scrollbar); /* Color morado para el "dedo" del scrollbar */
   border-radius: 10px; /* Hace que el thumb sea redondeado */
 }
 
@@ -244,36 +269,25 @@ body {
 }
 
 .container-fluid {
-  min-height: 90vh; /* 100% del alto de la ventana */
-  display: flex;
-  flex-direction: column;
+  max-width: 100%;
+  min-height: 90vh;
+  overflow-x: auto;
 }
 
+.card {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+
 #toggleSidebarBtn {
-  background-color: rgba(251, 253, 254, 0.176); /* Azul con opacidad del 50% */
-  border: none; /* Elimina el borde por defecto */
-  color: white; /* Cambia el color del texto a blanco */
-  transition: background-color 0.3s ease; /* Transición suave al cambiar el fondo */
+  background-color: #9881ff;
+  color: var(--btn-text-color);
+  transition: background-color 0.3s ease;
 }
 
 #toggleSidebarBtn:hover {
-  background-color: rgba(99, 174, 255, 0.7); /* Aumenta la opacidad al hacer hover */
+  background-color: var(--toggleSidebarBtn-hover); /* Aumenta la opacidad al hacer hover */
 }
-
-  /* Cambiar color de texto en el modal */
-  #userModal .modal-header, 
-  #userModal .modal-body, 
-  #userModal .modal-footer {
-    color: black;
-  }
-
-  /* También puedes cambiar el color del texto de los campos */
-  #userModal .form-label {
-    color: black;
-  }
-  #userModal .form-control {
-    color: black;
-  }
 
 
   @media (max-width: 576px) { /* Para pantallas pequeñas */
@@ -283,3 +297,191 @@ body {
       margin-top: 10vh;
     }
   }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  input:hover {
+    border-color: var(--input-hover-border-color);
+    box-shadow: var(--input-hover-shadow);
+    transition: var(--input-transition);
+  }
+
+  .color-spin {
+    color: var(--color-spin);
+  }
+    
+  /* Estilo del contenedor del input */
+.choices__inner {
+  background-color: #fff !important;
+  border: 1px solid #ced4da !important;
+  border-radius: 0.375rem !important;
+  padding: 0.375rem 0.75rem !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  color: #495057 !important;
+  padding-left: 10px !important; /* Ajusta el valor según lo necesites */
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out !important;
+}
+
+/* Barra de búsqueda dentro de Choices.js */
+.choices__input--cloned {
+  padding-left: 10px !important;  /* Ajusta el valor según lo necesites */
+}
+
+.choices__list--dropdown .choices__item {
+  color: #454545 !important; /* Cambia este valor por el color que quieras */
+  font-family: 'Nunito', sans-serif !important;
+  font-size: 1rem !important;  /* Ajusta el tamaño según lo necesites */
+}
+
+/* Borde al hacer focus */
+.choices__inner.is-focused {
+  border-color: #86b7fe !important;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+}
+
+/* Input dentro del Choices (buscador) */
+.choices__input {
+  color: #495057 !important;
+  background-color: transparent !important;
+  padding-left: 0 !important;
+}
+
+/* Placeholder */
+.choices__placeholder {
+  color: #6c757d !important;
+  opacity: 1 !important;
+}
+
+/* Opciones del dropdown */
+.choices__list--dropdown .choices__item {
+  font-size: 1rem;
+  padding: 0.375rem 0.75rem;
+}
+
+
+.fa-angle-down {
+  font-size: 20px !important;
+}
+
+.fa-angle-up {
+  font-size: 20px !important;
+}
+
+
+#user_name_welcome {
+  font-size: 14px;
+}
+
+/* Estilos para pantallas pequeñas (dispositivos móviles) */
+@media (max-width: 767px) {
+
+  #user_name_welcome {
+    font-size: 14px;
+  }
+
+
+  #sidebarMenu {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    width: 200px;
+    height: auto;
+    min-height: 100vh;
+    position: fixed;
+    opacity: 1;
+    transform: translateX(0);
+    background: var(--background-sidebar);
+    color: var(--welcome-message-color);
+    padding: 1.5rem 0;
+    font-size: 1rem;
+    visibility: visible;
+    z-index: 100000;
+  }
+
+  #sidebarMenu {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    width: 250px;
+    height: auto;
+    min-height: 100vh;
+    position: fixed;
+    opacity: 1;
+    transform: translateX(0);
+    background: rgba(68, 12, 137, 0.7);  /* Color de fondo con transparencia (ajustable) */
+    color: var(--welcome-message-color);
+    padding: 1.5rem 0;
+    font-size: 1rem;
+    visibility: visible;
+    z-index: 100000;
+    backdrop-filter: blur(10px);  /* Aplica el blur */
+
+  }
+  
+  #sidebarMenu.hidden {
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+}
+
+@keyframes parpadeo {
+  0% {
+    box-shadow: 0 0 2px rgba(138, 43, 226, 0.3), 0 0 5px rgba(138, 43, 226, 0.5); /* Morado claro */
+  }
+  25% {
+    box-shadow: 0 0 2px rgba(138, 43, 226, 0.3), 0 0 5px rgba(138, 43, 226, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 4px rgba(138, 43, 226, 0.6), 0 0 10px rgba(138, 43, 226, 0.8); /* Morado brillante */
+  }
+  75% {
+    box-shadow: 0 0 4px rgba(138, 43, 226, 0.6), 0 0 10px rgba(138, 43, 226, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 2px rgba(138, 43, 226, 0.3), 0 0 5px rgba(138, 43, 226, 0.5);
+  }
+}
+
+/* esta clase hace que algo brille de forma parpadeante, pensado para cuando algo corre en segundo plano */
+.div-brillante {
+  animation: parpadeo 3s infinite; /* Cambia la duración y la frecuencia si lo deseas */
+}
+
+
+.previewImage {
+  border-radius: 15px; /* Redondea los bordes */
+  border: 3px solid #000000; /* Borde color morado */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+.previewImage {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.previewImage:hover {
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño de la imagen */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Aumenta la sombra al pasar el mouse */
+}
+
+.previewPdf {
+  border-radius: 10px; /* Bordes redondeados */
+  border: 3px solid #000000; /* Borde color morado */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  overflow: hidden; /* Para evitar que el contenido sobresalga */
+}
+
+.rotacion {
+  transition: transform 1s ease; /* Transición suave */
+}
+
+/* Estilo cuando pasas el mouse */
+.rotacion:hover {
+  transform: rotate(90deg); /* Rotación de 90 grados */
+}
+
+/* barra de progreso */
+.progress-bar {
+  background-color: #6f42c1; /* Color morado */
+}
+

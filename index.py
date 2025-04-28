@@ -1,8 +1,10 @@
 from flask import Flask, render_template, redirect, url_for, session
 from flask_cors import CORS  # Importar CORS
-from controllers.users import bp as users_bp
-from controllers.login import login_bp
-from controllers.dashboard import dashboard_bp
+from app.users.users_routes import bp as users_bp
+from app.login.login import login_bp
+from app.dashboard.dashboard import dashboard_bp
+from app.registro_gastos.registro_gastos_routes import registro_gastos_bp
+from app.utils.decorators import login_required
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # Habilitar CORS para todas las rutas
@@ -14,21 +16,27 @@ app.config['STATIC_FOLDER'] = 'static'
 app.register_blueprint(users_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(dashboard_bp)
+app.register_blueprint(registro_gastos_bp)
 
 @app.route('/')
+@login_required
 def index():
-    if 'email' not in session:
-        return redirect(url_for('login.login_get'))
     return render_template('dashboard.html')
 
+
 @app.route('/users')
-def usuarios_page():
+@login_required
+def users():
     return render_template('users.html')
+
+@login_required
+@app.route('/registro-gastos')
+def registro_gastos():
+    return render_template('registro-gastos/registro-gastos.html')
 
 @app.route('/logout')
 def logout():
     session.pop('email', None)
-    print("Sesión eliminada")
     return redirect(url_for('login.login_get'))
 
 if __name__ == '__main__':
