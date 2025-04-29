@@ -143,3 +143,31 @@ h2 {
 }
 
 
+  
+/* Clase moderna, limpia y contrastada para título blanco */
+.texto-titulo-icono {
+    font-size: 32px;
+    font-family: 'Inter', 'Urbanist', 'Poppins', 'Segoe UI', sans-serif;
+    text-align: center;
+    color: #fcfcfc; /* Texto blanco */
+    text-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.25),  /* sombra gris suave */
+      0 4px 6px rgba(138, 43, 226, 0.2); /* leve tinte morado en segunda sombra */
+    animation: brilloSuave 4s ease-in-out infinite alternate;
+  }
+  
+  /* Animación de brillo suave */
+  @keyframes brilloSuave {
+    0% {
+      text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        0 4px 6px rgba(138, 43, 226, 0.15);
+    }
+    100% {
+      text-shadow: 
+        0 3px 6px rgba(0, 0, 0, 0.35),
+        0 6px 10px rgba(138, 43, 226, 0.25);
+    }
+  }
+  
+  
