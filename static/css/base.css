@@ -396,7 +396,7 @@ body {
     padding: 1.5rem 0;
     font-size: 1rem;
     visibility: visible;
-    z-index: 100000;
+    z-index: 8000;
   }
 
   #sidebarMenu {
@@ -412,7 +412,7 @@ body {
     padding: 1.5rem 0;
     font-size: 1rem;
     visibility: visible;
-    z-index: 100000;
+    z-index: 8000;
     backdrop-filter: blur(10px);  /* Aplica el blur */
 
   }
