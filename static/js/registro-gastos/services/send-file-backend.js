@@ -31,6 +31,8 @@ const sendFileToBackend = async (file) => {
 
       loadTableProducts(responseData);
       document.getElementById("div_carga_documento").classList.remove("div-brillante");
+      document.getElementById("send_data_purchase").style.display = "block";
+      document.getElementById("barra_progreso_carga").style.display = "none";
 
       extractDataBtn.innerHTML = `<i class="fas fa-magic mr-1"></i> Extraer datos`;
       extractDataBtn.disabled = false; // Opcional: deshabilitar mientras procesa

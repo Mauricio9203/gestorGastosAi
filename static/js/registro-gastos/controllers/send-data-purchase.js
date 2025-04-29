@@ -2,10 +2,12 @@ import { notificationToastify, showProcessingToast } from "../../utils/notificat
 import { addBoleta, addDetalleBoleta } from "../services/add-boleta.js";
 import { sendFileUpload } from "../services/upload-file.js";
 import { disableButtonsItems, enableButtonsItems } from "../utils/disable-buttons.js";
-import { items } from "./load-table-products.js";
 
 // Función principal para manejar la carga y obtención de la URL
 const sendDataPurchase = async (file, tableProducts) => {
+  document.getElementById("send_data_purchase").style.display = "block";
+  document.getElementById("barra_progreso_carga").style.display = "block";
+
   document.getElementById("progress_bar_items").classList.add("progress-bar-animated");
   disableButtonsItems();
   showProcessingToast(true);
@@ -46,15 +48,29 @@ const sendDataPurchase = async (file, tableProducts) => {
 
   actualizarProgreso("Proceso completado", 100);
 
+  notificationToastify("La boleta o factura ha sido cargada con éxito.", 2000, "bottom", "right", "success");
   showProcessingToast(false);
+  setTimeout(() => {
+    notificationToastify("Reestableciendo módulo...", 2000, "bottom", "right", "info");
+  }, 2000);
+
   document.getElementById("progress_bar_items").style.backgroundColor = "#198754";
 
   document.getElementById("progress_bar_items").classList.remove("progress-bar-animated");
 
-  //document.getElementById("send_data_purchase").style.display = "none";
+  document.getElementById("send_data_purchase").style.display = "none";
 
-  //habilitar botones
-  enableButtonsItems();
+  setTimeout(() => {
+    document.getElementById("progress_bar_items").style.backgroundColor = "#6f42c1";
+    document.getElementById("barra_progreso_carga").style.display = "none";
+    actualizarProgreso("Subiendo archivo...", 0);
+    const boton = document.querySelector(".filepond--file-action-button.filepond--action-remove-item");
+    enableButtonsItems();
+    // Verificamos si el botón existe antes de hacer el clic
+    if (boton) {
+      boton.click();
+    }
+  }, 4000);
 };
 
 const refactorizarItems = (items, id_boleta) => {

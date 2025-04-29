@@ -18,7 +18,6 @@ const sendFileUpload = async (file) => {
     const data = await response.json(); // Esperamos la respuesta como JSON
 
     if (data.url) {
-      notificationToastify("Archivo cargado con éxito", 3000, "bottom", "right", "success");
       return data.url; // Devolvemos la URL
     } else {
       notificationToastify("Error" + data.error, 3000, "bottom", "right", "danger");
