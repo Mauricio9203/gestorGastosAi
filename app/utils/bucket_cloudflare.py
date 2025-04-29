@@ -10,10 +10,10 @@ load_dotenv()
 
 # ==== CONFIGURACIÓN (rellena con tus datos) ====
 
-ACCESS_KEY_ID = os.getenv("CLOUDFLARE_ACCESS_KEY_ID")         # <-- Tu Access Key de Cloudflare R2
-SECRET_ACCESS_KEY = os.getenv("CLOUDFLARE_SECRET_ACCESS_KEY")       # <-- Tu Secret Key de Cloudflare R2
-ACCOUNT_ID = os.getenv("e8b3ab98814698c7daf1295aa93037d0")              # <-- Tu ID de cuenta en Cloudflare (está en la URL)
-BUCKET_NAME = os.getenv("CLOUDFLARE_BUCKET_NAME")        # <-- El nombre del bucket en R2
+ACCESS_KEY_ID = '9d24206a11bc740bd7a1d16a7d213cfd'        # <-- Tu Access Key de Cloudflare R2
+SECRET_ACCESS_KEY = 'b7ecd088691edd754e39cafc8b51a0c33d10b79b5907877364cd3bde46834864'     # <-- Tu Secret Key de Cloudflare R2
+ACCOUNT_ID = 'e8b3ab98814698c7daf1295aa93037d0'           # <-- Tu ID de cuenta en Cloudflare (está en la URL)
+BUCKET_NAME = 'boletas'    # <-- El nombre del bucket en R2
 ENDPOINT_URL = f'https://{ACCOUNT_ID}.r2.cloudflarestorage.com'
 
  #os.getenv("CLOUDFLARE_BUCKET_NAME")
