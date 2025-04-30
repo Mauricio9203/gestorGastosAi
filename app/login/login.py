@@ -3,6 +3,7 @@ from supabase import create_client, Client
 import bcrypt
 from dotenv import load_dotenv
 import os
+from app.menu import modulos
 
 # Cargar las variables de entorno desde el archivo .env
 load_dotenv()
@@ -53,6 +54,7 @@ def login():
             session['email'] = email  # Guardamos el email en la sesión
             session['username'] = user["username"]  # Guardamos el nombre en la sesión
             session['user_roles'] = user["user_roles"]  # Guardamos el nombre en la sesión
+            session['modulos'] = modulos  # Guardamos el menú completo en la sesión
             return jsonify({'success': True, 'message': 'Login successful'})
         else:
             return jsonify({'success': False, 'message': 'Incorrect password'})

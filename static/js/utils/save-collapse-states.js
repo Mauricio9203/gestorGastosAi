@@ -1,45 +1,53 @@
 const saveCollapseStates = () => {
-  document.querySelectorAll(".nav-link").forEach((link) => {
+  // 1) sólo los que controlan collapse
+  document.querySelectorAll('.nav-link[data-toggle="collapse"]').forEach((link) => {
     link.addEventListener("click", (e) => {
-      const clickedElement = e.currentTarget;
-      const isExpanded = clickedElement.getAttribute("aria-expanded") === "true";
+      const clicked = e.currentTarget;
+      // 2) el id de la flecha buscamos <i class="float-right">
+      const arrowEl = clicked.querySelector("i.float-right");
+      const arrowId = arrowEl ? arrowEl.id : null;
 
-      // Obtener el ID del collapse asociado, por ejemplo desde href="#configuraciones"
-      const collapseId = clickedElement.getAttribute("href")?.replace("#", "");
-      const collapseElement = document.getElementById(collapseId);
-      if (!collapseElement) return;
+      // 3) collapseId = lo que viene en el href (#algo)
+      const collapseId = clicked.getAttribute("href")?.replace("#", "");
+      const collapseEl = document.getElementById(collapseId);
+      if (!collapseEl) return; // sin collapse, salimos
 
-      let openCollapses = JSON.parse(localStorage.getItem("openCollapses")) || [];
+      const isExpanded = clicked.getAttribute("aria-expanded") === "true";
+
+      let open = JSON.parse(localStorage.getItem("openCollapses")) || [];
+      let arrows = JSON.parse(localStorage.getItem("id_arrows")) || [];
 
       if (isExpanded) {
-        // Eliminar de localStorage
-        openCollapses = openCollapses.filter((id) => id.trim() !== collapseId.trim());
+        open = open.filter((id) => id !== collapseId);
+        arrows = arrowId ? arrows.filter((id) => id !== arrowId) : arrows;
       } else {
-        // Agregar al localStorage
-        if (!openCollapses.includes(collapseId)) {
-          openCollapses.push(collapseId);
-        }
+        if (!open.includes(collapseId)) open.push(collapseId);
+        if (arrowId && !arrows.includes(arrowId)) arrows.push(arrowId);
       }
 
-      localStorage.setItem("openCollapses", JSON.stringify(openCollapses));
+      localStorage.setItem("openCollapses", JSON.stringify(open));
+      localStorage.setItem("id_arrows", JSON.stringify(arrows));
     });
   });
 };
 
 const restoreCollapseStates = () => {
-  const openCollapses = JSON.parse(localStorage.getItem("openCollapses")) || [];
+  const open = JSON.parse(localStorage.getItem("openCollapses")) || [];
+  const arrows = JSON.parse(localStorage.getItem("id_arrows")) || [];
 
-  openCollapses.forEach((collapseId) => {
-    const collapseElement = document.getElementById(collapseId);
-    const triggerLink = document.querySelector(`.nav-link[href="#${collapseId}"]`);
+  // reabrir colapsables
+  open.forEach((id) => {
+    const col = document.getElementById(id);
+    const link = document.querySelector(`.nav-link[href="#${id}"]`);
+    if (col) col.classList.add("show");
+    if (link) link.setAttribute("aria-expanded", "true");
+  });
 
-    if (collapseElement) {
-      collapseElement.classList.add("show");
-    }
-
-    if (triggerLink) {
-      triggerLink.setAttribute("aria-expanded", "true");
-    }
+  // girar flechas
+  arrows.forEach((arrowId) => {
+    const arrow = document.getElementById(arrowId);
+    if (!arrow) return;
+    arrow.classList.replace("fa-angle-down", "fa-angle-up");
   });
 };
 

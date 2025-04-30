@@ -5,6 +5,7 @@ from app.login.login import login_bp
 from app.dashboard.dashboard import dashboard_bp
 from app.registro_gastos.registro_gastos_routes import registro_gastos_bp
 from app.utils.decorators import login_required
+from app.menu import modulos
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # Habilitar CORS para todas las rutas
@@ -33,6 +34,11 @@ def users():
 @app.route('/registro-gastos')
 def registro_gastos():
     return render_template('registro-gastos/registro-gastos.html')
+
+@login_required
+@app.route('/modulo-base/sub-modulo-base')
+def modulo_base():
+    return render_template('modulo-base/sub-modulo-base.html')
 
 @app.route('/logout')
 def logout():

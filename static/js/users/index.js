@@ -7,9 +7,9 @@ import { exportButtons } from "./components/table-settings.js";
 import { deleteSelections } from "./components/delete-selections.js";
 
 //mover esto para configurar el sidebar del módulo
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   const linkId = "configuracionesLink";
-  const subLinkId = "table_tabulator";
+  const subLinkId = "usuariosLink";
   const collapseId = "configuraciones";
   const arrow = "configuracionesArrow";
   addCustomActiveClass(linkId, subLinkId, collapseId, arrow);

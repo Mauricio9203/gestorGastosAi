@@ -61,55 +61,31 @@
           <h6 class="text-shadow mt-1" id="user_name_welcome">Welcome, {{ session.get('username') }}!</h6>
         </div>
 
-        <!-- Primer UL: Dashboard -->
         <ul class="nav flex-column mt-1">
+          {% for modulo in session.modulos %}
+          {% if modulo.id != "moduloBase" %}
           <li class="nav-item">
-            <a class="nav-link text-white" href="#dashboard" data-toggle="collapse" aria-expanded="false" id="dashboardLink">
-              <i class="fa-solid fa-chart-line"></i> Panel de Control
-              <i class="fa-solid fa-angle-down float-right" id="dashboardArrow"></i>
+            <a class="nav-link text-white" href="#{{ modulo.id }}" data-toggle="collapse" aria-expanded="false" id="{{ modulo.id }}Link">
+              <i class="fa-solid {{ modulo.icono }}"></i> {{ modulo.nombre }}
+              <i class="fa-solid fa-angle-down float-right" id="{{ modulo.id }}Arrow"></i>
             </a>
-            <div class="collapse" id="dashboard">
+            <div class="collapse" id="{{ modulo.id }}">
               <ul class="nav flex-column ml-3">
-                <li class="nav-item" id="overviewOption">
-                  <a id="overviewLink" class="nav-link text-white" href="{{ url_for('index') }}"> <i class="fa-solid fa-chart-bar"></i> Dashboard </a>
+                {% for sub in modulo.submodulos %}
+                <li class="nav-item" id="{{ sub.id }}Option">
+                  <a id="{{ sub.id }}Link" class="nav-link text-white" href="{{ url_for(sub.url) }}">
+                    <i class="fa-solid {{ sub.icono }}"></i> {{ sub.nombre }}
+                  </a>
                 </li>
+                {% endfor %}
               </ul>
             </div>
           </li>
+          {% endif%}
+          {% endfor %}
         </ul>
+        
 
-        <ul class="nav flex-column mt-1">
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#registroGastos" data-toggle="collapse" aria-expanded="false" id="registroGastosLink">
-              <i class="fa-solid fa-receipt"></i> Registro Gastos
-              <i class="fa-solid fa-angle-down float-right" id="registroGastosArrow"></i>
-            </a>
-            <div class="collapse" id="registroGastos">
-              <ul class="nav flex-column ml-3">
-                <li class="nav-item" id="escanearBoletaOption">
-                  <a id="escanearBoleta" class="nav-link text-white" href="{{ url_for('registro_gastos') }}"> <i class="fa-solid fa-camera" loading="lazy"></i> Agregar Boleta </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-
-        <!-- Segundo UL: Configuraciones -->
-        <ul class="nav flex-column mt-2">
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#configuraciones" data-toggle="collapse" aria-expanded="false" id="configuracionesLink">
-              <i class="fa-solid fa-gear"></i> Configuraciones
-              <i class="fa-solid fa-angle-down float-right" id="configuracionesArrow"></i>
-            </a>
-            <div class="collapse" id="configuraciones">
-              <ul class="nav flex-column ml-3">
-                <li class="nav-item">
-                  <a id="table_tabulator" class="nav-link text-white" href="{{ url_for('users') }}"> <i class="fa-solid fa-user-cog"></i> Usuarios </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
       </div>
 
       <div class="container-fluid p-0" id="content">

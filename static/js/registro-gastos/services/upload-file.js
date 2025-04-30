@@ -2,9 +2,6 @@ import { notificationToastify } from "../../utils/notifications-toastify.js";
 
 //subir a cloudflare
 const sendFileUpload = async (file) => {
-  console.log(file.file); // Asegúrate de que `file.file` esté correctamente definido
-  console.log(file.file.name); // Verifica el nombre del archivo
-
   const formData = new FormData();
   formData.append("file", file.file, file.file.name);
 

@@ -15,8 +15,6 @@ const sendDataPurchase = async (file, tableProducts) => {
   actualizarProgreso("Guardando archivo de la boleta...", 0);
   let url_imagen = await sendFileUpload(file);
 
-  console.log(url_imagen); // Imprime la URL después de que se resuelve la promesa
-
   // Otras operaciones
   let fecha = document.getElementById("fechaBoleta").value ?? null;
   let comercio = document.getElementById("comercioBoleta").value ?? null;
@@ -42,7 +40,6 @@ const sendDataPurchase = async (file, tableProducts) => {
   let id_boleta = boleta["boleta"][0]["id"];
 
   let dataItems = refactorizarItems(tableProducts.getData(), id_boleta);
-  console.log(dataItems);
   actualizarProgreso("Agreando items a la boleta...", 80);
   let detalle_boleta = await addDetalleBoleta(dataItems);
 

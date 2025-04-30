@@ -1,28 +1,39 @@
+// sidebarCollapseLogic.js
+
 const arrowSidebar = () => {
-  //módulo dashboard
-  document.getElementById("dashboardLink").addEventListener("click", function () {
-    arrowDiection(document.getElementById("dashboardArrow"));
-  });
+  // Escuchar solo a enlaces que controlan collapse y tienen id
+  document.querySelectorAll('.nav-link[data-toggle="collapse"][id]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const clickedId = event.currentTarget.id;
+      if (!clickedId) return; // sin id, salimos
 
-  //módulo Settings
-  document.getElementById("configuracionesLink").addEventListener("click", function () {
-    arrowDiection(document.getElementById("configuracionesArrow"));
-  });
+      // Construir el id de la flecha
+      const arrowId = getArrowId(clickedId);
+      const arrowEl = document.getElementById(arrowId);
+      if (!arrowEl) {
+        console.error(`Arrow element not found: #${arrowId}`);
+        return;
+      }
 
-  //módulo Registro Gastos
-  document.getElementById("registroGastosLink").addEventListener("click", function () {
-    arrowDiection(document.getElementById("registroGastosArrow"));
+      // Alternar la dirección de la flecha
+      arrowDirection(arrowEl);
+    });
   });
 };
 
-const arrowDiection = (arrow) => {
+const arrowDirection = (arrow) => {
+  // Garantizar que arrow existe y es un elemento con classList
+  if (!arrow || !arrow.classList) return;
   if (arrow.classList.contains("fa-angle-down")) {
-    arrow.classList.remove("fa-angle-down");
-    arrow.classList.add("fa-angle-up");
+    arrow.classList.replace("fa-angle-down", "fa-angle-up");
   } else {
-    arrow.classList.remove("fa-angle-up");
-    arrow.classList.add("fa-angle-down");
+    arrow.classList.replace("fa-angle-up", "fa-angle-down");
   }
+};
+
+const getArrowId = (linkId) => {
+  // Remover sufijo "Link" o últimos 4 caracteres
+  return linkId.length > 4 ? `${linkId.slice(0, -4)}Arrow` : `${linkId}Arrow`;
 };
 
 export { arrowSidebar };
