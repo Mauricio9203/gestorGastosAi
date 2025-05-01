@@ -1,0 +1,100 @@
+{% extends 'base.html' %} {% block title %}Data Analysis{% endblock %} {% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='modules/registro-gastos/registrar-gasto/css/registrar-gasto.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='core/css/table-tabulator.css') }}" />
+<div class="container-fluid py-4">
+  <!-- Título del módulo -->
+  <h3 class="text-dark d-flex align-items-center text-shadow">
+    <i class="fas fa-camera mr-2"></i>
+    <!-- Icono de análisis de datos -->
+    Registrar Gasto
+  </h3>
+
+  <!-- Fila de las tarjetas -->
+  <div class="row mt-3">
+    <!-- Card 1 -->
+    <div class="col-12 col-lg-6 mt-2">
+      <div class="card rounded-lg border-0 " id="div_carga_documento">
+        <div class="card-body">
+          <h5 class="card-title text-dark text-shadow">Subir documento</h5>
+
+          <input type="file" id="fileUpload"  style="display: none;"/>
+
+          <!-- Contenedor para vista previa personalizada -->
+          <div id="previewContainer" style="margin-top: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center">
+            <img id="previewImage" class="previewImage" src="" style="max-width: 250px; cursor: zoom-in; display: none;" />
+            <!-- Contenedor para la vista previa de PDFs -->
+            <iframe id="previewPdf" class="previewPdf" style="display: none" width="100%" height="500px"></iframe>
+          </div>
+          <div id="procesarDocumento" style="margin-top: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center; display: none">
+            <button id="extractDataBtn" class="btn btn-dark mt-3"><i class="fas fa-magic mr-1"></i> Extraer datos</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2-->
+    <div class="col-12 col-lg-6 mt-2" id="data_preview" style="display: none">
+      <div class="card rounded-lg border-0">
+        <div class="card-body">
+          <h5 class="card-title text-dark text-shadow">Editar Boleta</h5>
+          <!-- Inputs para los datos principales -->
+          <div class="row mb-3">
+            <div class="col-md-6 mb-2">
+              <label for="fechaBoleta" class="form-label">Fecha</label>
+              <input type="date" class="form-control form-control-sm" id="fechaBoleta" />
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="comercioBoleta" class="form-label">Comercio</label>
+              <input type="text" class="form-control form-control-sm" id="comercioBoleta" placeholder="Nombre del comercio" />
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="rutBoleta" class="form-label">RUT</label>
+              <input type="text" class="form-control form-control-sm" id="rutBoleta" placeholder="RUT del comercio" />
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="totalBoletaNeto" class="form-label">Total Neto</label>
+              <input type="number" class="form-control form-control-sm" id="totalBoletaNeto" placeholder="Total en $" step="0.01" min="0" />
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="porcentajeIva" class="form-label">%IVA</label>
+              <input type="text" class="form-control form-control-sm" id="porcentajeIva" placeholder="Total en $" step="0.01" min="0" />
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="totalBoletaBruto" class="form-label">Total Bruto</label>
+              <input type="number" class="form-control form-control-sm" id="totalBoletaBruto" placeholder="Total en $" step="0.01" min="0" />
+            </div>
+            <!-- Checkbox alineado con los demás campos -->
+            <div class="col-md-12 mt-3 ml-4">
+              <input class="form-check-input" type="checkbox" id="checkboxRevisado" />
+              <label class="form-check-label" for="checkboxRevisado">Confirmo que he revisado la boleta</label>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end mb-3">
+            <button id="agregarItem" class="btn btn-sm btn-primary " style="display: block;" disabled><i class="fas fa-plus" ></i> Agregar</button>
+            <button id="eliminarItem" class="btn btn-sm btn-danger ml-2 "  style="display: block;" disabled><i class="fas fa-trash" ></i></i> Eliminar</button>
+          </div>
+          <div id="products-table" class="ml-2 mr-2 mb-2 custom-tabulator">
+            <!-- Acá sigue tu tabla de productos -->
+          </div>
+          <div class="row mb-3 mt-3" id="barra_progreso_carga" style="display: none;"> 
+            <div class="col-md-12 ">
+              <h6 class="text-secondary" id="estado_proceso">Subiendo archivo...</h6>
+              <div class="progress">
+                <div id="progress_bar_items" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+       
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-dark w-100 mt-3 " id="send_data_purchase" type="button" disabled>Registrar Boleta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="{{ url_for('static', filename='modules/registro-gastos/registrar-gasto/js/index.js') }}"></script>
+{% endblock %}

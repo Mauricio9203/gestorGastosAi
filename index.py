@@ -1,11 +1,14 @@
 from flask import Flask, render_template, redirect, url_for, session
 from flask_cors import CORS  # Importar CORS
-from app.users.users_routes import bp as users_bp
-from app.login.login import login_bp
-from app.dashboard.dashboard import dashboard_bp
-from app.registro_gastos.registro_gastos_routes import registro_gastos_bp
+
+#importacion de registros blueprint
+from app.auth.login import login_bp
+from app.modules.configuraciones.usuarios.usuarios_routes import bp as users_bp
+from app.modules.panel_de_control.dashboard.dashboard_routes import dashboard_bp
+from app.modules.registro_gastos.registrar_gasto.registrar_gasto_routes import registro_gastos_bp
+
 from app.utils.decorators import login_required
-from app.menu import modulos
+from app.services.menu import modulos
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # Habilitar CORS para todas las rutas
@@ -22,25 +25,28 @@ app.register_blueprint(registro_gastos_bp)
 @app.route('/')
 @login_required
 def index():
-    return render_template('dashboard.html')
+    return render_template('modules/panel-de-control/dashboard.html')
 
 
-@app.route('/users')
+@app.route('/configuraciones/usuarios')
 @login_required
 def users():
-    return render_template('users.html')
+    return render_template('modules/configuraciones/usuarios.html')
 
+
+@app.route('/registro-gastos/registrar-gasto')
 @login_required
-@app.route('/registro-gastos')
 def registro_gastos():
-    return render_template('registro-gastos/registro-gastos.html')
+    return render_template('modules/registro-gastos/registrar-gasto.html')
 
-@login_required
+
 @app.route('/modulo-base/sub-modulo-base')
+@login_required
 def modulo_base():
-    return render_template('modulo-base/sub-modulo-base.html')
+    return render_template('modules/modulo-base/sub-modulo-base.html')
 
 @app.route('/logout')
+@login_required
 def logout():
     session.pop('email', None)
     return redirect(url_for('login.login_get'))
