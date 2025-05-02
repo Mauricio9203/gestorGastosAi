@@ -1,0 +1,32 @@
+<!-- Modal -->
+<div class="modal fade" id="agregarSubModuloModal" tabindex="-1" aria-labelledby="agregarSubModuloModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content rounded-3 border-0 shadow-lg">
+      <!-- Header -->
+      <div class="modal-header bg-lilac text-white header-modal">
+        <h6 class="modal-title" id="agregarSubModuloModalLabel">Crear submódulo</h6>
+        <button type="button" class="btn-close btn-close-white mt-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body bg-light-lilac">
+        <input type="hidden" id="agregarSubModuloIdUsuario" value="" />
+
+        <form id="agregarSubModuloForm">
+          <div class="mb-3">
+            <label for="agregarSubModuloNombre" class="form-label text-dark">Nombre del Submódulo</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="agregarSubModuloNombre" placeholder="Ej: configuración avanzada" />
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer bg-light-lilac">
+        <button class="btn btn-outline-secondary bg-cancel" data-bs-dismiss="modal" id="agregarSubModuloCancelar">Cancelar</button>
+        <button type="button" id="agregarSubModuloGuardar" form="agregarSubModuloForm" class="btn btn-lilac">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

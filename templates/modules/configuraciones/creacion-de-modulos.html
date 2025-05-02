@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block title %}Data Analysis{% endblock %} {% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='modules/modulo-base/sub-modulo-base/css/sub-modulo-base.css') }}" />
+
+<div class="container-fluid py-4">
+  <!-- Título del módulo -->
+  <h3 class="text-dark d-flex align-items-center text-shadow">
+    <i class="fas fa-chart-line mr-2"></i>
+    <!-- Icono de análisis de datos -->
+    Creación de módulos
+  </h3>
+
+  <!-- Fila de las tarjetas -->
+  <div class="row mt-3 text-dark">
+    <!-- Card 1 -->
+    <div class="col-md-12 mt-2">
+      <div class="card rounded-lg border-0">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 mb-3">
+              <label for="selectModulo" class="form-label d-flex justify-content-between">
+                Módulos
+                <div class="d-flex">
+                  <button type="button" class="btn btn-outline-success btn-sm ms-2 py-0 px-2" title="Agregar módulo" data-bs-toggle="modal" data-bs-target="#agregarModuloModal"><i class="fas fa-plus"></i> Agregar</button>
+                  <button type="button" class="btn btn-outline-danger btn-sm ms-2 py-0 px-2 ml-2" title="Eliminar módulo"><i class="fas fa-trash"></i> Eliminar</button>
+                </div>
+              </label>
+              <select class="form-control" id="selectModulo" required></select>
+            </div>
+            <div class="col-md-6 col-sm-12 mb-3" id="divSubModulos" style="display: none">
+              <label for="selectSubModulo" class="form-label d-flex justify-content-between">
+                Sub Módulos
+                <div class="d-flex">
+                  <button type="button" class="btn btn-outline-success btn-sm ms-2 py-0 px-2" title="Agregar" data-bs-toggle="modal" data-bs-target="#agregarSubModuloModal"><i class="fas fa-plus"></i> Agregar</button>
+                  <button type="button" class="btn btn-outline-danger btn-sm ms-2 py-0 px-2 ml-2" title="Eliminar"><i class="fas fa-trash"></i> Eliminar</button>
+                </div>
+              </label>
+              <select class="form-control" id="selectSubModulo" required></select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="{{ url_for('static', filename='modules/configuraciones/creacion-de-modulos/js/index.js') }}"></script>
+{% endblock %}

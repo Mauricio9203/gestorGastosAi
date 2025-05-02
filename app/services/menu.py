@@ -37,6 +37,12 @@ modulos = [
                 "icono": "fa-user-cog",
                 "nombre": "Usuarios",
                 "url": "users"
+            },
+            {
+                "id": "creacion-de-modulos",
+                "icono": "fa-cubes",
+                "nombre": "Creación de módulos",
+                "url": "creacion_modulos"
             }
         ]
     },
