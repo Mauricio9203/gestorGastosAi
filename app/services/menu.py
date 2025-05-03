@@ -58,6 +58,5 @@ modulos = [
                 "url": "modulo_base"
             }
         ]
-    },
-    
+    }
 ]

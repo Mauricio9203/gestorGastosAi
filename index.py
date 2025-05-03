@@ -57,5 +57,11 @@ def logout():
     session.pop('email', None)
     return redirect(url_for('login.login_get'))
 
+
+@app.route('/estadisticas')
+@login_required
+def estadisticas():
+    return render_template('modules/ventas/estadisticas.html')
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

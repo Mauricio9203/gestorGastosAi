@@ -1,15 +1,19 @@
 import os
 
-def crear_html(html_ruta, texto_guion_sub_modulo, titulo_sub_modulo,texto_guion):
+def crear_html(css_ruta, texto_guion_sub_modulo, titulo_sub_modulo,texto_guion):
     # Crear carpeta si no existe
-    os.makedirs(html_ruta, exist_ok=True)
+    os.makedirs(css_ruta, exist_ok=True)
 
     # Ruta completa del archivo HTML
-    ruta_archivo_html = os.path.join(html_ruta, texto_guion_sub_modulo + ".html")
+    ruta_archivo_html = os.path.join(css_ruta, texto_guion_sub_modulo + ".html")
 
     # Contenido básico del HTML con placeholders para las variables
-    contenido_html = """ 
-    <link rel="stylesheet" href="{{ url_for('static', filename='modules/{modulo}/{submodulo}/css/{submodulo}.css') }}" />
+    contenido_html = ''' 
+    {{% extends 'base.html' %}}
+    {{% block title %}}Data Analysis{{% endblock %}}
+    {{% block body %}}
+    
+    <link rel="stylesheet" href="{{{{ url_for('static', filename='modules/{modulo}/{submodulo}/css/{submodulo}.css') }}}}" />
 
     <div class="container-fluid py-4">
     <h3 class="text-dark d-flex align-items-center text-shadow">
@@ -26,8 +30,10 @@ def crear_html(html_ruta, texto_guion_sub_modulo, titulo_sub_modulo,texto_guion)
     </div>
     </div>
 
-    <script type="module" src="{{ url_for('static', filename='modules/{modulo}/{submodulo}/js/index.js') }}"></script>
-    """
+    <script type="module" src="{{{{ url_for('static', filename='modules/{modulo}/{submodulo}/js/index.js') }}}}"></script>
+    {{% endblock %}}
+    '''
+
 
     # Reemplazar las variables con el método format()
     contenido_html = contenido_html.format(
