@@ -85,7 +85,7 @@ def crear_boleta():
         nueva_boleta["id_usuario"] = int(session['id_user']) #agregar la id del usuario que creo la boleta
         try:
             # Asegúrate de que la variable que usas sea la correcta, aquí estoy usando nueva_boleta
-            boleta = create_record("boleta", nueva_boleta)  
+            boleta = create_record("boletas", nueva_boleta)  
             print (boleta)
             return jsonify({"message": "Boleta creada exitosamente", "boleta": boleta}), 201
         except Exception as e:

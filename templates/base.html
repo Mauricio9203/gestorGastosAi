@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='core/css/loading-module.css') }}" />
+
     <script type="module" src="{{ url_for('static', filename='utils/loading-module.js') }}"></script>
     </style>
     <!-- Icono en formato PNG para pantallas retina (192x192 píxeles) -->
@@ -22,8 +23,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='core/css/base.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='core/css/modals.css') }}" />
 
-    <!-- Incluir CSS de DataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+
     <!-- Cargar jQuery primero -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -47,6 +47,8 @@
     <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
     <!-- Viewer.js -->
     <script src="https://unpkg.com/viewerjs/dist/viewer.min.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='core/css/table-tabulator.css') }}" />
   </head>
 
   <body>
@@ -132,6 +134,7 @@
     {% include 'modals/configuraciones/usuarios/modal-user-settings.html' %}
     {% include 'modals/configuraciones/creacion-de-modulos/modal-agregar-modulo.html' %}
     {% include 'modals/configuraciones/creacion-de-modulos/modal-agregar-sub-modulo.html' %}
+    {% include 'modals/registro-gastos/modal-detalle-boleta.html' %} 
 
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>

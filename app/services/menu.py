@@ -1,5 +1,3 @@
-#en la url se debe colocar el nombre de la función registrada a esa url
-
 modulos = [
     {
         "id": "dashboard",
@@ -24,6 +22,12 @@ modulos = [
                 "icono": "fa-camera",
                 "nombre": "Registrar Gasto",
                 "url": "registro_gastos"
+            },
+              {
+                "id": "gastos-registrados",
+                "icono": "fa-file-invoice",
+                "nombre": "Gastos Registrados",
+                "url": "gastos_registrados"
             }
         ]
     },
@@ -43,19 +47,6 @@ modulos = [
                 "icono": "fa-cubes",
                 "nombre": "Creación de módulos",
                 "url": "creacion_modulos"
-            }
-        ]
-    },
-    {
-        "id": "moduloBase",
-        "icono": "fa-gear",
-        "nombre": "Módulo Base",
-        "submodulos": [
-            {
-                "id": "sub_modulo_base",
-                "icono": "fa-user-cog",
-                "nombre": "Sub módulo Base",
-                "url": "modulo_base"
             }
         ]
     }

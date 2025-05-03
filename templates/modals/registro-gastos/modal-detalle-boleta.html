@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div class="modal fade" id="modal-detalle-boleta" tabindex="-1" aria-labelledby="modal-detalle-boletaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content rounded-3 border-0 shadow-lg">
+      <!-- Header -->
+      <div class="modal-header bg-lilac text-white header-modal">
+        <h6 class="modal-title" id="modal-detalle-boletaLabel">Detalle Documento</h6>
+        <button type="button" class="btn-close btn-close-white mt-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body bg-light-lilac">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <div>
+            <!-- Botones de exportación con Font Awesome -->
+            <button id="download-csv-detalle-boleta" class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i> CSV</button>
+            <button id="download-xlsx-detalle-boleta" class="btn btn-outline-success btn-sm"><i class="fas fa-file-excel"></i> Excel</button>
+            <button id="download-json-detalle-boleta" class="btn btn-outline-info btn-sm"><i class="fas fa-file-alt"></i> JSON</button>
+          </div>
+
+          <!-- Botones Add y Eliminar a la derecha -->
+          <div class="d-flex">
+            <!-- Botón para eliminar selección -->
+            <button id="delete-rows-detalle-boleta" class="btn btn-outline-danger btn-sm ms-2 ml-1" style="display: none"><i class="fas fa-trash-alt"></i> Eliminar</button>
+          </div>
+        </div>
+        <div id="detalle-boleta-table" class="ml-2 mr-2 mb-2 custom-tabulator mt-3" style="display: block">
+          <i class="fas fa-circle-notch fa-spin fa-3x color-spin d-flex justify-content-center align-items-center"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

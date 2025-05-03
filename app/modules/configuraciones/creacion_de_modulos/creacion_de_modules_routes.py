@@ -67,7 +67,7 @@ def crear_sub_modulo():
         # Crear carpeta de módulo python
         python_ruta = os.path.join(ruta_python)
         os.makedirs(os.path.join(python_ruta, texto_guion_bajo_sub_modulo), exist_ok=True)
-        crear_py(python_ruta,texto_guion_bajo_sub_modulo,texto_guion,texto_guion_sub_modulo)
+        crear_py(python_ruta,texto_guion_bajo_sub_modulo,texto_guion,texto_guion_sub_modulo,texto_guion_bajo)
         
         # Crear carpeta de módulo static js css
         css_js_ruta = os.path.join(ruta_js_css)
@@ -75,11 +75,11 @@ def crear_sub_modulo():
         
         css_ruta = os.path.join(ruta_js_css+"/"+texto_guion_sub_modulo)
         os.makedirs(os.path.join(css_ruta, "css"), exist_ok=True)
-        crear_css(css_ruta,texto_guion_sub_modulo)
+        crear_css(css_ruta,texto_guion_sub_modulo,)
         
         js_ruta = os.path.join(ruta_js_css+"/"+texto_guion_sub_modulo)
         os.makedirs(os.path.join(js_ruta, "js"), exist_ok=True)
-        crear_archivo_js(js_ruta)
+        crear_archivo_js(js_ruta,texto_guion,texto_guion_sub_modulo)
         
         # Crear carpeta de módulo static html
         crear_html(ruta_html,texto_guion_sub_modulo,textoNormalSubModulo, texto_guion)

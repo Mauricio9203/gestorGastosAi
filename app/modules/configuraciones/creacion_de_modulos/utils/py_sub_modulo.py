@@ -1,13 +1,13 @@
 import os
 
-def crear_py(py_ruta, texto_guion_bajo_sub_modulo,texto_guion,texto_guion_sub_modulo):
+def crear_py(py_ruta, texto_guion_bajo_sub_modulo,texto_guion,texto_guion_sub_modulo,texto_guion_bajo):
     print(py_ruta)
     print(texto_guion_bajo_sub_modulo)
     # Crear carpeta si no existe
     os.makedirs(py_ruta, exist_ok=True)
 
     # Ruta completa del archivo py
-    ruta_archivo_py = os.path.join(py_ruta+"/"+texto_guion_bajo_sub_modulo, texto_guion_bajo_sub_modulo + ".py")
+    ruta_archivo_py = os.path.join(py_ruta+"/"+texto_guion_bajo_sub_modulo, texto_guion_bajo_sub_modulo + "_routes.py")
 
     # Contenido exactamente como lo quieres, respetando espacios
     contenido_py = (
@@ -25,6 +25,8 @@ def crear_py(py_ruta, texto_guion_bajo_sub_modulo,texto_guion,texto_guion_sub_mo
         
     # Llamar a la función con los parámetros deseados
     agregar_ruta_a_app('/'+texto_guion_sub_modulo, texto_guion_bajo_sub_modulo, 'modules/'+texto_guion+'/'+texto_guion_sub_modulo+'.html')
+    importar_blueprint(texto_guion_bajo,texto_guion_bajo_sub_modulo)
+    registrar_blueprint(texto_guion_bajo_sub_modulo)
         
 def agregar_ruta_a_app(ruta, nombre_funcion, plantilla):
     # Ruta del archivo Python donde deseas agregar la nueva ruta (ejemplo: 'app.py')
@@ -61,8 +63,65 @@ def {nombre_funcion}():
 
     print(f"Ruta '{ruta}' agregada correctamente al archivo '{archivo_py}'")
 
+def importar_blueprint(nombre_modulo_guion_bajo, nombre_sub_modulo_guion_bajo):
+    # Ruta del archivo Python donde deseas agregar la nueva ruta (ejemplo: 'app.py')
+    archivo_py = 'index.py'
+    
+    # Abrir el archivo y leer su contenido
+    with open(archivo_py, 'r', encoding='utf-8') as archivo:
+        contenido = archivo.readlines()
+
+    # Buscar la línea donde está el bloque if __name__ == '__main__':
+    posicion_blueprint = None
+    for i, linea in enumerate(contenido):
+        if linea.strip() == '#fin importacion de registros blueprint':
+            posicion_blueprint = i
+            break
+
+    if posicion_blueprint is None:
+        raise Exception("No se encontró el bloque 'if __name__ == '__main__':' en el archivo")
 
 
-#agregar registro de blue print
+    nuevo_registro_bp = f"""from app.modules.{nombre_modulo_guion_bajo}.{nombre_sub_modulo_guion_bajo}.{nombre_sub_modulo_guion_bajo}_routes import {nombre_sub_modulo_guion_bajo}_bp\n"""
+    
+    # Insertar la nueva ruta antes del bloque `if __name__ == '__main__':`
+    contenido.insert(posicion_blueprint, nuevo_registro_bp)
+
+    # Escribir los cambios de vuelta al archivo
+    with open(archivo_py, 'w', encoding='utf-8') as archivo:
+        archivo.writelines(contenido)
+
+    print(f"Registro '{nuevo_registro_bp}' agregado correctamente al archivo '{archivo_py}'")
+    
+def registrar_blueprint( nombre_sub_modulo_guion_bajo):
+    # Ruta del archivo Python donde deseas agregar la nueva ruta (ejemplo: 'app.py')
+    archivo_py = 'index.py'
+    
+    # Abrir el archivo y leer su contenido
+    with open(archivo_py, 'r', encoding='utf-8') as archivo:
+        contenido = archivo.readlines()
+
+    # Buscar la línea donde está el bloque if __name__ == '__main__':
+    posicion_blueprint = None
+    for i, linea in enumerate(contenido):
+        if linea.strip() == '#Fin Registra los Blueprints':
+            posicion_blueprint = i
+            break
+
+    if posicion_blueprint is None:
+        raise Exception("No se encontró el bloque 'if __name__ == '__main__':' en el archivo")
+
+
+    nuevo_registro_bp = f"""app.register_blueprint({nombre_sub_modulo_guion_bajo}_bp)\n"""
+    
+    # Insertar la nueva ruta antes del bloque `if __name__ == '__main__':`
+    contenido.insert(posicion_blueprint, nuevo_registro_bp)
+
+    # Escribir los cambios de vuelta al archivo
+    with open(archivo_py, 'w', encoding='utf-8') as archivo:
+        archivo.writelines(contenido)
+
+    print(f"Registro '{nuevo_registro_bp}' agregado correctamente al archivo '{archivo_py}'")
+
 
         

@@ -42,16 +42,9 @@ def subir_archivo(file_object, nombre_objeto_en_r2, tiempo_expiracion=3600):
         # Usar 'upload_fileobj' para trabajar con un objeto 'file-like' (FileStorage)
         s3.upload_fileobj(file_object, BUCKET_NAME, nombre_objeto_en_r2)
         print(f"✅ Archivo subido como '{nombre_objeto_en_r2}' exitosamente.")
-
+        #https://pub-2d8344ab758f4d1b8f4ec35631657394.r2.dev/boletas/boleta%20mayo_39f4ec113e3a475d8a593f43f9ccfd3d.jpeg
         # Generar y retornar la URL firmada
-        url = s3.generate_presigned_url(
-            'get_object',
-            Params={
-                'Bucket': BUCKET_NAME,
-                'Key': nombre_objeto_en_r2
-            },
-            ExpiresIn=tiempo_expiracion
-        )
+        url = "https://pub-2d8344ab758f4d1b8f4ec35631657394.r2.dev/"+nombre_objeto_en_r2
         return url
 
     except Exception as e:
