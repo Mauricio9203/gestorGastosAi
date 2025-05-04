@@ -100,6 +100,36 @@
   border-radius: 4px;
 }
 
+.tabulator-page-counter span {
+  font-size: 14px; /* o el tamaño que prefieras */
+}
+
+.tabulator-paginator span {
+  font-size: 14px; /* o el tamaño que prefieras */
+}
+
+.tabulator-page {
+  font-size: 14px; /* o el tamaño que prefieras */
+}
+
+
+
+
+@media (max-width: 768px) {
+  .tabulator-page-counter span {
+    font-size: 9px; /* o el tamaño que prefieras */
+  }
+  
+  .tabulator-paginator span {
+    font-size: 9px; /* o el tamaño que prefieras */
+  }
+  
+  .tabulator-page {
+    font-size: 9px; /* o el tamaño que prefieras */
+  }
+  
+}
+
 .tabulator-page{
   color: #dcddff;
 }
@@ -122,6 +152,8 @@
   font-size: 14px;  /* Cambia el tamaño de la fuente si es necesario */
   padding: 5px;  /* Ajusta el padding para que el texto tenga más espacio */
 }
+
+
 
 
 

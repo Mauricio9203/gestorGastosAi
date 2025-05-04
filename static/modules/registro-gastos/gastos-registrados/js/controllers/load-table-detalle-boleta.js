@@ -2,10 +2,10 @@ import { tableSettingsDetalleBoleta } from "../components/table-settings-detalle
 import { getDetalleBoleta } from "../services/get-detalle-boleta.js";
 
 let tableDetalleBoleta;
-
 //Iniciar Tabla
 const loadTableDetalleBoleta = async (id_boleta) => {
   var data = await getDetalleBoleta(id_boleta);
+
   var tabledata = data.detalle_boleta;
 
   //configuración de las columnas
@@ -25,7 +25,7 @@ const loadTableDetalleBoleta = async (id_boleta) => {
       title: "Item",
       field: "nombre_item",
       editor: "input",
-      width: 400,
+      minWidth: 200,
       headerFilter: "input",
     },
     {
@@ -33,40 +33,48 @@ const loadTableDetalleBoleta = async (id_boleta) => {
       field: "precio_total",
       editor: "input",
       headerFilter: "input",
+      minWidth: 100,
+      bottomCalc: "sum",
     },
     {
       title: "Categoria",
       field: "nombre_categoria",
       editor: "input",
       headerFilter: "input",
+      minWidth: 100,
     },
     {
       title: "Cantidad",
       field: "cantidad",
       editor: "input",
       headerFilter: "input",
+      minWidth: 100,
     },
     {
       title: "Precio Unitario",
       field: "precio_unitario",
       editor: "input",
       headerFilter: "input",
+      minWidth: 100,
     },
     {
       title: "Contenido",
       field: "cantidad_contenido_unidad",
       editor: "input",
       headerFilter: "input",
+      minWidth: 100,
     },
     {
       title: "Unidad Medida",
       field: "unidad_medida",
       editor: "input",
       headerFilter: "input",
+      minWidth: 100,
     },
     {
       title: "Creado",
       field: "created_at",
+      minWidth: 130,
       formatter: function (cell) {
         // Obtener la fecha desde el campo
         const date = new Date(cell.getValue());
@@ -80,6 +88,7 @@ const loadTableDetalleBoleta = async (id_boleta) => {
     {
       title: "Actualizado",
       field: "updated_at",
+      minWidth: 130,
       tooltip: false,
       formatter: (cell) => {
         // Obtener la fecha desde el campo
@@ -93,8 +102,8 @@ const loadTableDetalleBoleta = async (id_boleta) => {
     },
   ];
 
-  var paginationSize = 10;
-  var initialSort = [{ column: "created_at", dir: "desc" }];
+  var paginationSize = 12;
+  var initialSort = [];
 
   tableDetalleBoleta = tableSettingsDetalleBoleta(tabledata, paginationSize, initialSort, column);
 };

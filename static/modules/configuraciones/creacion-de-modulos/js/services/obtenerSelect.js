@@ -29,7 +29,6 @@ const obtenerListaSubModulos = () => {
     select.style.display = "block";
 
     const nombreModulo = document.getElementById("selectModulo").value; // Puedes obtenerlo desde un input si quieres
-    console.log("lista submodulos", nombreModulo);
     if (nombreModulo != "") {
       fetch("/obtener_lista_sub_modulos", {
         method: "POST",

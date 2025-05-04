@@ -32,21 +32,21 @@ const tableSettings = (tabledata, paginationSize, initialSort, column) => {
 };
 
 // Configuración Botones de exportación
-const exportButtons = () => {
+const exportButtonsBoleta = () => {
   //cambiar nombre a los archivos de exportación
   let fileName = "datos";
   // CSV
-  document.getElementById("download-csv").addEventListener("click", function () {
+  document.getElementById("download-csv-gastos-registrados").addEventListener("click", function () {
     table.download("csv", fileName + ".csv");
   });
   // Excel (XLSX)
-  document.getElementById("download-xlsx").addEventListener("click", function () {
+  document.getElementById("download-xlsx-gastos-registrados").addEventListener("click", function () {
     table.download("xlsx", fileName + ".xlsx", { sheetName: "Reporte" });
   });
   // JSON
-  document.getElementById("download-json").addEventListener("click", function () {
+  document.getElementById("download-json-gastos-registrados").addEventListener("click", function () {
     table.download("json", fileName + ".json");
   });
 };
 
-export { tableSettings, exportButtons };
+export { tableSettings, exportButtonsBoleta };

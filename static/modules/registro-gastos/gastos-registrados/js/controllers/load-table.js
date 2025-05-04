@@ -26,34 +26,37 @@ const loadTable = async () => {
       field: "nombre_comercio",
       editor: "input",
       headerFilter: "input",
+      minWidth: 200,
     },
     {
       title: "Total Neto",
       field: "total_neto",
       editor: "input",
-      headerFilter: "input",
+      minWidth: 100,
     },
     {
       title: "% IVA",
       field: "porcentaje_iva",
       editor: "input",
-      headerFilter: "input",
+      minWidth: 100,
     },
     {
       title: "Total Bruto",
       field: "total_bruto",
       editor: "input",
-      headerFilter: "input",
+      minWidth: 100,
     },
     {
       title: "Fecha Compra",
       field: "fecha_boleta",
       editor: "input",
       headerFilter: "input",
+      minWidth: 100,
     },
     {
       title: "Creado",
       field: "created_at",
+      minWidth: 140,
       formatter: function (cell) {
         // Obtener la fecha desde el campo
         const date = new Date(cell.getValue());
@@ -62,11 +65,11 @@ const loadTable = async () => {
         const formattedDate = date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB");
         return formattedDate;
       },
-      headerFilter: "input",
     },
     {
       title: "Actualizado",
       field: "updated_at",
+      minWidth: 140,
       tooltip: false,
       formatter: (cell) => {
         // Obtener la fecha desde el campo
@@ -76,20 +79,37 @@ const loadTable = async () => {
         const formattedDate = date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB");
         return formattedDate;
       },
-      headerFilter: "input",
     },
     {
-      title: "Foto",
+      title: "Documento",
       field: "url_boleta",
       hozAlign: "center",
+      minWidth: 100,
+      headerSort: false,
       formatter: function (cell) {
         const url = cell.getValue();
         const rowId = cell.getRow().getPosition();
-        return `
-          <div class="viewer-wrapper" id="viewer-${rowId}">
-            <img src="${url}" class="boleta-image-hover" style="height: 60px; max-width: 100px; cursor: pointer;"  />
-          </div>
-        `;
+
+        // Verificar si la URL es un PDF
+        const isPDF = url.toLowerCase().endsWith(".pdf");
+
+        if (isPDF) {
+          // Enlace de descarga para PDF con ícono
+          return `
+            <div class="viewer-wrapper" id="viewer-${rowId}">
+              <a href="${url}" target="_blank" class="pdf-link">
+                <i class="fas fa-file-pdf" style="color: #d9534f; font-size: 24px;"></i>
+              </a>
+            </div>
+          `;
+        } else {
+          // Mostrar imagen con ícono y mantener el viewer
+          return `
+            <div class="viewer-wrapper" id="viewer-${rowId}">
+              <img src="${url}" class="boleta-image-hover" style="max-height: 30px;cursor: pointer;" />
+            </div>
+          `;
+        }
       },
       tooltip: false,
     },
@@ -97,6 +117,8 @@ const loadTable = async () => {
       title: "Actions",
       field: "Actions",
       hozAlign: "center",
+      minWidth: 80,
+      headerSort: false, //desactiva el sort la flecha
       formatter: function (cell) {
         const rowData = cell.getRow().getData();
         const id = rowData.id; // Suponiendo que la fila tiene una columna 'id'

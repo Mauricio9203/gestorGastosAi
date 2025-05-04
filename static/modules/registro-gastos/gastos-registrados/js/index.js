@@ -1,8 +1,9 @@
 import { addCustomActiveClass } from "../../../../utils/sidebarConfig.js";
+import { exportButtonsDetalleBoleta } from "./components/table-settings-detalle-boleta.js";
+import { exportButtonsBoleta } from "./components/table-settings.js";
 import { abrirModalDetalleBoleta } from "./controllers/abrir-modal-detalle-boleta.js";
-import { loadTableDetalleBoleta } from "./controllers/load-table-detalle-boleta.js";
+import { filtroSearchBoleta } from "./controllers/filtros.js";
 import { loadTable } from "./controllers/load-table.js";
-import { getDetalleBoleta } from "./services/get-detalle-boleta.js";
 import { getGastos } from "./services/get-gastos.js";
 
 window.addEventListener("DOMContentLoaded", async function () {
@@ -14,7 +15,8 @@ window.addEventListener("DOMContentLoaded", async function () {
   addCustomActiveClass(linkId, subLinkId, collapseId, arrow);
   getGastos();
   await loadTable(); // para que la siguiente función funcione, debe esperar a que cargue la tabla
-  getDetalleBoleta();
-  await loadTableDetalleBoleta();
   abrirModalDetalleBoleta();
+  exportButtonsDetalleBoleta();
+  exportButtonsBoleta();
+  filtroSearchBoleta();
 });

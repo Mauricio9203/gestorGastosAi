@@ -7,7 +7,6 @@ const tableEvents = (table) => {
   });
 
   table.on("dataLoaded", function () {
-    console.log("activando imagen");
     setTimeout(() => {
       document.querySelectorAll(".viewer-wrapper").forEach((element) => {
         new Viewer(element, {

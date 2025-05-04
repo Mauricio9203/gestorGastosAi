@@ -32,8 +32,6 @@ const crearModulo = async (nombreModulo, textoGuion, textoGuionBajo) => {
 };
 
 const crearSubModulo = async (nombreModulo, textoGuion, textoGuionBajo, nombreSubModulo, subModuloGuion, subModuloGuionBajo) => {
-  console.log(nombreModulo, textoGuion, textoGuionBajo, nombreSubModulo, subModuloGuion, subModuloGuionBajo);
-
   showProcessingToast(true);
   try {
     const response = await fetch("/crear_sub_modulo", {

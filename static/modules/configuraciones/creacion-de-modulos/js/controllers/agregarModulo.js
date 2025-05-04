@@ -13,7 +13,6 @@ const agregarSubModulo = () => {
   document.getElementById("agregarSubModuloGuardar").addEventListener("click", () => {
     const nombreModulo = document.getElementById("selectModulo").value; // Puedes obtenerlo desde un input si quieres
     const nombreSubModulo = document.getElementById("agregarSubModuloNombre").value; // Puedes obtenerlo desde un input si quieres
-    console.log(nombreSubModulo);
     let textoGuion = reemplazarGuionPorGuionBajo(nombreModulo);
     let textoGuionBajo = formatearTextoGuionBajo(nombreModulo);
 

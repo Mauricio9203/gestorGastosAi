@@ -1,9 +1,16 @@
-import { table } from "../controllers/load-table.js";
 import { tableEventsDetalleBoleta } from "./table-events-detalle-boleta.js";
+
+let tableDetalleBoleta;
 
 //configurar Tabla
 const tableSettingsDetalleBoleta = (tabledata, paginationSize, initialSort, column) => {
-  const table = new Tabulator("#detalle-boleta-table", {
+  // 💣 Destruir la tabla anterior si ya existe
+  if (tableDetalleBoleta) {
+    tableDetalleBoleta.destroy();
+    tableDetalleBoleta = null;
+  }
+
+  tableDetalleBoleta = new Tabulator("#detalle-boleta-table", {
     data: tabledata, //load row data from array
     layout: "fitColumns", //fit columns to width of table
     addRowPos: "top", //when adding a new row, add it to the top of the table
@@ -22,31 +29,31 @@ const tableSettingsDetalleBoleta = (tabledata, paginationSize, initialSort, colu
   });
 
   // Esperar a que la tabla esté completamente construida antes de limpiar los filtros
-  table.on("tableBuilt", function () {
-    table.clearFilter();
+  tableDetalleBoleta.on("tableBuilt", function () {
+    tableDetalleBoleta.clearFilter();
   });
 
-  tableEventsDetalleBoleta(table);
+  tableEventsDetalleBoleta(tableDetalleBoleta);
 
-  return table;
+  return tableDetalleBoleta;
 };
 
 // Configuración Botones de exportación
-const exportButtons = () => {
+const exportButtonsDetalleBoleta = () => {
   //cambiar nombre a los archivos de exportación
   let fileName = "datos";
   // CSV
-  document.getElementById("download-csv").addEventListener("click", function () {
-    table.download("csv", fileName + ".csv");
+  document.getElementById("download-csv-detalle-boleta").addEventListener("click", function () {
+    tableDetalleBoleta.download("csv", fileName + ".csv");
   });
   // Excel (XLSX)
-  document.getElementById("download-xlsx").addEventListener("click", function () {
-    table.download("xlsx", fileName + ".xlsx", { sheetName: "Reporte" });
+  document.getElementById("download-xlsx-detalle-boleta").addEventListener("click", function () {
+    tableDetalleBoleta.download("xlsx", fileName + ".xlsx", { sheetName: "Reporte" });
   });
   // JSON
-  document.getElementById("download-json").addEventListener("click", function () {
-    table.download("json", fileName + ".json");
+  document.getElementById("download-json-detalle-boleta").addEventListener("click", function () {
+    tableDetalleBoleta.download("json", fileName + ".json");
   });
 };
 
-export { tableSettingsDetalleBoleta, exportButtons };
+export { tableSettingsDetalleBoleta, exportButtonsDetalleBoleta };
