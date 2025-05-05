@@ -1,37 +1,62 @@
-const barChart = (etiquetas, valores, titulo, idChart, backgroundColor, borderColor) => {
-  // 1. Verificar si ya existe un gráfico en el idChart
-  const existingChart = Chart.getChart(idChart); // Obtener la instancia de gráfico
-  if (existingChart) {
-    // Destruir el gráfico anterior antes de crear uno nuevo
-    existingChart.destroy();
+const charts = {};
+let chartCounter = 0; // Para canvas sin ID
+
+const barChart = (etiquetas, valores, titulo, idOrElement, backgroundColor, borderColor) => {
+  const canvas = typeof idOrElement === "string" ? document.getElementById(idOrElement) : idOrElement;
+
+  if (!canvas) {
+    console.error(`Canvas con ID o referencia inválida:`, idOrElement);
+    return;
   }
 
-  // 1. Combinar todo en un array de objetos
-  const datos = etiquetas.map((label, i) => ({
-    label,
-    value: valores[i],
-  }));
+  const ctx = canvas.getContext("2d");
 
-  // 2. Ordenar por valor descendente
-  datos.sort((a, b) => b.value - a.value);
+  // Si el canvas no tiene ID, se le asigna uno automáticamente
+  if (!canvas.id) {
+    canvas.id = `chart-auto-${chartCounter++}`;
+  }
 
-  // 3. Separar los datos ordenados
+  const chartKey = canvas.id;
+
+  const datos = etiquetas
+    .map((label, i) => ({
+      label,
+      value: valores[i],
+      bg: backgroundColor[i],
+      border: borderColor[i],
+    }))
+    .sort((a, b) => b.value - a.value);
+
   const etiquetasOrdenadas = datos.map((d) => d.label);
   const valoresOrdenados = datos.map((d) => d.value);
-  const bgOrdenado = datos.map((d) => d.bg);
-  const borderOrdenado = datos.map((d) => d.border);
 
-  // Configurar y renderizar el gráfico
-  new Chart(idChart, {
-    type: "bar", // Tipo de gráfico: barras
+  // Si el gráfico ya existe, actualizarlo
+  if (charts[chartKey]) {
+    const chart = charts[chartKey];
+    chart.data.labels = etiquetasOrdenadas;
+    chart.data.datasets[0].data = valoresOrdenados;
+    chart.data.datasets[0].backgroundColor = backgroundColor;
+    chart.data.datasets[0].borderColor = borderColor;
+    chart.data.datasets[0].label = titulo;
+    chart.update({
+      duration: 800, // Duración de la animación
+      easing: "easeOutQuart", // Transición más suave
+      responsiveAnimationDuration: 500, // Duración extra para el cambio de tamaño
+    });
+    return;
+  }
+
+  // Crear un nuevo gráfico
+  const newChart = new Chart(ctx, {
+    type: "bar",
     data: {
-      labels: etiquetasOrdenadas, // Etiquetas del gráfico
+      labels: etiquetasOrdenadas,
       datasets: [
         {
-          label: titulo, // Título del dataset
-          data: valoresOrdenados, // Valores del gráfico
-          backgroundColor: backgroundColor, // Color de las barras
-          borderColor: borderColor, // Color del borde
+          label: titulo,
+          data: valoresOrdenados,
+          backgroundColor: backgroundColor,
+          borderColor: borderColor,
           borderWidth: 1,
         },
       ],
@@ -39,69 +64,46 @@ const barChart = (etiquetas, valores, titulo, idChart, backgroundColor, borderCo
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: {
+        duration: 800, // Duración de la animación
+        easing: "easeInOutQuad", // Tipo de transición suave
+      },
       plugins: {
-        legend: {
-          display: false,
-        },
-        tooltip: {
-          enabled: true,
-        },
-        // Agregar plugin de dataLabels solo para mostrar números
+        legend: { display: false },
+        tooltip: { enabled: true },
         datalabels: {
-          color: "gray", // Color del texto dentro de las barras
-          align: "center", // Alinear el texto al centro de las barras
-          anchor: "center", // Anclar el texto al centro
+          color: "gray",
+          align: "center",
+          anchor: "center",
           font: {
             weight: "bold",
-            size: window.innerWidth < 768 ? 8 : 12, // Ajusta el tamaño de la fuente en pantallas pequeñas
+            size: window.innerWidth < 768 ? 8 : 12,
           },
-          formatter: (value) => value.toFixed(1), // Mostrar solo el valor numérico
+          formatter: (value) => value.toFixed(1),
         },
       },
       scales: {
         y: {
           beginAtZero: true,
-          title: {
-            display: false,
-            text: "Total Gastado",
-            color: "#333", // Color del texto
-            font: {
-              size: 8,
-            },
-            padding: { top: 10 },
-          },
           ticks: {
-            callback: function (value) {
-              return "$" + value;
-            },
-            font: {
-              size: 12,
-            },
+            callback: (value) => "$" + value,
+            font: { size: 12 },
           },
         },
         x: {
-          title: {
-            display: false,
-            text: "Categorías",
-            color: "#333", // Color del texto
-            font: {
-              size: 8,
-            },
-            padding: { top: 10 },
-          },
           ticks: {
-            font: {
-              size: 12, // Tamaño de la fuente del eje X
-            },
-            maxRotation: 100, // Máxima rotación permitida
-            minRotation: 0, // Mínima rotación si hay espacio
-            autoSkip: true, // (opcional) Muestra todas las etiquetas
+            font: { size: 12 },
+            maxRotation: 100,
+            minRotation: 0,
+            autoSkip: true,
           },
         },
       },
     },
-    plugins: [ChartDataLabels], // Asegúrate de incluir el plugin ChartDataLabels
+    plugins: [ChartDataLabels],
   });
+
+  charts[chartKey] = newChart;
 };
 
 export { barChart };

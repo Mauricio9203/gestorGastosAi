@@ -20,7 +20,7 @@ const detectarCambiosBoleta = async () => {
         table: "boletas",
       },
       (payload) => {
-        console.log("🎯 Cambio detectado en boletas:", payload);
+        //console.log("🎯 Cambio detectado en boletas:", payload);
         ejecutarAcciones();
       }
     )
@@ -28,7 +28,6 @@ const detectarCambiosBoleta = async () => {
 };
 
 const ejecutarAcciones = () => {
-  console.log("ejecutando acciones");
   totalReceipts();
   totalGastado();
   chartTotalGastoPorCategoria();
