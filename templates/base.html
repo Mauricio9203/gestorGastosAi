@@ -6,7 +6,7 @@
     <script type="module" src="{{ url_for('static', filename='utils/loading-module.js') }}"></script>
     </style>
     <!-- Icono en formato PNG para pantallas retina (192x192 píxeles) -->
-    <link rel="icon" href="static/core/images/administracion.png" sizes="192x192" type="image/png" />
+    <link rel="icon" src="{{ url_for('static', filename='core/images/administracion.png') }}"  sizes="192x192" type="image/png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Panel</title>
@@ -56,13 +56,13 @@
   <body>
     <!-- Loading overlay -->
     <div id="loading-overlay">
-      <i class="fas fa-cog fa-spin" style="margin-right: 10px;"></i> Cargando módulo
+      <i class="fas fa-circle-notch fa-spin fa-2x" style="margin-right: 10px;"></i>  <img src="{{ url_for('static', filename='core/images/logo_gastos_ai.png') }}" alt="Gestor de Gastos AI" style="height: 100px;" />
     </div>
     <div class="d-flex" id="wrapper" style="display: none">
       <div class="sidebar bg-gradient shadow-lg hidden" id="sidebarMenu">
         <div class="text-center py-3 rounded mb-4" style="min-width: 190px">
-          <h5 class="text-white mb-0 text-shadow"><i class="fa-solid fa-tools"></i> MG System</h5>
-          <h6 class="text-shadow mt-1" id="user_name_welcome">Welcome, {{ session.get('username') }}!</h6>
+          <img src="{{ url_for('static', filename='core/images/logo_gastos_ai.png') }}" alt="Gestor de Gastos AI" style="height: 80px;" />
+          <h6 class="text-shadow mt-1" id="user_name_welcome">Bienvenid@, {{ session.get('username') }}!</h6>
         </div>
 
         <ul class="nav flex-column mt-1">
