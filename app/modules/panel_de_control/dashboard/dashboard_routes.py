@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from supabase import create_client, Client
 from dotenv import load_dotenv
 import os
@@ -26,7 +26,62 @@ def total_users():
     response = supabase.table('users').select( count='exact').execute()
     return jsonify(response.count if response.data else 0)
 
+@dashboard_bp.route('/dashboard/boletas_no_revisadas', methods=['GET'])
+def total_boletas_no_revisadas():
+    comercio = request.args.get('comercio')
+    fecha_inicio = request.args.get('fecha_inicio')
+    fecha_fin = request.args.get('fecha_fin')
 
+    query = supabase.table('boletas').select(count='exact').eq('confirmacion_revision', False)
+
+    if comercio:
+        query = query.eq('nombre_comercio', comercio)
+    if fecha_inicio:
+        query = query.gte('fecha_boleta', fecha_inicio)
+    if fecha_fin:
+        query = query.lte('fecha_boleta', fecha_fin)
+
+    response = query.execute()
+    return jsonify(response.count if response.data else 0)
+
+@dashboard_bp.route('/dashboard/count_boletas', methods=['GET'])
+def total_boletas():
+    comercio = request.args.get('comercio')
+    fecha_inicio = request.args.get('fecha_inicio')
+    fecha_fin = request.args.get('fecha_fin')
+
+    query = supabase.table('boletas').select(count='exact')
+
+    if comercio:
+        query = query.eq('nombre_comercio', comercio)
+    if fecha_inicio:
+        query = query.gte('fecha_boleta', fecha_inicio)
+    if fecha_fin:
+        query = query.lte('fecha_boleta', fecha_fin)
+
+    response = query.execute()
+    return jsonify(response.count if response.data else 0)
+
+@dashboard_bp.route('/dashboard/total_gastado', methods=['GET'])
+def total_gastado():
+    #response = supabase.rpc("get_total_gastado_dynamic", {"fecha_inicio": "2025-04-12","fecha_fin": "2026-04-12","comercio": "Woolworths","id_usuario": 108}).execute()
+    response = supabase.rpc('get_total_gastado_dynamic').execute()
+    return jsonify(response.data if response.data else 0)
+
+@dashboard_bp.route('/dashboard/total_gastado_por_categoria', methods=['GET'])
+def total_gastado_por_categoria():
+    #response = supabase.rpc('get_total_gastado_por_categoria_dynamic', {'fecha_inicio': '2025-04-12','fecha_fin': '2026-04-12','comercio': 'Woolworths',id_usuario: 108,'limite': 10}).execute()
+    response = supabase.rpc('get_total_gastado_por_categoria_dynamic', {'limite':10}).execute()
+    #print(response)
+    return jsonify(response.data if response.data else [])
+
+@dashboard_bp.route('/dashboard/total_gastado_por_comercio', methods=['GET'])
+def total_gastado_por_comercio():
+    #response = supabase.rpc('get_total_gastado_por_comercio_dynamic', {'fecha_inicio': '2025-04-12','fecha_fin': '2026-04-12','comercio': 'Woolworths',id_usuario: 108,'limite': 10}).execute()
+    #response = supabase.rpc('get_total_gastado_por_comercio', {'fecha_inicio': '2025-04-12','fecha_fin': '2026-04-12','comercio': 'Woolworths','usuario_id': 108,'limite': 10}).execute()
+    response = supabase.rpc('get_total_gastado_por_comercio').execute()
+    print(response)
+    return jsonify(response.data if response.data else [])
   
 
 

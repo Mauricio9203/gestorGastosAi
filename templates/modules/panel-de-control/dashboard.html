@@ -3,46 +3,108 @@
 
 <div class="container-fluid py-4">
   <!-- Título del módulo -->
-  <h3 class="text-dark d-flex align-items-center text-shadow">
-    <i class="fas fa-chart-line mr-2"></i>
-    <!-- Icono de análisis de datos -->
-    Dashboard
-  </h3>
+  <h3 class="text-dark d-flex align-items-center text-shadow mb-4"><i class="fas fa-chart-line mr-2"></i> Dashboard</h3>
 
-  <!-- Fila de las tarjetas -->
-  <div class="row mt-3">
-    <!-- Card 1 -->
-    <div class="col-md-6 mt-2">
-      <div class="card rounded-lg border-0">
+  <!-- Filtros de fecha alineados a la derecha -->
+  <div class="row mt-3 text-dark">
+    <!-- Filtro de Fecha de inicio en su propia columna -->
+    <div class="col-md-3 col-sm-6 mt-2">
+      <label for="fecha-inicio" class="form-label mb-1">Fecha de inicio</label>
+      <input type="date" class="form-control form-control-sm" id="fecha-inicio" name="fecha-inicio" />
+    </div>
+    <!-- Filtro de Fecha de fin en su propia columna -->
+    <div class="col-md-3 col-sm-6 mt-2">
+      <label for="fecha-fin" class="form-label mb-1">Fecha de fin</label>
+      <input type="date" class="form-control form-control-sm" id="fecha-fin" name="fecha-fin" />
+    </div>
+    <!-- Filtro de Comercio en su propia columna -->
+    <div class="col-md-3 col-sm-6 mt-2">
+      <label for="comercio" class="form-label mb-1">Comercio</label>
+      <select class="form-control form-control-sm" id="comercio" name="comercio">
+        <option value="" selected>Seleccione un comercio</option>
+        <option value="comercio1">Comercio 1</option>
+        <option value="comercio2">Comercio 2</option>
+        <option value="comercio3">Comercio 3</option>
+      </select>
+    </div>
+    <!-- Botón Filtrar en su propia columna -->
+    <div class="col-md-3 col-sm-6 mt-2 d-flex align-items-end justify-content-center">
+      <button class="btn btn-sm btn-primary w-100" id="btn-filtrar-fechas"><i class="fas fa-filter me-1"></i> Filtrar</button>
+    </div>
+  </div>
+
+  <!-- Total de boletas -->
+  <div class="row mt-2">
+    <div class="col-md-4 col-sm-6 mt-2">
+      <div class="card rounded-lg border-0 text-center">
         <div class="card-body">
-          <h5 class="card-title text-dark text-shadow">Total Users</h5>
-
-          <div style="height: 200px" class="text-center">
-            <div class="spin_dashboard" id="spinner_total_users" style="display: none">
-              <!-- Spinner (centrado en el card-body) -->
-              <div class="fa fa-circle-notch fa-spin color-spin spinner_dashboard" aria-hidden="true"></div>
-            </div>
-            <!-- Número de usuarios (oculto cuando el spinner esté visible) -->
-            <h1 class="text-dark" style="font-size: 5rem; font-weight: bold" id="total_users"></h1>
-          </div>
+          <h6 class="text-muted">Boletas cargadas</h6>
+          <h2 id="total-receipts" class="text-primary fw-bold mb-0">--</h2>
         </div>
       </div>
     </div>
 
-    <!-- Card 2 -->
+    <!-- Total gastado -->
+    <div class="col-md-4 col-sm-6 mt-2">
+      <div class="card rounded-lg border-0 text-center">
+        <div class="card-body">
+          <h6 class="text-muted">Total gastado</h6>
+          <h2 id="total-spent" style="color: #c08d35" class="fw-bold mb-0">$--</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mt-2">
+      <div class="card rounded-lg border-0 text-center">
+        <div class="card-body">
+          <h6 class="text-muted">N° Boletas no revisadas</h6>
+          <h2 id="cantidad-boletas-no-revisadas" style="color: blueviolet" class="fw-bold mb-0">--</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fila de las tarjetas -->
+  <div class="row mt-2">
     <div class="col-md-6 mt-2">
       <div class="card rounded-lg border-0">
-        <div class="card-body">
-          <h5 class="card-title text-dark text-shadow">Number of Users by Role</h5>
+        <div class="card-body position-relative">
+          <!-- Botón de expansión -->
+          <button class="btn btn-light btn-sm shadow-sm" style="position: absolute; top: 10px; right: 10px; z-index: 10" title="Pantalla completa">
+            <i class="fas fa-expand"></i>
+          </button>
 
-          <div style="height: 200px" class="text-center">
+          <h5 class="card-title text-dark text-shadow">Total gastado por categoría</h5>
+
+          <div style="height: 200px" class="text-center" id="contenedor_grafico_barras">
             <div class="spin_dashboard" id="spinner_count_by_rol" style="display: none">
-              <!-- Spinner (centrado en el card-body) -->
               <div class="fa fa-circle-notch fa-spin color-spin spinner_dashboard" aria-hidden="true"></div>
             </div>
-            <!-- Número de usuarios (oculto cuando el spinner esté visible) -->
+
             <h1 class="text-dark" style="font-size: 5rem; font-weight: bold" id="total_users"></h1>
-            <canvas id="count_users_by_roles"></canvas>
+
+            <canvas id="chart-total-gasto-por-categoria" style="width: 100% !important; height: 100%"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mt-2">
+      <div class="card rounded-lg border-0">
+        <div class="card-body position-relative">
+          <!-- Botón de expansión -->
+          <button class="btn btn-light btn-sm shadow-sm" style="position: absolute; top: 10px; right: 10px; z-index: 10" title="Pantalla completa">
+            <i class="fas fa-expand"></i>
+          </button>
+
+          <h5 class="card-title text-dark text-shadow">Total gastado por comercio</h5>
+
+          <div style="height: 200px" class="text-center" id="contenedor_grafico_barras">
+            <div class="spin_dashboard" id="spinner_count_by_rol" style="display: none">
+              <div class="fa fa-circle-notch fa-spin color-spin spinner_dashboard" aria-hidden="true"></div>
+            </div>
+
+            <h1 class="text-dark" style="font-size: 5rem; font-weight: bold" id="total_users"></h1>
+
+            <canvas id="chart-total-gasto-por-comercio" style="width: 100% !important; height: 100%"></canvas>
           </div>
         </div>
       </div>

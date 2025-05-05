@@ -1,6 +1,10 @@
 import { addCustomActiveClass } from "../../../../utils/sidebarConfig.js";
-import { chart_count_users_by_rol } from "./controllers/chart-count-users-by-rol.js";
-import { totalUsers } from "./controllers/total-users.js";
+import { chartTotalGastoPorCategoria } from "./controllers/chart-total-gasto-por-categoria.js";
+import { chartTotalGastoPorComercio } from "./controllers/chart-total-gasto-por-comercio.js";
+import { detectarCambiosBoleta } from "./controllers/detectar-cambios-tabla-boletas.js";
+import { totalBoletasNoRevisadas } from "./controllers/total-boletas-no-revisadas.js";
+import { totalReceipts } from "./controllers/total-boletas.js";
+import { totalGastado } from "./controllers/total-gastado.js";
 
 //mover esto para configurar el sidebar del módulo
 window.addEventListener("DOMContentLoaded", function () {
@@ -11,6 +15,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
   addCustomActiveClass(linkId, subLinkId, collapseId, arrow);
 
-  chart_count_users_by_rol();
-  totalUsers();
+  totalReceipts();
+  totalGastado();
+  chartTotalGastoPorCategoria();
+  totalBoletasNoRevisadas();
+  chartTotalGastoPorComercio();
+  detectarCambiosBoleta();
 });

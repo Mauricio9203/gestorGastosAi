@@ -10,3 +10,12 @@
     font-size: 3rem; 
     position: absolute; 
 }
+
+/* Aplica el estilo solo a pantallas pequeñas (menos de 576px) */
+@media (max-width: 575.98px) {
+    #btn-filtrar-fechas {
+      width: 100%;
+      margin-top: 15px;
+    }
+  }
+  
