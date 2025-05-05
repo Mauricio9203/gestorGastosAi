@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, session
 from supabase import create_client, Client
 from dotenv import load_dotenv
 import os
@@ -32,7 +32,7 @@ def total_boletas_no_revisadas():
     fecha_inicio = request.args.get('fecha_inicio')
     fecha_fin = request.args.get('fecha_fin')
 
-    query = supabase.table('boletas').select(count='exact').eq('confirmacion_revision', False)
+    query = supabase.table('boletas').select(count='exact').eq('confirmacion_revision', False).eq('id_usuario',session['id_user'] )
 
     if comercio:
         query = query.eq('nombre_comercio', comercio)
@@ -50,7 +50,7 @@ def total_boletas():
     fecha_inicio = request.args.get('fecha_inicio')
     fecha_fin = request.args.get('fecha_fin')
 
-    query = supabase.table('boletas').select(count='exact')
+    query = supabase.table('boletas').select(count='exact').eq('id_usuario', session['id_user'])
 
     if comercio:
         query = query.eq('nombre_comercio', comercio)
@@ -64,22 +64,21 @@ def total_boletas():
 
 @dashboard_bp.route('/dashboard/total_gastado', methods=['GET'])
 def total_gastado():
-    #response = supabase.rpc("get_total_gastado_dynamic", {"fecha_inicio": "2025-04-12","fecha_fin": "2026-04-12","comercio": "Woolworths","id_usuario": 108}).execute()
-    response = supabase.rpc('get_total_gastado_dynamic').execute()
+    #response = supabase.rpc("get_total_gastado_dynamic", {"fecha_inicio": "2025-04-12","fecha_fin": "2026-04-12","comercio": "Woolworths","usuario_id": 108}).execute()
+    response = supabase.rpc('get_total_gastado_dynamic', {'usuario_id':  session['id_user']}).execute()
     return jsonify(response.data if response.data else 0)
 
 @dashboard_bp.route('/dashboard/total_gastado_por_categoria', methods=['GET'])
 def total_gastado_por_categoria():
     #response = supabase.rpc('get_total_gastado_por_categoria_dynamic', {'fecha_inicio': '2025-04-12','fecha_fin': '2026-04-12','comercio': 'Woolworths',id_usuario: 108,'limite': 10}).execute()
-    response = supabase.rpc('get_total_gastado_por_categoria_dynamic', {'limite':10}).execute()
+    response = supabase.rpc('get_total_gastado_por_categoria_dynamic', {'limite':10, 'id_usuario': session['id_user']}).execute()
     #print(response)
     return jsonify(response.data if response.data else [])
 
 @dashboard_bp.route('/dashboard/total_gastado_por_comercio', methods=['GET'])
 def total_gastado_por_comercio():
-    #response = supabase.rpc('get_total_gastado_por_comercio_dynamic', {'fecha_inicio': '2025-04-12','fecha_fin': '2026-04-12','comercio': 'Woolworths',id_usuario: 108,'limite': 10}).execute()
     #response = supabase.rpc('get_total_gastado_por_comercio', {'fecha_inicio': '2025-04-12','fecha_fin': '2026-04-12','comercio': 'Woolworths','usuario_id': 108,'limite': 10}).execute()
-    response = supabase.rpc('get_total_gastado_por_comercio').execute()
+    response = supabase.rpc('get_total_gastado_por_comercio',{'usuario_id': session['id_user']}).execute()
     print(response)
     return jsonify(response.data if response.data else [])
   

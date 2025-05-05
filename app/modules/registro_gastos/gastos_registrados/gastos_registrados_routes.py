@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, session
 from app.services.crud import get_record
 
 # Crear un Blueprint para los usuarios
@@ -9,7 +9,7 @@ def lista_boletas():
     response = get_record(
         table="boletas",
         #filters={"username": "editado"}, ejemplo solo si quiero filtrar es como un where en sql
-        filters={},
+        filters={'id_usuario':session['id_user']},
         select_columns="id, created_at,updated_at,fecha_boleta,nombre_comercio,rut_comercio,total_neto,total_bruto, porcentaje_iva,confirmacion_revision, url_boleta"
     )
     return jsonify({
