@@ -6,3 +6,27 @@
     transform: scale(1.15); /* Aumenta un 10% */
     z-index: 2;
     }
+    
+    .nav-tabs .nav-link.active {
+        background-color: #5938a4;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+        border-color: #5938a4;
+      }
+
+  .nav-tabs .nav-link {
+    color: #5938a4; /* color normal */
+  }
+
+  .nav-tabs .nav-link:hover {
+    color: #3c2671;
+  }
+
+  
+
+  @media (max-width: 768px) {
+    /* Estilos para pantallas pequeñas como móviles y tablets */
+    .contenido-grafico-detalle-boleta {
+      height: 800px;
+    }
+  }

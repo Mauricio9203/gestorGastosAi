@@ -26,7 +26,7 @@ const loadTable = async () => {
       field: "nombre_comercio",
       editor: "input",
       headerFilter: "input",
-      minWidth: 200,
+      minWidth: 150,
     },
     {
       title: "Total Neto",

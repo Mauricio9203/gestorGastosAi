@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const toggleLoadingState = (isLoading) => {
     if (isLoading) {
       loginButton.disabled = true; // Deshabilitar el botón
-      loginButton.innerHTML = 'Login <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'; // Mostrar el ícono de carga
+      loginButton.innerHTML = 'Iniciando Sesión <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'; // Mostrar el ícono de carga
     } else {
       loginButton.disabled = false; // Habilitar el botón
-      loginButton.innerHTML = "Login"; // Volver al texto original
+      loginButton.innerHTML = "Iniciar Sesión"; // Volver al texto original
     }
   };
 

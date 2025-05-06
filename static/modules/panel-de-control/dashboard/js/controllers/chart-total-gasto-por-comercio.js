@@ -1,5 +1,5 @@
 import { showSpinner, hideSpinner } from "../../../../../utils/spinners.js";
-import { barChart } from "../../../charts/bar-chart.js";
+import { graficoDinamico } from "../../../charts/grafico-dinamico.js";
 import { getTotalGastoPorComercio } from "../services/get-total-gasto-por-comercio.js";
 
 // Función de flecha para cargar los datos desde el servidor Flask
@@ -17,7 +17,7 @@ const chartTotalGastoPorComercio = async () => {
     const borderColor = "rgba(69, 0, 83, 0.69)";
 
     //enviar parámetros al constructor del gráfico
-    barChart(etiquetas, valores, titulo, idChart, backgroundColor, borderColor);
+    graficoDinamico(etiquetas, valores, titulo, idChart, backgroundColor, borderColor, "bar");
   }
 };
 
