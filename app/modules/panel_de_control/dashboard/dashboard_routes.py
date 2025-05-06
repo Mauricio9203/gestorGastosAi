@@ -81,6 +81,23 @@ def total_gastado_por_comercio():
     response = supabase.rpc('get_total_gastado_por_comercio',{'usuario_id': session['id_user']}).execute()
     print(response)
     return jsonify(response.data if response.data else [])
+
+@dashboard_bp.route('/dashboard/comprobar_id_usuario', methods=['GET'])
+def comprobar_id_usuario():
+    verificacion = False
+    id_usuario = request.args.get('idUsuario')
+    print(id_usuario)
+    print(session['id_user'])
+    if int(id_usuario) == int(session['id_user']):
+        verificacion = True
+    return jsonify({"verificacion": verificacion})
+
+@dashboard_bp.route('/dashboard/credenciales_supabase', methods=['GET'])
+def credenciales_supabase():
+    supabaseUrl =os.getenv("SUPABASE_URL")
+    supabaseKey =os.getenv("SUPABASE_KEY_PUBLIC")
+    
+    return jsonify({"supabaseUrl": supabaseUrl,"supabaseKey":supabaseKey})
   
 
 

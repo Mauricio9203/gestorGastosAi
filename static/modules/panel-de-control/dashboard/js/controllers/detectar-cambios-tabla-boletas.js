@@ -6,9 +6,7 @@ import { chartTotalGastoPorCategoria } from "./chart-total-gasto-por-categoria.j
 import { chartTotalGastoPorComercio } from "./chart-total-gasto-por-comercio.js";
 
 const detectarCambiosBoleta = async () => {
-  const supabaseUrl = "https://anvmidwmtgkhtesxtdsk.supabase.co";
-  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFudm1pZHdtdGdraHRlc3h0ZHNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgwNDgxOTMsImV4cCI6MjA1MzYyNDE5M30.848n_1vRqoMJXUPtdzQKffW1DJkZYG53rt7TXMbVWSE";
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabase = await obtenerCredencialesSupabase();
 
   const channel = supabase
     .channel("boletas-changes")
@@ -20,8 +18,8 @@ const detectarCambiosBoleta = async () => {
         table: "boletas",
       },
       (payload) => {
-        //console.log("🎯 Cambio detectado en boletas:", payload);
-        ejecutarAcciones();
+        let idUsuario = payload["new"]["id_usuario"];
+        verificarUsuario(idUsuario);
       }
     )
     .subscribe();
@@ -34,4 +32,32 @@ const ejecutarAcciones = () => {
   totalBoletasNoRevisadas();
   chartTotalGastoPorComercio();
 };
-export { detectarCambiosBoleta };
+
+const verificarUsuario = (idUsuario) => {
+  fetch(`/dashboard/comprobar_id_usuario?idUsuario=${idUsuario}`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.verificacion) {
+        ejecutarAcciones();
+      }
+    })
+    .catch((error) => {
+      console.error("Error al comprobar el ID:", error);
+    });
+};
+
+const obtenerCredencialesSupabase = async () => {
+  try {
+    const response = await fetch(`/dashboard/credenciales_supabase`);
+    const data = await response.json();
+    const supabaseUrl = data["supabaseUrl"];
+    const supabaseKey = data["supabaseKey"];
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    return supabase;
+  } catch (error) {
+    console.error("Error al obtener las credenciales de Supabase:", error);
+    return null;
+  }
+};
+
+export { detectarCambiosBoleta, ejecutarAcciones };

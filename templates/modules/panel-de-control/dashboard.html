@@ -3,7 +3,12 @@
 
 <div class="container-fluid py-4">
   <!-- Título del módulo -->
-  <h3 class="text-dark d-flex align-items-center text-shadow mb-4"><i class="fas fa-chart-line mr-2"></i> Dashboard</h3>
+  <h3 class="text-dark d-flex align-items-center text-shadow mb-4">
+    <i class="fas fa-chart-line mr-2"></i> Dashboard
+    <button id="refreshButton" class="btn btn-sm btn-outline-primary ms-2 ml-3" title="Refrescar gráficos">
+      <i class="fas fa-sync-alt" id="iconoRefres"></i>
+    </button>
+  </h3>
 
   <!-- Filtros de fecha alineados a la derecha -->
   <div class="row mt-3 text-dark">

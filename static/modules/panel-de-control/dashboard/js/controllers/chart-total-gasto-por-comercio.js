@@ -13,8 +13,8 @@ const chartTotalGastoPorComercio = async () => {
     const valores = data.map((item) => item.total_gastado); // Ajusta 'total_usuarios' según tu respuesta
     const titulo = "Total gastado por categoría";
     const idChart = document.getElementById("chart-total-gasto-por-comercio");
-    const backgroundColor = "rgba(79, 0, 207, 0.2)";
-    const borderColor = "rgb(69, 0, 83)";
+    const backgroundColor = "rgba(105, 47, 116, 0.83)";
+    const borderColor = "rgba(69, 0, 83, 0.69)";
 
     //enviar parámetros al constructor del gráfico
     barChart(etiquetas, valores, titulo, idChart, backgroundColor, borderColor);

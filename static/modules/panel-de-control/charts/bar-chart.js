@@ -5,7 +5,6 @@ const barChart = (etiquetas, valores, titulo, idOrElement, backgroundColor, bord
   const canvas = typeof idOrElement === "string" ? document.getElementById(idOrElement) : idOrElement;
 
   if (!canvas) {
-    console.error(`Canvas con ID o referencia inválida:`, idOrElement);
     return;
   }
 
@@ -72,14 +71,21 @@ const barChart = (etiquetas, valores, titulo, idOrElement, backgroundColor, bord
         legend: { display: false },
         tooltip: { enabled: true },
         datalabels: {
-          color: "gray",
+          color: "white",
           align: "center",
           anchor: "center",
           font: {
             weight: "bold",
             size: window.innerWidth < 768 ? 8 : 12,
           },
-          formatter: (value) => value.toFixed(1),
+          formatter: (value) => {
+            if (value >= 1000000) {
+              return (value / 1000000).toFixed(1) + "M"; // Formato en millones
+            } else if (value >= 1000) {
+              return (value / 1000).toFixed(1) + "k"; // Formato en miles
+            }
+            return value.toFixed(1); // Si es menor que 1000, lo deja como está
+          },
         },
       },
       scales: {

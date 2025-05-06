@@ -1,6 +1,6 @@
 /* Fondo con gradiente animado */
 body {
-    background: linear-gradient(135deg, #6a11cb, #2575fc, #1f5ef2, #9b4dca);
+    background: linear-gradient(135deg, #1C0A26, #2C0B3D, #4A235A, #6C3483, #5E3370, #750fb5);
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
     height: 100vh;

@@ -2,7 +2,6 @@ import { addCustomActiveClass } from "../../../../utils/sidebarConfig.js";
 import { exportButtonsDetalleBoleta } from "./components/table-settings-detalle-boleta.js";
 import { exportButtonsBoleta } from "./components/table-settings.js";
 import { abrirModalDetalleBoleta } from "./controllers/abrir-modal-detalle-boleta.js";
-import { filtroSearchBoleta } from "./controllers/filtros.js";
 import { loadTable } from "./controllers/load-table.js";
 import { getGastos } from "./services/get-gastos.js";
 
@@ -18,5 +17,4 @@ window.addEventListener("DOMContentLoaded", async function () {
   abrirModalDetalleBoleta();
   exportButtonsDetalleBoleta();
   exportButtonsBoleta();
-  filtroSearchBoleta();
 });

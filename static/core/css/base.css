@@ -7,14 +7,14 @@
   --background-navbar:  #7e56b7  ; 
   --logout-button-color: #e63946;
   --logout-button-hover: #d62c1a;
-  --color-module-active: rgba(174, 100, 249, 0.5);
-  --color-module-active-border : 1px solid #3e006b;
-  --color-module-active-hover: rgba(62, 0, 107, 0.7);
+  --color-module-active: rgba(137, 41, 232, 0.5);
+  --color-module-active-border : 1px solid #540091;
+  --color-module-active-hover: rgba(93, 0, 159, 0.7);
   --color-module-active-hover-border: #6f00cc;
   --color-module-active-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  --color-module-sub-active: rgba(91, 0, 202, 0.5);
-  --color-text-module-sub-active: #ffffff
-  --custom-active-sub-hover-bg: rgba(91, 0, 202, 0.7);
+  --color-module-sub-active: rgba(175, 102, 248, 0.5);
+  --color-text-module-sub-active: #ffffff;
+  --custom-active-sub-hover-bg: rgba(117, 0, 201, 0.7);
   --custom-active-sub-hover-border: #8e2df5;
   --custom-active-sub-hover-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
   --card-header-bg: #d1c4e9;

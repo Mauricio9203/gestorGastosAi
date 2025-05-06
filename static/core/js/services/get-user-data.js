@@ -22,7 +22,6 @@ const getUserData = () => {
     })
     .catch((error) => {
       enableInputs();
-      console.error("Error al obtener los datos del usuario:", error);
     });
 };
 

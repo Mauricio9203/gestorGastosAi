@@ -1,4 +1,3 @@
-import { filtroSearchDetalleBoleta } from "./filtros.js";
 import { loadTableDetalleBoleta } from "./load-table-detalle-boleta.js";
 
 const abrirModalDetalleBoleta = () => {
@@ -8,7 +7,6 @@ const abrirModalDetalleBoleta = () => {
       const id = button.getAttribute("data-id");
       if (id) {
         await loadTableDetalleBoleta(id);
-        filtroSearchDetalleBoleta();
       }
     }
   });
