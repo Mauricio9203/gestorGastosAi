@@ -1,3 +1,5 @@
+let boletasEliminar;
+
 const tableEvents = (table) => {
   // Evento para cuando una celda sea editada
   table.on("cellEdited", function (cell) {

@@ -1,5 +1,6 @@
 import { addCustomActiveClass } from "../../../../utils/sidebarConfig.js";
 import { cambioPestana } from "./components/cambio-pestanas-detalle-boleta.js";
+import { deleteSelections } from "./components/delete-selections.js";
 import { exportButtonsDetalleBoleta } from "./components/table-settings-detalle-boleta.js";
 import { exportButtonsBoleta } from "./components/table-settings.js";
 import { abrirModalDetalleBoleta } from "./controllers/abrir-modal-detalle-boleta.js";
@@ -20,4 +21,5 @@ window.addEventListener("DOMContentLoaded", async function () {
   exportButtonsBoleta();
   makeWheelListenersPassive();
   cambioPestana();
+  deleteSelections();
 });

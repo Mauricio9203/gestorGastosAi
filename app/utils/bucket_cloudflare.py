@@ -50,6 +50,15 @@ def subir_archivo(file_object, nombre_objeto_en_r2, tiempo_expiracion=3600):
     except Exception as e:
         print(f"❌ Error al subir el archivo: {e}")
         return None
+    
+def eliminar_archivo(nombre_objeto_en_r2):
+    try:
+        s3.delete_object(Bucket=BUCKET_NAME, Key=nombre_objeto_en_r2)
+        print(f"🗑️ Archivo '{nombre_objeto_en_r2}' eliminado correctamente.")
+        return True
+    except Exception as e:
+        print(f"❌ Error al eliminar el archivo: {e}")
+        return False
 
 # ==== EJEMPLO DE USO ====
 

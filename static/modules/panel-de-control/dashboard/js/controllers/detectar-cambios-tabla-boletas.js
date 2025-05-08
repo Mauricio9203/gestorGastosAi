@@ -18,14 +18,24 @@ const detectarCambiosBoleta = async () => {
         table: "boletas",
       },
       (payload) => {
-        let idUsuario = payload["new"]["id_usuario"];
-        verificarUsuario(idUsuario);
+        if (payload.eventType != "DELETE") {
+          console.log("se creó, actualizó");
+          let idUsuario = payload["new"]["id_usuario"];
+          verificarUsuario(idUsuario);
+        } else {
+          console.log("se eliminó la boleta");
+          console.log(payload.old.id); // id boleta, esto para eliminacion
+        }
       }
     )
     .subscribe();
 };
 
 const ejecutarAcciones = () => {
+  document.getElementById("iconoRefres").classList.add("fa-spin");
+  setTimeout(() => {
+    document.getElementById("iconoRefres").classList.remove("fa-spin");
+  }, 2000);
   totalReceipts();
   totalGastado();
   chartTotalGastoPorCategoria();
