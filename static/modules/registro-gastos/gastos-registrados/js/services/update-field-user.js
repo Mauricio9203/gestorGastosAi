@@ -1,4 +1,3 @@
-import { formatearNombreCampo } from "../../../../../utils/formatear-nombre-campo.js";
 import { notificationToastify, showProcessingToast } from "../../../../../utils/notifications-toastify.js";
 import { table } from "../controllers/load-table.js";
 
@@ -33,7 +32,7 @@ const updateFieldUser = async (userId, campo, valor) => {
     }
 
     showProcessingToast(false);
-    notificationToastify(formatearNombreCampo(campo) + " actualizado", 3000, "bottom", "right", "success");
+    notificationToastify(campo + " actualizado", 3000, "bottom", "right", "success");
 
     return data;
   } catch (error) {

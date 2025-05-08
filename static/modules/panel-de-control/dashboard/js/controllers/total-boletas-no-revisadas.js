@@ -9,7 +9,7 @@ const totalBoletasNoRevisadas = async () => {
   if (data != false) {
     document.getElementById("cantidad-boletas-no-revisadas").innerText = data;
   } else {
-    document.getElementById("cantidad-boletas-no-revisadas").innerText = "-";
+    document.getElementById("cantidad-boletas-no-revisadas").innerText = "0";
   }
 };
 

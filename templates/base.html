@@ -68,7 +68,7 @@
 
         <ul class="nav flex-column mt-1">
           {% for modulo in session.modulos %}
-          {% if modulo.id != "moduloBasess" %}
+          {% if modulo.id != "configuraciones" %}
           <li class="nav-item">
             <a class="nav-link text-white" href="#{{ modulo.id }}" data-toggle="collapse" aria-expanded="false" id="{{ modulo.id }}Link">
               <i class="fa-solid {{ modulo.icono }}"></i> {{ modulo.nombre }}

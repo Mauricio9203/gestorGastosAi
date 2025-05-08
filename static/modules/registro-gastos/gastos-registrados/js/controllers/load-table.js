@@ -47,6 +47,13 @@ const loadTable = async () => {
       minWidth: 100,
     },
     {
+      title: "Revisado",
+      field: "confirmacion_revision",
+      formatter: "tickCross",
+      editor: true, // permite marcar/desmarcar
+      minWidth: 100,
+    },
+    {
       title: "Fecha Compra",
       field: "fecha_boleta",
       editor: "input",

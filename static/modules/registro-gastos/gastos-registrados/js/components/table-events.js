@@ -1,11 +1,13 @@
-let boletasEliminar;
+import { validarDatosBoleta } from "../services/update-boleta-fields.js";
 
 const tableEvents = (table) => {
   // Evento para cuando una celda sea editada
-  table.on("cellEdited", function (cell) {
+  table.on("cellEdited", async function (cell) {
     let value = cell.getValue();
-    let idUser = cell.getRow().getData().id;
+    let idBoleta = cell.getRow().getData().id;
     let fieldName = cell.getField();
+
+    validarDatosBoleta(idBoleta, fieldName, value, cell);
   });
 
   table.on("dataLoaded", function () {

@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, session
 from app.services.crud import get_record, delete_records
 from app.utils.bucket_cloudflare import eliminar_archivo
+from app.services.crud import update_record
 
 # Crear un Blueprint para los usuarios
 gastos_registrados_bp = Blueprint('gastos_registrados', __name__)
@@ -71,6 +72,29 @@ def eliminar_boletas():
         "eliminadas": eliminadas,
         "errores": errores
     })
+    
+@gastos_registrados_bp.route('/boleta/updateFields/<int:boleta_id>', methods=['PUT'])
+def actualizar_campo_boleta(boleta_id):  # <- agregar aquí
+    try:
+        boleta_data = request.get_json()
+        print(boleta_data)
+        
+        campo = boleta_data["campo"]
+        valor = boleta_data["valor"]
+        # Ya no necesitas obtener `boleta_id` del body porque viene por la URL
+        
+        update_data = {campo: valor}
+        response = update_record("boletas", update_data, {"id": boleta_id})
+        
+        if response:
+            return jsonify({"message": "Boleta o factura actualizado exitosamente", "boleta": response}), 200
+        else:
+            return jsonify({"error": "Error al actualizar Boleta o factura"}), 400
+        
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 
 
     
