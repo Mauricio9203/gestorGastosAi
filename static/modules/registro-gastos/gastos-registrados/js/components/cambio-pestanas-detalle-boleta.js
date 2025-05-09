@@ -1,16 +1,32 @@
 const cambioPestana = () => {
-  document.getElementById("pestana-tabla-detalle-boleta").addEventListener("click", function () {
-    this.classList.add("active");
-    document.getElementById("pestana-grafico-detalle-boleta").classList.remove("active");
-    document.getElementById("contenido-tabla-detalle-boleta").style.display = "block";
-    document.getElementById("contenido-grafico-detalle-boleta").style.display = "none";
-  });
+  const tabs = [
+    {
+      id: "pestana-tabla-detalle-boleta",
+      contentId: "contenido-tabla-detalle-boleta",
+    },
+    {
+      id: "pestana-grafico-detalle-boleta",
+      contentId: "contenido-grafico-detalle-boleta",
+    },
+    {
+      id: "pestana-agregar-detalle-boleta",
+      contentId: "contenido-formulario-detalle-boleta", // mismo contenido que la pestaña gráfica
+    },
+  ];
 
-  document.getElementById("pestana-grafico-detalle-boleta").addEventListener("click", function () {
-    this.classList.add("active");
-    document.getElementById("pestana-tabla-detalle-boleta").classList.remove("active");
-    document.getElementById("contenido-tabla-detalle-boleta").style.display = "none";
-    document.getElementById("contenido-grafico-detalle-boleta").style.display = "block";
+  const activarPestana = (tabId) => {
+    tabs.forEach(({ id, contentId }) => {
+      const tab = document.getElementById(id);
+      const content = document.getElementById(contentId);
+      const isActive = id === tabId;
+
+      tab.classList.toggle("active", isActive);
+      content.style.display = isActive ? "block" : "none";
+    });
+  };
+
+  tabs.forEach(({ id }) => {
+    document.getElementById(id).addEventListener("click", () => activarPestana(id));
   });
 };
 

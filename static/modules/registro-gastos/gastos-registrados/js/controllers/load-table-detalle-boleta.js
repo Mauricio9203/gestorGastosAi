@@ -72,23 +72,28 @@ const loadTableDetalleBoleta = async (id_boleta) => {
     {
       title: "Unidad Medida",
       field: "unidad_medida",
-      editor: "input",
       headerFilter: "input",
       minWidth: 100,
-    },
-    {
-      title: "Creado",
-      field: "created_at",
-      minWidth: 130,
-      formatter: function (cell) {
-        // Obtener la fecha desde el campo
-        const date = new Date(cell.getValue());
-
-        // Formatear la fecha y hora a "DD/MM/YYYY HH:mm:ss"
-        const formattedDate = date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB");
-        return formattedDate;
+      editor: "select",
+      editorParams: {
+        values: {
+          unidades: "unidades",
+          gramos: "gramos",
+          kilogramos: "kilogramos",
+          mililitros: "mililitros",
+          litros: "litros",
+          paquetes: "paquetes",
+          docenas: "docenas",
+          botellas: "botellas",
+          latas: "latas",
+          bolsas: "bolsas",
+          cajas: "cajas",
+          bandejas: "bandejas",
+          frascos: "frascos",
+          tubos: "tubos",
+          sachets: "sachets",
+        },
       },
-      headerFilter: "input",
     },
     {
       title: "Actualizado",
@@ -103,7 +108,6 @@ const loadTableDetalleBoleta = async (id_boleta) => {
         const formattedDate = date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB");
         return formattedDate;
       },
-      headerFilter: "input",
     },
   ];
 

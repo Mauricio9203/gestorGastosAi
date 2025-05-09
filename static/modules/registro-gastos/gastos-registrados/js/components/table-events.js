@@ -27,10 +27,10 @@ const tableEvents = (table) => {
   table.on("rowSelectionChanged", function (data) {
     if (data.length > 0) {
       document.getElementById("delete-rows-gastos-registrados").style.display = "block";
-      document.getElementById("delete-rows-gastos-registrados").innerHTML = '<i class="fas fa-trash-alt"></i> Eliminar (' + data.length + ")";
+      document.getElementById("delete-rows-gastos-registrados").innerHTML = '<i class="fas fa-trash-alt"></i> <span class="span_exportacion">Eliminar</span> (' + data.length + ")";
     } else {
       document.getElementById("delete-rows-gastos-registrados").style.display = "none";
-      document.getElementById("delete-rows-gastos-registrados").innerHTML = '<i class="fas fa-trash-alt"></i> Eliminar"';
+      document.getElementById("delete-rows-gastos-registrados").innerHTML = '<i class="fas fa-trash-alt"></i> <span class="span_exportacion">Eliminar</span>"';
     }
   });
 };

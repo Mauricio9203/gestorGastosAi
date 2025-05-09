@@ -1,4 +1,5 @@
 import { addCustomActiveClass } from "../../../../utils/sidebarConfig.js";
+import { detectarCambioFullscreen, pantallaCompletaBoletaCargada } from "./components/pantalla-completa-boleta-cargada.js";
 import { uploadedFile } from "./components/uploaded-file.js";
 
 //mover esto para configurar el sidebar del módulo
@@ -10,4 +11,6 @@ window.addEventListener("DOMContentLoaded", function () {
 
   addCustomActiveClass(linkId, subLinkId, collapseId, arrow);
   uploadedFile();
+  pantallaCompletaBoletaCargada();
+  detectarCambioFullscreen();
 });

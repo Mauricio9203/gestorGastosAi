@@ -12,31 +12,42 @@
   <!-- Fila de las tarjetas -->
   <div class="row mt-3">
     <!-- Card 1 -->
-    <div class="col-12 col-lg-6 mt-2">
+    <div class="col-md-4 mt-2">
       <div class="card rounded-lg border-0 " id="div_carga_documento">
         <div class="card-body">
           <h5 class="card-title text-dark text-shadow">Subir documento</h5>
 
           <input type="file" id="fileUpload"  style="display: none;"/>
+        
 
           <!-- Contenedor para vista previa personalizada -->
           <div id="previewContainer" style="margin-top: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center">
-            <img id="previewImage" class="previewImage" src="" style="max-width: 250px; cursor: zoom-in; display: none;" />
+            <img id="previewImage" class="previewImage" src="" style="max-height: 200px; cursor: zoom-in; display: none;" />
             <!-- Contenedor para la vista previa de PDFs -->
-            <iframe id="previewPdf" class="previewPdf" style="display: none" width="100%" height="500px"></iframe>
+            <iframe id="previewPdf" class="previewPdf" style="display: none" width="100%" height="400px"></iframe>
           </div>
+
           <div id="procesarDocumento" style="margin-top: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center; display: none">
             <button id="extractDataBtn" class="btn btn-dark mt-3"><i class="fas fa-magic mr-1"></i> Extraer datos</button>
           </div>
+
         </div>
       </div>
     </div>
 
+
     <!-- Card 2-->
-    <div class="col-12 col-lg-6 mt-2" id="data_preview" style="display: none">
-      <div class="card rounded-lg border-0">
-        <div class="card-body">
+    <div class="col-md-8 mt-2" id="data_preview" style="display: block">
+   
+      <div class="card rounded-lg border-0" id="formulario-boleta-cargada">
+
+        <div class="card-body position-relative" id="card-body-formulario-carga" >
+          <button id="pantalla-completa-editar-boleta-cargada" class="btn btn-light btn-sm shadow-sm" style="position: absolute; top: 10px; right: 10px; z-index: 10" title="Pantalla completa">
+            <i class="fas fa-expand" aria-hidden="true"></i>
+          </button>
+  
           <h5 class="card-title text-dark text-shadow">Editar Boleta</h5>
+      
           <!-- Inputs para los datos principales -->
           <div class="row mb-3">
             <div class="col-md-6 mb-2">
@@ -71,7 +82,7 @@
           </div>
 
           <div class="d-flex justify-content-end mb-3">
-            <button id="agregarItem" class="btn btn-sm btn-primary " style="display: block;" disabled><i class="fas fa-plus" ></i> Agregar</button>
+            <button id="agregarItem" class="btn btn-sm agregarItem " style="display: block;" disabled><i class="fas fa-plus" ></i> Agregar</button>
             <button id="eliminarItem" class="btn btn-sm btn-danger ml-2 "  style="display: block;" disabled><i class="fas fa-trash" ></i></i> Eliminar</button>
           </div>
           <div id="products-table" class="ml-2 mr-2 mb-2 custom-tabulator">

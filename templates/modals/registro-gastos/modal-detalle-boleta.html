@@ -13,33 +13,88 @@
         <div class="d-flex justify-content-between align-items-center mb-1">
           <div>
             <!-- Botones de exportación con Font Awesome -->
-            <button id="download-csv-detalle-boleta" class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i> CSV</button>
-            <button id="download-xlsx-detalle-boleta" class="btn btn-outline-success btn-sm"><i class="fas fa-file-excel"></i> Excel</button>
-            <button id="download-json-detalle-boleta" class="btn btn-outline-info btn-sm"><i class="fas fa-file-alt"></i> JSON</button>
+            <button id="download-csv-detalle-boleta" class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i> <span class="span_exportacion">CSV</span></button>
+            <button id="download-xlsx-detalle-boleta" class="btn btn-outline-success btn-sm"><i class="fas fa-file-excel"></i> <span class="span_exportacion">Excel</span></button>
+            <button id="download-json-detalle-boleta" class="btn btn-outline-info btn-sm"><i class="fas fa-file-alt"></i> <span class="span_exportacion">JSON</span></button>
           </div>
 
           <!-- Botones Add y Eliminar a la derecha -->
           <div class="d-flex">
             <!-- Botón para eliminar selección -->
-            <button id="delete-rows-detalle-boleta" class="btn btn-outline-danger btn-sm ms-2 ml-1" style="display: none"><i class="fas fa-trash-alt"></i> Eliminar</button>
+            <button id="add-rows-detalle-boleta" class="btn btn-outline-primary btn-sm ms-2 ml-1" style="display: block"><i class="fas fa-add"></i> <span class="span_exportacion">Agregar</span></button>
+            <button id="delete-rows-detalle-boleta" class="btn btn-outline-danger btn-sm ms-2 ml-1" style="display: none"><i class="fas fa-trash-alt"></i> <span class="span_exportacion">Eliminar</span></button>
           </div>
         </div>
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link active" id="pestana-tabla-detalle-boleta" aria-current="page" href="#">Tabla</a>
+            <a class="nav-link titulo-pestanas active" id="pestana-tabla-detalle-boleta" aria-current="page" href="#">Tabla</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="pestana-grafico-detalle-boleta" href="#">Gráfico</a>
+            <a class="nav-link titulo-pestanas" id="pestana-grafico-detalle-boleta" href="#">Gráfico</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link titulo-pestanas" id="pestana-agregar-detalle-boleta" href="#">Agregar Ítem</a>
           </li>
         </ul>
+
         <div id="contenido-tabla-detalle-boleta">
           <div id="detalle-boleta-table" class="ml-2 mr-2 mb-2 custom-tabulator mt-3" style="display: block"></div>
           <div id="detalle-boleta-table-cargando" class="ml-2 mr-2 mb-2 mt-3" style="display: none">
             <i class="fas fa-circle-notch fa-spin fa-3x color-spin d-flex justify-content-center align-items-center"></i>
           </div>
         </div>
+
         <div id="contenido-grafico-detalle-boleta" style="max-height: 400px; display: none">
           <canvas id="chart-resumen-detalle-boleta" style="width: 100% !important; height: 100%"></canvas>
+        </div>
+
+        <div id="contenido-formulario-detalle-boleta" style="min-height: auto; display: none" class="text-dark">
+          <div class="row mb-2 mt-3">
+            <div class="col-md-3">
+              <label for="nombreItem" class="form-label">Nombre Ítem</label>
+              <input type="text" class="form-control form-control-sm" id="nombreItem" placeholder="Ej: Leche entera" />
+            </div>
+            <div class="col-md-3">
+              <label for="nombreCategoria" class="form-label">Nombre Categoría</label>
+              <input type="text" class="form-control form-control-sm" id="nombreCategoria" placeholder="Ej: Lácteos" />
+            </div>
+            <div class="col-md-3">
+              <label for="precioUnitario" class="form-label">Precio Unitario</label>
+              <input type="number" class="form-control form-control-sm" id="precioUnitario" step="0.01" placeholder="Ej: 1.50" />
+            </div>
+            <div class="col-md-3">
+              <label for="cantidad" class="form-label">Cantidad</label>
+              <input type="number" class="form-control form-control-sm" id="cantidad" placeholder="Ej: 3" />
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-md-3">
+              <label for="precioTotal" class="form-label">Precio Total</label>
+              <input type="number" class="form-control form-control-sm" id="precioTotal" step="0.01" placeholder="Ej: 4.50" />
+            </div>
+            <div class="col-md-3">
+              <label for="cantidadContenido" class="form-label">Cantidad Contenido</label>
+              <input type="number" class="form-control form-control-sm" id="cantidadContenido" step="0.01" placeholder="Ej: 1" />
+            </div>
+            <div class="col-md-3">
+              <label for="unidadMedida" class="form-label">Unidad de Medida</label>
+              <select class="form-select form-control form-control-sm" id="unidadMedida">
+                <option selected disabled>Selecciona unidad</option>
+                <option value="ml">ml</option>
+                <option value="l">litros</option>
+                <option value="g">gramos</option>
+                <option value="kg">kilos</option>
+                <option value="un">unidades</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-2 mt-3">
+            <div class="col-md-12 d-flex align-items-end justify-content-end">
+              <button type="submit" class="btn agregarItem btn-sm btn-block" disabled>Guardar (en desarrollo)</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

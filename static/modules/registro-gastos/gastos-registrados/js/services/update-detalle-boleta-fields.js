@@ -1,11 +1,11 @@
 import { formatearNombreCampo } from "../../../../../utils/formatear-nombre-campo.js";
 import { notificationToastify, showProcessingToast } from "../../../../../utils/notifications-toastify.js";
-import { table } from "../controllers/load-table.js";
+import { tableDetalleBoleta } from "../controllers/load-table-detalle-boleta.js";
 
-const updateFieldBoleta = async (boletaId, campo, valor) => {
+const updateFieldDetalleBoleta = async (detalle_boleta_id, campo, valor) => {
   showProcessingToast(true);
   try {
-    const response = await fetch(`/boleta/updateFields/${boletaId}`, {
+    const response = await fetch(`/boleta/updateFieldsDetalleBoleta/${detalle_boleta_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -19,15 +19,14 @@ const updateFieldBoleta = async (boletaId, campo, valor) => {
     const data = await response.json();
 
     console.log(data);
-    let dataBoleta = data["boleta"][0];
+    let dataBoleta = data["detalle_boleta"][0];
 
     // Extraer solo los campos esperados
-    const { id, nombre_item, total_bruto, nombre_categoria, cantidad, precio_unitario, cantidad_contenido_unidad, unidad_medida, updated_at } = dataBoleta; // reemplaza con tus campos reales
-    const cleanData = { id, nombre_item, total_bruto, nombre_categoria, cantidad, precio_unitario, cantidad_contenido_unidad, unidad_medida, updated_at };
+    const { id, nombre_comercio, total_neto, porcentaje_iva, total_bruto, confirmacion_revision, fecha_boleta, created_at, updated_at, url_boleta } = dataBoleta; // reemplaza con tus campos reales
+    const cleanData = { id, nombre_comercio, total_neto, porcentaje_iva, total_bruto, confirmacion_revision, fecha_boleta, created_at, updated_at, url_boleta };
 
     //actualizar solo la fila que se editó
-
-    table.updateData([cleanData]); // solo actualiza la fila con los datos limpios
+    tableDetalleBoleta.updateData([cleanData]); // solo actualiza la fila con los datos limpios
 
     if (!response.ok) {
       showProcessingToast(false);
@@ -46,9 +45,9 @@ const updateFieldBoleta = async (boletaId, campo, valor) => {
   }
 };
 
-const validarDatosBoleta = (boletaId, campo, valor, cell) => {
+const validarDatosBoleta = (detalle_boleta_id, campo, valor, cell) => {
   console.log("validando datos");
-  console.log(boletaId, campo, valor);
+  console.log(detalle_boleta_id, campo, valor);
 
   // Validar que no esté vacío
   if (campo != "confirmacion_revision") {
@@ -69,7 +68,7 @@ const validarDatosBoleta = (boletaId, campo, valor, cell) => {
   }
 
   // Si todo es válido, actualizar
-  updateFieldBoleta(boletaId, campo, valor);
+  updateFieldDetalleBoleta(detalle_boleta_id, campo, valor);
 };
 
 //cell.restoreOldValue();
@@ -84,4 +83,4 @@ const validarFecha = (dateString) => {
   return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
 };
 
-export { updateFieldBoleta, validarDatosBoleta };
+export { updateFieldDetalleBoleta, validarDatosBoleta };

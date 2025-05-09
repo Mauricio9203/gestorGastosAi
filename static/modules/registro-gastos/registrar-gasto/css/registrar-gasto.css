@@ -50,15 +50,7 @@
   cursor: pointer;
 }
 
-#agregarItem {
-  background-color: #6a4c9c;
-  border-color: black;
-}
 
-#agregarItem:hover {
-  background-color: #5a3b7e; /* Nuevo color de fondo cuando el mouse pasa por encima */
-  border-color: #4e2a66; /* Nuevo color de borde cuando el mouse pasa por encima */
-}
 
 @media (min-width: 767px) { 
   .row {

@@ -93,6 +93,62 @@ def actualizar_campo_boleta(boleta_id):  # <- agregar aquí
         
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@gastos_registrados_bp.route('/boleta/updateFieldsDetalleBoleta/<int:detalle_boleta_id>', methods=['PUT'])
+def actualizar_campo_detalle_boleta(detalle_boleta_id):  # <- agregar aquí
+    try:
+        detalle_boleta_data = request.get_json()
+        print(detalle_boleta_data)
+        
+        campo = detalle_boleta_data["campo"]
+        valor = detalle_boleta_data["valor"]
+        # Ya no necesitas obtener `boleta_id` del body porque viene por la URL
+        
+        update_data = {campo: valor}
+        response = update_record("detalle_boleta", update_data, {"id": detalle_boleta_id})
+        
+        if response:
+            return jsonify({"message": "Detalle de boleta actualizado exitosamente", "detalle_boleta": response}), 200
+        else:
+            return jsonify({"error": "Error al actualizar detalle de boleta"}), 400
+        
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+    
+@gastos_registrados_bp.route('/boletas/eliminar_detalle_boleta', methods=['POST'])
+def eliminar_detalle_boleta():
+    data = request.get_json()
+
+    if not data or not isinstance(data, list):
+        return jsonify({"error": "Se esperaba una lista JSON con objetos {id_detalle_boleta}"}), 400
+
+    errores = []
+    eliminadas = []
+
+    for item in data:
+        id_boleta = item.get('id_detalle_boleta')
+
+        if not id_boleta:
+            errores.append({"id_detalle_boleta": id_boleta, "error": "Falta id_detalle_boleta"})
+            continue
+
+        resultado = delete_records(
+            table_name="detalle_boleta",
+            ids={id_boleta}
+        )
+
+        if not resultado:
+            errores.append({"id_detalle_boleta": id_boleta, "error": "No se pudo eliminar boleta"})
+            continue
+
+        eliminadas.append(id_boleta)
+
+    return jsonify({
+        "eliminadas": eliminadas,
+        "errores": errores
+    })
+
 
 
 

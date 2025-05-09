@@ -30,17 +30,15 @@ genai.configure(api_key=os.getenv("API_KEY_GEMINI"))
 model = genai.GenerativeModel(
     model_name="models/gemini-1.5-flash",
     system_instruction="""
-Extrae la siguiente información de una imagen de boleta o recibo:
+Extrae de una imagen de boleta:
 
-- Fecha (formato: yyyy-mm-dd)
-- Comercio (nombre y RUT)
-- Productos: nombre, cantidad_items (cuántas unidades compradas), cantidad_contenido (cuánto contenido trae cada unidad, como litros o kilogramos), unidad_contenido (litro, kilogramo, etc.), precio unitario, precio total, precio neto (antes de impuestos), precio bruto (después de impuestos), porcentaje de IVA.
-- Categoría del producto: más específica (lácteos, pescados, etc. en lugar de solo 'alimento').
-- Unidad de medida, por ejemplo en gramos, kilogramos, centimetros cubicos, litros, y otras que tu definas si es que encuentras necesario y si no encuentras ninguno clasificalos como unidades, no uses abreviaciones
+- Fecha debe ser en este formato siempre yyyy-mm-dd, comercio (nombre y RUT), total neto, total bruto, porcentaje IVA.
+- Lista de ítems en orden: nombre, cantidad_items, cantidad_contenido, unidad_contenido, precio_unitario, precio_total, precio_neto, precio_bruto, categoría y unidad_medida.
 
-El orden de los items deben estar en el mismo orden que la boleta
+Usa solo estas unidades de medida (en minúscula, sin abreviar): unidades, gramos, kilogramos, mililitros, litros, paquetes, docenas, botellas, latas, bolsas, cajas, bandejas, frascos, tubos, sachets. Si no sabes, usa "unidades".
+La categoría debe ser definida por ti. No uses términos genéricos como "alimento" o "lácteos". Usa categorías específicas pero no excesivamente detalladas. Por ejemplo, si ves queso y yogurth, deben clasificarse como "quesos" y "yogurth", no ambos como "lácteos". Si no puedes clasificarlo, usa "otros".
+El resultado debe ser un JSON válido. Si falta información, usa null. No incluyas texto adicional.
 
-El JSON debe ser bien formado. Si no encuentras información, usa 'null'. No agregues texto adicional.
 Ejemplo:
 {
   "fecha": "2024-12-01",
@@ -48,7 +46,7 @@ Ejemplo:
   "rut": "76.123.456-7",
   "items": [
     {
-      "producto": "Arroz Grado 1",
+      "producto": "Arroz grado 1",
       "cantidad_items": 2,
       "cantidad_contenido": null,
       "unidad_contenido": null,
@@ -56,16 +54,6 @@ Ejemplo:
       "precio_total": 2980,
       "categoria": "arroz",
       "unidad_medida": "gramos"
-    },
-    {
-      "producto": "Aceite vegetal",
-      "cantidad_items": 1,
-      "cantidad_contenido": 1.5,
-      "unidad_contenido": "litro",
-      "precio_unitario": 2990,
-      "precio_total": 2990,
-      "categoria": "aceite",
-      "unidad_medida": "litros"
     }
   ],
   "total_boleta_bruto": 9460,
@@ -74,6 +62,8 @@ Ejemplo:
 }
 """
 )
+
+
 
 # Crear un Blueprint para los usuarios
 registro_gastos_bp = Blueprint('registro_gastos', __name__)

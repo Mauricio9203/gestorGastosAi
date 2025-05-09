@@ -22,7 +22,7 @@ const tableSettingsDetalleBoleta = (tabledata, paginationSize, initialSort, colu
     movableColumns: true, //allow column order to be changed
     initialSort: initialSort,
     columnDefaults: {
-      tooltip: true, //show tool tips on cells
+      tooltip: false, //show tool tips on cells
     },
     columns: column,
     headerCssClass: "custom-header",
@@ -32,6 +32,15 @@ const tableSettingsDetalleBoleta = (tabledata, paginationSize, initialSort, colu
   tableDetalleBoleta.on("tableBuilt", function () {
     tableDetalleBoleta.clearFilter();
   });
+
+  //parche: si no se cargan los detalles de la tabla, lo fuerza para que re aparezca
+  setTimeout(() => {
+    const elemento = document.querySelector("#detalle-boleta-table > div.tabulator-tableholder > div");
+    if (!elemento) {
+      console.log("no se detectó el elemento solucionando");
+      document.querySelector("#detalle-boleta-table > div.tabulator-footer > div.tabulator-footer-contents > span.tabulator-paginator > span > button").click();
+    }
+  }, 2000);
 
   tableEventsDetalleBoleta(tableDetalleBoleta);
 

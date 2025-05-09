@@ -426,6 +426,19 @@ body {
     visibility: hidden;
   }
 
+  .span_exportacion{
+    display: none;
+  }
+
+  .titulo-pestanas{
+    font-size: 15px;
+  }
+
+  .form-label {
+    font-size: 15px;
+    margin-bottom: 0%;
+    margin-top: 2%;
+  }
 }
 
 @keyframes parpadeo {
@@ -487,4 +500,22 @@ body {
 .progress-bar {
   background-color: #6f42c1; /* Color morado */
 }
+
+.agregarItem {
+  background-color: #6a4c9c;
+  border-color: black;
+  color: #f8f9fa;
+}
+
+.agregarItem:hover {
+  background-color: #5a3b7e; /* Nuevo color de fondo cuando el mouse pasa por encima */
+  border-color: #4e2a66; /* Nuevo color de borde cuando el mouse pasa por encima */
+}
+
+.card-body-full-screen {
+  max-height: 100vh;  /* 80% de la altura de la ventana del navegador */
+  overflow-y: auto;  /* Habilita el scroll vertical */
+  position: relative;
+}
+
 
