@@ -35,12 +35,8 @@ const tableSettingsDetalleBoleta = (tabledata, paginationSize, initialSort, colu
 
   //parche: si no se cargan los detalles de la tabla, lo fuerza para que re aparezca
   setTimeout(() => {
-    const elemento = document.querySelector("#detalle-boleta-table > div.tabulator-tableholder > div");
-    if (!elemento) {
-      console.log("no se detectó el elemento solucionando");
-      document.querySelector("#detalle-boleta-table > div.tabulator-footer > div.tabulator-footer-contents > span.tabulator-paginator > span > button").click();
-    }
-  }, 2000);
+    document.querySelector("#detalle-boleta-table > div.tabulator-footer > div.tabulator-footer-contents > span.tabulator-paginator > span > button").click();
+  }, 1000);
 
   tableEventsDetalleBoleta(tableDetalleBoleta);
 

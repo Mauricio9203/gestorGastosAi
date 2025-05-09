@@ -8,9 +8,9 @@ const getGastos = async () => {
 
     return data;
   } catch (error) {
-    notificationToastify("Ha habido un problema al cargar la tabla, espere...", 3000, "bottom", "right", "warning");
+    notificationToastify("Ha habido un problema al cargar la tabla, reiniciando módulo", 3000, "bottom", "right", "warning");
     setTimeout(() => {
-      loadTable();
+      location.reload();
     }, 2000);
   }
 };

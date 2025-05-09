@@ -4,7 +4,7 @@ import { tableEventsProducts } from "./table-events-products.js";
 const tableSettingsProducts = (tabledata, paginationSize, column) => {
   const table = new Tabulator("#products-table", {
     data: tabledata, //load row data from array
-    layout: "fitColumns", //fit columns to width of table
+    layout: "fitData", // No ajusta columnas al ancho del contenedor
     addRowPos: "top", //when adding a new row, add it to the top of the table
     history: true, //allow undo and redo actions on the table
     pagination: "local", //paginate the data

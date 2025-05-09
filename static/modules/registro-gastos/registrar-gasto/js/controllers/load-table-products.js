@@ -6,7 +6,7 @@ let items;
 //Iniciar Tabla
 const loadTableProducts = (data) => {
   //campos boleta
-
+  const esPantallaPequena = window.innerWidth < 768;
   document.getElementById("fechaBoleta").value = data.fecha;
   document.getElementById("rutBoleta").value = data.rut;
   document.getElementById("totalBoletaBruto").value = data.total_boleta_bruto;
@@ -34,15 +34,15 @@ const loadTableProducts = (data) => {
       title: "producto",
       field: "producto",
       editor: "input",
-      width: "40px",
-      frozen: true,
+      minWidth: esPantallaPequena ? 70 : 200, // cambia según ancho de pantalla
+      frozen: esPantallaPequena ? false : true, // cambia según ancho de pantalla
       headerFilter: "input",
     },
     {
       title: "Precio Total",
       field: "precio_total",
       editor: "input",
-      width: "20px",
+      minWidth: "20px",
       headerFilter: "input",
       bottomCalc: "sum", // Calcular el total de esta columna
       bottomCalcFormatter: "money", // Formatear como dinero
@@ -51,14 +51,14 @@ const loadTableProducts = (data) => {
       title: "Categoría",
       field: "categoria",
       editor: "input",
-      width: "15px",
+      minWidth: "15px",
       headerFilter: "input",
     },
     {
       title: "cantidad",
       field: "cantidad_items",
       editor: "input",
-      width: "15px",
+      minWidth: "15px",
       headerFilter: "input",
       bottomCalc: "sum",
     },
@@ -66,21 +66,21 @@ const loadTableProducts = (data) => {
       title: "Precio Unitario",
       field: "precio_unitario",
       editor: "input",
-      width: "20px",
+      minWidth: "20px",
       headerFilter: "input",
     },
     {
       title: "cantidad de contenido",
       field: "cantidad_contenido",
       editor: "input",
-      width: "15px",
+      minWidth: "15px",
       headerFilter: "input",
     },
     {
       title: "Unidad de Medida",
       field: "unidad_medida",
       editor: "input",
-      width: "15px",
+      minWidth: "15px",
       headerFilter: "input",
     },
   ];

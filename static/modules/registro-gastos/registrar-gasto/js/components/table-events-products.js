@@ -46,6 +46,7 @@ const deleteItem = (table) => {
         cancelButtonText: "Cancelar",
         confirmButtonColor: "#dc3545",
         reverseButtons: true,
+        target: document.getElementById("card-body-formulario-carga"),
       })
       .then((result) => {
         if (result.isConfirmed) {
