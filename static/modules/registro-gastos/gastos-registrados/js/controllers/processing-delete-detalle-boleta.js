@@ -6,7 +6,6 @@ import { tableDetalleBoleta } from "./load-table-detalle-boleta.js";
 const proccesingDeleteDetalleBoleta = async (data) => {
   disableButton("delete-rows-detalle-boleta");
   let response = await deleteDetalleBoletas(data);
-  console.log("respuestaa", response);
   enableButton("delete-rows-detalle-boleta");
   notificationToastify("¡Elementos eliminados correctamente!", 2000, "bottom", "right", "success");
   document.getElementById("delete-rows-detalle-boleta").style.display = "none";

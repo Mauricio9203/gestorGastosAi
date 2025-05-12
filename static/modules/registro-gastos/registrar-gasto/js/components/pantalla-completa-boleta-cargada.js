@@ -40,9 +40,6 @@ const detectarCambioFullscreen = () => {
     const fullscreenElement = document.fullscreenElement;
 
     if (!fullscreenElement) {
-      // Ya no hay ningún elemento en pantalla completa
-      console.log("Saliste del modo pantalla completa");
-
       document.getElementById("card-body-formulario-carga").classList.remove("card-body-full-screen");
     } else {
     }

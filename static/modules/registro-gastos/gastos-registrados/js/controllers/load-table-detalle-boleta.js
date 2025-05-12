@@ -118,7 +118,6 @@ const loadTableDetalleBoleta = async (id_boleta) => {
 };
 
 const chartResumenDetalleBoleta = (data) => {
-  console.log(data);
   if (data == false) {
   } else {
     // Extraer etiquetas y valores del response (ajusta esto según tu respuesta real)

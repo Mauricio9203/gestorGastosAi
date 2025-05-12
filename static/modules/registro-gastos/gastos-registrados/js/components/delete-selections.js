@@ -12,8 +12,6 @@ const deleteSelections = async () => {
       boletasEliminar.push({ id_boleta: data.id, url_boleta: obtenerKeyDesdeURL(data.url_boleta) });
     });
 
-    console.log(boletasEliminar);
-
     let title = "¿Estás seguro?";
     let text = "Esta acción no puede deshacerse";
     let icon = "warning";

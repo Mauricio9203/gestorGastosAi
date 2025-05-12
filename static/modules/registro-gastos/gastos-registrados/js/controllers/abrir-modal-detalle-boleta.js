@@ -5,6 +5,7 @@ const abrirModalDetalleBoleta = () => {
     const button = event.target.closest(".changePass");
     if (button) {
       const id = button.getAttribute("data-id");
+      localStorage.setItem("idBoleta", id);
       if (id) {
         await loadTableDetalleBoleta(id);
       }

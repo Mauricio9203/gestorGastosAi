@@ -18,7 +18,6 @@ const updateFieldBoleta = async (boletaId, campo, valor) => {
 
     const data = await response.json();
 
-    console.log(data);
     let dataBoleta = data["boleta"][0];
 
     // Extraer solo los campos esperados
@@ -47,9 +46,6 @@ const updateFieldBoleta = async (boletaId, campo, valor) => {
 };
 
 const validarDatosBoleta = (boletaId, campo, valor, cell) => {
-  console.log("validando datos");
-  console.log(boletaId, campo, valor);
-
   // Validar que no esté vacío
   if (campo != "confirmacion_revision") {
     if (!valor || valor.trim() === "") {

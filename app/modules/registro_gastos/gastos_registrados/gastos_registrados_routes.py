@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, session
 from app.services.crud import get_record, delete_records
 from app.utils.bucket_cloudflare import eliminar_archivo
-from app.services.crud import update_record
+from app.services.crud import update_record, create_record
 
 # Crear un Blueprint para los usuarios
 gastos_registrados_bp = Blueprint('gastos_registrados', __name__)
@@ -148,6 +148,22 @@ def eliminar_detalle_boleta():
         "eliminadas": eliminadas,
         "errores": errores
     })
+    
+@gastos_registrados_bp.route('/registro_gastos/crear_detalle_boleta', methods=['POST'])
+def crear_detalle_boleta():
+    try:
+        nuevo_detalle = request.get_json()
+        print(nuevo_detalle)
+        #nuevo_detalle["id_usuario"] = int(session['id_user']) #agregar la id del usuario que creo la boleta
+        try:
+            # Asegúrate de que la variable que usas sea la correcta, aquí estoy usando nuevo_detalle
+            detalle_boleta = create_record("detalle_boleta", nuevo_detalle)  
+            print (detalle_boleta)
+            return jsonify({"message": "Detalle de Boleta creada exitosamente", "detalle_boleta": detalle_boleta, "ok":True}), 201
+        except Exception as e:
+            return jsonify({"error": str(e)}), 400
+    except Exception as e:
+        return jsonify({"error": "Error al procesar la solicitud: " + str(e)}), 400
 
 
 

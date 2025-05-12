@@ -21,7 +21,6 @@
           <!-- Botones Add y Eliminar a la derecha -->
           <div class="d-flex">
             <!-- Botón para eliminar selección -->
-            <button id="add-rows-detalle-boleta" class="btn btn-outline-primary btn-sm ms-2 ml-1" style="display: block"><i class="fas fa-add"></i> <span class="span_exportacion">Agregar</span></button>
             <button id="delete-rows-detalle-boleta" class="btn btn-outline-danger btn-sm ms-2 ml-1" style="display: none"><i class="fas fa-trash-alt"></i> <span class="span_exportacion">Eliminar</span></button>
           </div>
         </div>
@@ -51,48 +50,58 @@
         <div id="contenido-formulario-detalle-boleta" style="min-height: auto; display: none" class="text-dark">
           <div class="row mb-2 mt-3">
             <div class="col-md-3">
-              <label for="nombreItem" class="form-label">Nombre Ítem</label>
+              <label for="nombreItem" class="form-label">Nombre Ítem *</label>
               <input type="text" class="form-control form-control-sm" id="nombreItem" placeholder="Ej: Leche entera" />
             </div>
             <div class="col-md-3">
-              <label for="nombreCategoria" class="form-label">Nombre Categoría</label>
+              <label for="nombreCategoria" class="form-label">Nombre Categoría *</label>
               <input type="text" class="form-control form-control-sm" id="nombreCategoria" placeholder="Ej: Lácteos" />
             </div>
             <div class="col-md-3">
-              <label for="precioUnitario" class="form-label">Precio Unitario</label>
+              <label for="precioUnitario" class="form-label">Precio Unitario *</label>
               <input type="number" class="form-control form-control-sm" id="precioUnitario" step="0.01" placeholder="Ej: 1.50" />
             </div>
             <div class="col-md-3">
-              <label for="cantidad" class="form-label">Cantidad</label>
+              <label for="cantidad" class="form-label">Cantidad *</label>
               <input type="number" class="form-control form-control-sm" id="cantidad" placeholder="Ej: 3" />
             </div>
           </div>
 
           <div class="row mb-2">
             <div class="col-md-3">
-              <label for="precioTotal" class="form-label">Precio Total</label>
+              <label for="precioTotal" class="form-label">Precio Total *</label>
               <input type="number" class="form-control form-control-sm" id="precioTotal" step="0.01" placeholder="Ej: 4.50" />
             </div>
             <div class="col-md-3">
-              <label for="cantidadContenido" class="form-label">Cantidad Contenido</label>
+              <label for="cantidadContenido" class="form-label">Cantidad Contenido *</label>
               <input type="number" class="form-control form-control-sm" id="cantidadContenido" step="0.01" placeholder="Ej: 1" />
             </div>
             <div class="col-md-3">
-              <label for="unidadMedida" class="form-label">Unidad de Medida</label>
+              <label for="unidadMedida" class="form-label">Unidad de Medida *</label>
               <select class="form-select form-control form-control-sm" id="unidadMedida">
-                <option selected disabled>Selecciona unidad</option>
-                <option value="ml">ml</option>
-                <option value="l">litros</option>
-                <option value="g">gramos</option>
-                <option value="kg">kilos</option>
-                <option value="un">unidades</option>
+                <option selected disabled value="">Selecciona unidad</option>
+                <option value="unidades">unidades</option>
+                <option value="gramos">gramos</option>
+                <option value="kilogramos">kilogramos</option>
+                <option value="mililitros">mililitros</option>
+                <option value="litros">litros</option>
+                <option value="paquetes">paquetes</option>
+                <option value="docenas">docenas</option>
+                <option value="botellas">botellas</option>
+                <option value="latas">latas</option>
+                <option value="bolsas">bolsas</option>
+                <option value="cajas">cajas</option>
+                <option value="bandejas">bandejas</option>
+                <option value="frascos">frascos</option>
+                <option value="tubos">tubos</option>
+                <option value="sachets">sachets</option>
               </select>
             </div>
           </div>
 
           <div class="row mb-2 mt-3">
             <div class="col-md-12 d-flex align-items-end justify-content-end">
-              <button type="submit" class="btn agregarItem btn-sm btn-block" disabled>Guardar (en desarrollo)</button>
+              <button type="submit" id="agregarItem" class="btn agregarItem btn-sm btn-block">Guardar</button>
             </div>
           </div>
         </div>

@@ -6,7 +6,6 @@ import { table } from "./load-table.js";
 const proccesingDelete = async (data) => {
   disableButton("delete-rows-gastos-registrados");
   let response = await deleteBoletas(data);
-  console.log("respuestaa", response);
   enableButton("delete-rows-gastos-registrados");
   notificationToastify("¡Elementos eliminados correctamente!", 2000, "bottom", "right", "success");
   document.getElementById("delete-rows-gastos-registrados").style.display = "none";

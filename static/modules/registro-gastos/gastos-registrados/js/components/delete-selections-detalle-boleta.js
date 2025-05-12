@@ -12,8 +12,6 @@ const deleteSelectionsDetalleBoleta = async () => {
       detalleBoletaEliminar.push({ id_detalle_boleta: data.id });
     });
 
-    console.log(detalleBoletaEliminar);
-
     let title = "¿Estás seguro?";
     let text = "Esta acción no puede deshacerse";
     let icon = "warning";

@@ -11,8 +11,6 @@ const deleteDetalleBoletas = async (datos) => {
     const resultado = await response.json();
 
     if (response.ok) {
-      console.log("✅ Boletas eliminadas:", resultado.eliminadas);
-      console.log("⚠️ Errores:", resultado.errores);
       return resultado.eliminadas;
     } else {
       console.error("❌ Error en la solicitud:", resultado.error || resultado);
