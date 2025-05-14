@@ -25,7 +25,7 @@ def detalle_boleta():
     response = get_record(
         table="detalle_boleta",
         filters={"id_boleta": id_boleta}, 
-        select_columns="id, created_at,updated_at,nombre_item, precio_total, precio_unitario, nombre_categoria,cantidad,cantidad_contenido_unidad, unidad_medida,id_boleta"
+        select_columns="id, created_at,updated_at,nombre_item, precio_total, precio_unitario, nombre_categoria,cantidad,cantidad_contenido_unidad, unidad_medida,id_boleta, nombre_generico"
     )
 
     return jsonify({

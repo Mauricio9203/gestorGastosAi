@@ -82,6 +82,7 @@ const refactorizarItems = (items, id_boleta) => {
     nombre_item: item.producto ?? "Desconocido", // Si el producto está vacío, asignar 'Desconocido'
     precio_total: isNaN(parseFloat(item.precio_total)) ? 0.0 : parseFloat(item.precio_total),
     nombre_categoria: item.categoria ?? "Sin categoría", // Si la categoría está vacía, asignar 'Sin categoría'
+    nombre_generico: item.nombre_generico ?? "Sin nombre genérico", // Si el nombre genérico está vacío, asignar 'Sin nombre genérico'
     cantidad: isNaN(parseInt(item.cantidad_items)) ? 0 : parseInt(item.cantidad_items),
     precio_unitario: isNaN(parseFloat(item.precio_unitario)) ? 0.0 : parseFloat(item.precio_unitario),
     cantidad_contenido_unidad: isNaN(parseFloat(item.cantidad_contenido)) ? 0.0 : parseFloat(item.cantidad_contenido),

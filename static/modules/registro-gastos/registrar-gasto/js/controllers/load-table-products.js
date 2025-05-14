@@ -55,6 +55,13 @@ const loadTableProducts = (data) => {
       headerFilter: "input",
     },
     {
+      title: "Nombre Genérico",
+      field: "nombre_generico",
+      editor: "input",
+      minWidth: "15px",
+      headerFilter: "input",
+    },
+    {
       title: "cantidad",
       field: "cantidad_items",
       editor: "input",

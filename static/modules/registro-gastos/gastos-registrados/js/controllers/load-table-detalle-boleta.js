@@ -49,6 +49,13 @@ const loadTableDetalleBoleta = async (id_boleta) => {
       minWidth: 100,
     },
     {
+      title: "Nombre Genérico",
+      field: "nombre_generico",
+      editor: "input",
+      headerFilter: "input",
+      minWidth: 100,
+    },
+    {
       title: "Cantidad",
       field: "cantidad",
       editor: "input",
