@@ -8,7 +8,7 @@ import { exportButtonsBoleta } from "./components/table-settings.js";
 import { abrirModalDetalleBoleta } from "./controllers/abrir-modal-detalle-boleta.js";
 import { cargarItemBoleta } from "./controllers/cargar-item-boleta.js";
 import { loadTable } from "./controllers/load-table.js";
-import { makeWheelListenersPassive } from "./controllers/parche-data-table.js";
+//import { makeWheelListenersPassive } from "./controllers/parche-data-table.js";
 
 window.addEventListener("DOMContentLoaded", async function () {
   const linkId = "registroGastosLink";
@@ -22,7 +22,7 @@ window.addEventListener("DOMContentLoaded", async function () {
   abrirModalDetalleBoleta();
   exportButtonsDetalleBoleta();
   exportButtonsBoleta();
-  makeWheelListenersPassive();
+  //makeWheelListenersPassive();
   cambioPestana();
   deleteSelections();
   deleteSelectionsDetalleBoleta();
