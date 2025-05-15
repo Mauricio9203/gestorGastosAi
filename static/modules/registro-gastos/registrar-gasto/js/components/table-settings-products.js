@@ -1,8 +1,11 @@
 import { tableEventsProducts } from "./table-events-products.js";
-
+let table;
 //configurar Tabla
 const tableSettingsProducts = (tabledata, paginationSize, column) => {
-  const table = new Tabulator("#products-table", {
+  if (table) {
+    table.destroy();
+  }
+  table = new Tabulator("#products-table", {
     data: tabledata, //load row data from array
     layout: "fitData", // No ajusta columnas al ancho del contenedor
     addRowPos: "top", //when adding a new row, add it to the top of the table
