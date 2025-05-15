@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request,session
 from supabase import create_client, Client
 from dotenv import load_dotenv
 import os
+import time
 
 #necesarias para que la app funcione
 import google.generativeai as genai
@@ -64,8 +65,6 @@ Ejemplo:
 """
 )
 
-
-
 # Crear un Blueprint para los usuarios
 registro_gastos_bp = Blueprint('registro_gastos', __name__)
 
@@ -109,9 +108,6 @@ def subir_archivo_a_r2():
         # Obtener el archivo de la solicitud
         file = request.files['file']
         
-       
-            
-        
         # Verificar que el archivo no esté vacío
         if file.filename == '':
             return jsonify({"error": "Nombre de archivo vacío."}), 400
@@ -140,6 +136,7 @@ def subir_archivo_a_r2():
 @registro_gastos_bp.route('/extraer_items', methods=['POST'])
 def analizar_boleta_desde_imagen():
     try:
+        start_time = time.perf_counter()
         if 'file' not in request.files:
             return jsonify({"error": "No se encontró el archivo."}), 400
 
@@ -173,9 +170,17 @@ def analizar_boleta_desde_imagen():
                 ]
             }
         )
+        
+        prompt_token_count= int(response.usage_metadata.prompt_token_count )
+        candidates_token_count= int(response.usage_metadata.candidates_token_count)
+        total_token_count= int(response.usage_metadata.total_token_count)
+        id_usuario = int(session['id_user'])
+        end_time = time.perf_counter()
+        elapsed_ms = int((end_time - start_time) * 1000)  # solo milisegundos enteros
+        
+        respuesta_log = guardar_metadatos(prompt_token_count, candidates_token_count, total_token_count, id_usuario, elapsed_ms)
 
         texto = response.text.strip()
-
         # Intentar extraer JSON
         try:
             return jsonify(json.loads(texto))
@@ -188,6 +193,24 @@ def analizar_boleta_desde_imagen():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+def guardar_metadatos(token_entrada, token_salida, total_token, id_usuario, tiempo_proceso):
+    datos = {
+        "tokens_entrada": token_entrada,
+        "tokens_salida": token_salida,
+        "total_tokens": total_token,
+        "tiempo_proceso": tiempo_proceso,
+        "id_usuario": id_usuario
+    }
+
+    try:
+        respuesta = create_record("tokens_gastados", datos)
+        return respuesta
+    except Exception as e:
+        print(f"[guardar_metadatos] Error al guardar metadatos: {e}")
+        return False
+        # Aquí no hacemos raise, para que no afecte el resto del proceso
+
 
 
 
