@@ -31,7 +31,9 @@ const detectarCambiosBoleta = async () => {
     .subscribe();
 };
 
-const ejecutarAcciones = () => {
+const ejecutarAcciones = (fechaInicio, fechaFin, comercio) => {
+  console.log(fechaInicio, fechaFin, comercio);
+
   document.getElementById("iconoRefres").classList.add("fa-spin");
   setTimeout(() => {
     document.getElementById("iconoRefres").classList.remove("fa-spin");

@@ -1,7 +1,9 @@
 import { addCustomActiveClass } from "../../../../utils/sidebarConfig.js";
+import { selectComercio } from "./components/select-comercio.js";
 import { chartTotalGastoPorCategoria } from "./controllers/chart-total-gasto-por-categoria.js";
 import { chartTotalGastoPorComercio } from "./controllers/chart-total-gasto-por-comercio.js";
 import { detectarCambiosBoleta } from "./controllers/detectar-cambios-tabla-boletas.js";
+import { limpiarFiltros, validarFiltros } from "./controllers/filtros.js";
 import { refrescarGraficos } from "./controllers/refrescar-graficos.js";
 import { totalBoletasNoRevisadas } from "./controllers/total-boletas-no-revisadas.js";
 import { totalReceipts } from "./controllers/total-boletas.js";
@@ -23,4 +25,7 @@ window.addEventListener("DOMContentLoaded", function () {
   chartTotalGastoPorComercio();
   detectarCambiosBoleta();
   refrescarGraficos();
+  validarFiltros();
+  limpiarFiltros();
+  selectComercio();
 });

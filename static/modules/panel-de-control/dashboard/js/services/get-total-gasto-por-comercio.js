@@ -1,22 +1,34 @@
+import { validarFiltros } from "../controllers/filtros.js";
+
 const getTotalGastoPorComercio = async () => {
-  try {
-    const response = await fetch("/dashboard/total_gastado_por_comercio");
+  let filtros = validarFiltros();
+  let validacion = filtros["validacion"];
+  if (validacion != false) {
+    const queryString = new URLSearchParams(filtros).toString();
+    try {
+      const response = await fetch(`/dashboard/total_gastado_por_comercio?${queryString}`);
+      if (!response.ok) {
+        console.error("Error en la respuesta del servidor:", response.status);
+        return false;
+      }
 
-    if (!response.ok) {
-      console.error("Error en la respuesta del servidor:", response.status);
+      const data = await response.json();
+
+      if (!Array.isArray(data) || data.length === 0) {
+        let datos = [
+          {
+            nombre_comercio: "Sin datos",
+            total_gastado: 0,
+          },
+        ];
+        return datos;
+      }
+
+      return data;
+    } catch (error) {
+      console.error("Error al cargar los datos:", error);
       return false;
     }
-
-    const data = await response.json();
-
-    if (!Array.isArray(data) || data.length === 0) {
-      return false;
-    }
-
-    return data;
-  } catch (error) {
-    console.error("Error al cargar los datos:", error);
-    return false;
   }
 };
 

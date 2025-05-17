@@ -64,30 +64,72 @@ def total_boletas():
 
 @dashboard_bp.route('/dashboard/total_gastado', methods=['GET'])
 def total_gastado():
+    
+    fecha_inicio = request.args.get("fechaInicio")
+    fecha_fin = request.args.get("fechaFin")
+    comercio = request.args.get("comercio")
+    validacion = request.args.get("validacion")
+    rango_fechas_valido = request.args.get("rangoFechasValido")
+    comercio_valido = request.args.get("comercioValido")
+    
     #response = supabase.rpc("get_total_gastado_dynamic", {"fecha_inicio": "2025-04-12","fecha_fin": "2026-04-12","comercio": "Woolworths","usuario_id": 108}).execute()
-    response = supabase.rpc('get_total_gastado_dynamic', {'usuario_id':  session['id_user']}).execute()
+    print("Filtros recibidos:", fecha_inicio, fecha_fin, comercio,validacion,rango_fechas_valido)
+    if(rango_fechas_valido == "true" and comercio_valido == "false"):
+        response = supabase.rpc("get_total_gastado_dynamic", {"fecha_inicio": fecha_inicio,"fecha_fin": fecha_fin,"usuario_id": session['id_user']}).execute() 
+    elif(rango_fechas_valido == "true" and comercio_valido == "true"):
+        response = supabase.rpc("get_total_gastado_dynamic", {"fecha_inicio": fecha_inicio,"fecha_fin": fecha_fin,"comercio": comercio,"usuario_id": session['id_user']}).execute() 
+    elif(rango_fechas_valido == "false" and comercio_valido == "true"):
+        response = supabase.rpc("get_total_gastado_dynamic", {"comercio": comercio,"usuario_id": session['id_user']}).execute() 
+    else:
+        response = supabase.rpc('get_total_gastado_dynamic', {'usuario_id':  session['id_user']}).execute()
+        
     return jsonify(response.data if response.data else 0)
 
 @dashboard_bp.route('/dashboard/total_gastado_por_categoria', methods=['GET'])
 def total_gastado_por_categoria():
-    #response = supabase.rpc('get_total_gastado_por_categoria_dynamic', {'fecha_inicio': '2025-04-12','fecha_fin': '2026-04-12','comercio': 'Woolworths',id_usuario: 108,'limite': 10}).execute()
-    response = supabase.rpc('get_total_gastado_por_categoria_dynamic', {'limite':10, 'id_usuario': session['id_user']}).execute()
+    fecha_inicio = request.args.get("fechaInicio")
+    fecha_fin = request.args.get("fechaFin")
+    comercio = request.args.get("comercio")
+    validacion = request.args.get("validacion")
+    rango_fechas_valido = request.args.get("rangoFechasValido")
+    comercio_valido = request.args.get("comercioValido")
+    
+    if(rango_fechas_valido == "true" and comercio_valido == "false"):
+        response = supabase.rpc("get_total_gastado_por_categoria_dynamic", {"fecha_inicio": fecha_inicio,"fecha_fin": fecha_fin,"id_usuario": session['id_user']}).execute() 
+    elif(rango_fechas_valido == "true" and comercio_valido == "true"):
+        response = supabase.rpc("get_total_gastado_por_categoria_dynamic", {"fecha_inicio": fecha_inicio,"fecha_fin": fecha_fin,"comercio": comercio,"id_usuario": session['id_user']}).execute() 
+    elif(rango_fechas_valido == "false" and comercio_valido == "true"):
+        response = supabase.rpc("get_total_gastado_por_categoria_dynamic", {"comercio": comercio,"id_usuario": session['id_user']}).execute() 
+    else:
+        response = supabase.rpc('get_total_gastado_por_categoria_dynamic', {'limite':10, 'id_usuario': session['id_user']}).execute()
     #print(response)
     return jsonify(response.data if response.data else [])
 
 @dashboard_bp.route('/dashboard/total_gastado_por_comercio', methods=['GET'])
 def total_gastado_por_comercio():
+    fecha_inicio = request.args.get("fechaInicio")
+    fecha_fin = request.args.get("fechaFin")
+    comercio = request.args.get("comercio")
+    validacion = request.args.get("validacion")
+    rango_fechas_valido = request.args.get("rangoFechasValido")
+    comercio_valido = request.args.get("comercioValido")
+    
+    if(rango_fechas_valido == "true" and comercio_valido == "false"):
+        response = supabase.rpc("get_total_gastado_por_comercio", {"fecha_inicio": fecha_inicio,"fecha_fin": fecha_fin,"usuario_id": session['id_user']}).execute() 
+    elif(rango_fechas_valido == "true" and comercio_valido == "true"):
+        response = supabase.rpc("get_total_gastado_por_comercio", {"fecha_inicio": fecha_inicio,"fecha_fin": fecha_fin,"comercio": comercio,"usuario_id": session['id_user']}).execute() 
+    elif(rango_fechas_valido == "false" and comercio_valido == "true"):
+        response = supabase.rpc("get_total_gastado_por_comercio", {"comercio": comercio,"usuario_id": session['id_user']}).execute() 
+    else:
+        response = supabase.rpc('get_total_gastado_por_comercio',{'usuario_id': session['id_user']}).execute()
+
     #response = supabase.rpc('get_total_gastado_por_comercio', {'fecha_inicio': '2025-04-12','fecha_fin': '2026-04-12','comercio': 'Woolworths','usuario_id': 108,'limite': 10}).execute()
-    response = supabase.rpc('get_total_gastado_por_comercio',{'usuario_id': session['id_user']}).execute()
-    print(response)
     return jsonify(response.data if response.data else [])
 
 @dashboard_bp.route('/dashboard/comprobar_id_usuario', methods=['GET'])
 def comprobar_id_usuario():
     verificacion = False
     id_usuario = request.args.get('idUsuario')
-    print(id_usuario)
-    print(session['id_user'])
     if int(id_usuario) == int(session['id_user']):
         verificacion = True
     return jsonify({"verificacion": verificacion})
@@ -99,5 +141,9 @@ def credenciales_supabase():
     
     return jsonify({"supabaseUrl": supabaseUrl,"supabaseKey":supabaseKey})
   
+@dashboard_bp.route('/dashboard/lista_comercios', methods=['GET'])
+def lista_comercios():
+    response = supabase.rpc('obtener_comercios_por_usuario', {'p_id_usuario': session['id_user']}).execute()
+    return jsonify(response.data if response.data else [])
 
 

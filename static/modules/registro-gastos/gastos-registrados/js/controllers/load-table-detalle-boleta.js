@@ -40,6 +40,12 @@ const loadTableDetalleBoleta = async (id_boleta) => {
       headerFilter: "input",
       minWidth: 100,
       bottomCalc: "sum",
+      formatter: "money",
+      formatterParams: {
+        symbol: "$",
+        thousand: ",",
+        precision: 2,
+      },
     },
     {
       title: "Categoria",
@@ -68,6 +74,12 @@ const loadTableDetalleBoleta = async (id_boleta) => {
       editor: "input",
       headerFilter: "input",
       minWidth: 100,
+      formatter: "money",
+      formatterParams: {
+        symbol: "$",
+        thousand: ",",
+        precision: 2,
+      },
     },
     {
       title: "Contenido",

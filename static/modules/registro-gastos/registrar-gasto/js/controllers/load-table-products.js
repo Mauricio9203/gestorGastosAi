@@ -46,6 +46,12 @@ const loadTableProducts = (data) => {
       headerFilter: "input",
       bottomCalc: "sum", // Calcular el total de esta columna
       bottomCalcFormatter: "money", // Formatear como dinero
+      formatter: "money",
+      formatterParams: {
+        symbol: "$",
+        thousand: ",",
+        precision: 2,
+      },
     },
     {
       title: "Categoría",
@@ -75,6 +81,12 @@ const loadTableProducts = (data) => {
       editor: "input",
       minWidth: "20px",
       headerFilter: "input",
+      formatter: "money",
+      formatterParams: {
+        symbol: "$",
+        thousand: ",",
+        precision: 2,
+      },
     },
     {
       title: "cantidad de contenido",

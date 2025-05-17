@@ -1,15 +1,26 @@
+import { validarFiltros } from "../controllers/filtros.js";
+
 const getTotalGastado = async () => {
-  try {
-    const response = await fetch("/dashboard/total_gastado"); // Aquí va la ruta del endpoint que llamará a tu API Flask
-    if (!response.ok) {
-      console.error("Error en la respuesta del servidor:", response.status);
-      return false;
-    } else {
-      const data = await response.json();
-      return data;
+  let filtros = validarFiltros();
+  let validacion = filtros["validacion"];
+  console.log(validacion);
+  if (validacion != false) {
+    // Convertir el objeto filtros en string de parámetros de URL
+    const queryString = new URLSearchParams(filtros).toString();
+    try {
+      const response = await fetch(`/dashboard/total_gastado?${queryString}`); // Aquí va la ruta del endpoint que llamará a tu API Flask
+      if (!response.ok) {
+        console.error("Error en la respuesta del servidor:", response.status);
+        return false;
+      } else {
+        const data = await response.json();
+        return data;
+      }
+    } catch (error) {
+      console.error("Error al obtener el total de usuarios:", error);
     }
-  } catch (error) {
-    console.error("Error al obtener el total de usuarios:", error);
+  } else {
+    return "--";
   }
 };
 

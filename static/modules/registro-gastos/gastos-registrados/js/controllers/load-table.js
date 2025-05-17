@@ -33,6 +33,12 @@ const loadTable = async () => {
       field: "total_neto",
       editor: "input",
       minWidth: 100,
+      formatter: "money",
+      formatterParams: {
+        symbol: "$",
+        thousand: ",",
+        precision: 2,
+      },
     },
     {
       title: "% IVA",
@@ -45,6 +51,12 @@ const loadTable = async () => {
       field: "total_bruto",
       editor: "input",
       minWidth: 100,
+      formatter: "money",
+      formatterParams: {
+        symbol: "$",
+        thousand: ",",
+        precision: 2,
+      },
     },
     {
       title: "Revisado",
