@@ -519,3 +519,82 @@ body {
 }
 
 
+.select2-results__options {
+  color: #4e4e4e; /* Cambia por el color que quieras */
+  font-size: .875rem;
+}
+
+.select2-search__field{
+  height: 28px;
+}
+
+.select2-selection--single{
+  height: 31px !important;
+  border: 1px solid #ced4da !important; /* Borde gris claro */
+  color: #495057 !important; /* Color del texto */
+}
+
+.select2-container:hover .select2-selection--single {
+  border-color: #9c27b0 !important; /* Lila al hacer hover */
+  box-shadow: 0 0 5px rgba(156, 39, 176, 0.5) !important; /* Glow suave al hacer hover */
+}
+
+
+.select2-selection__rendered{
+  color: #4e4e4e; /* Cambia por el color que quieras */
+  font-size: .875rem;
+    padding-top: 2px !important; /* Ajusta el padding para centrar verticalmente */
+}
+
+.select2-selection__placeholder{
+  color: #6c757d !important; /* Cambia por el color que quieras */
+  font-size: .875rem !important;
+}
+
+.select2-results__option--highlighted{
+  background-color: #7852be !important; /* Color morado para el fondo del elemento seleccionado */
+  color: #ffffff !important; /* Color blanco para el texto del elemento seleccionado */
+}
+
+.btn-primary {
+  background-color: #6f42c1; /* Color morado */
+  border-color: #6f42c1; /* Borde morado */
+  color: #ffffff; /* Texto blanco */
+}
+.btn-primary:hover {
+  background-color: #5a3b7e; /* Color morado más oscuro al pasar el mouse */
+  border-color: #4e2a66; /* Borde morado más oscuro al pasar el mouse */
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.5); /* Sombra morada al hacer foco */
+}
+
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary.active,
+.btn-primary.show {
+  background-color: #540091 !important;
+  border-color: #540091 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.btn-outline-primary {
+  color: #6f42c1; /* Color morado */
+  border-color: #6f42c1; /* Borde morado */
+}
+.btn-outline-primary:hover {
+  background-color: #6f42c1; /* Color morado al pasar el mouse */
+  color: #ffffff; /* Texto blanco al pasar el mouse */
+  border-color: #6f42c1; /* Borde morado al pasar el mouse */
+}
+
+/* Active: cuando haces clic */
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-primary.show {
+  background-color: #5a34a1 !important; /* un tono más oscuro */
+  color: #fff !important;
+  border-color: #5a34a1 !important;
+  box-shadow: none !important;
+}

@@ -121,7 +121,7 @@ def total_gastado_por_comercio():
     elif(rango_fechas_valido == "false" and comercio_valido == "true"):
         response = supabase.rpc("get_total_gastado_por_comercio", {"comercio": comercio,"usuario_id": session['id_user']}).execute() 
     else:
-        response = supabase.rpc('get_total_gastado_por_comercio',{'usuario_id': session['id_user']}).execute()
+        response = supabase.rpc('get_total_gastado_por_comercio',{'usuario_id': session['id_user'], 'limite': 10}).execute()
 
     #response = supabase.rpc('get_total_gastado_por_comercio', {'fecha_inicio': '2025-04-12','fecha_fin': '2026-04-12','comercio': 'Woolworths','usuario_id': 108,'limite': 10}).execute()
     return jsonify(response.data if response.data else [])

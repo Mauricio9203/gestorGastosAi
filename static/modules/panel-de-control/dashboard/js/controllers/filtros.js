@@ -45,6 +45,8 @@ const limpiarFiltros = () => {
     if (btnFiltrar) {
       btnFiltrar.click();
     }
+
+    $("#comercio").val("").trigger("change");
   });
 };
 
