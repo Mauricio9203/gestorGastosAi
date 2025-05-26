@@ -1,3 +1,4 @@
+import { getUnidadesMedida } from "../../../../../utils/unidades-medida.js";
 import { graficoDinamico } from "../../../../panel-de-control/charts/grafico-dinamico.js";
 import { tableSettingsDetalleBoleta } from "../components/table-settings-detalle-boleta.js";
 import { getDetalleBoleta } from "../services/get-detalle-boleta.js";
@@ -95,23 +96,7 @@ const loadTableDetalleBoleta = async (id_boleta) => {
       minWidth: 100,
       editor: "select",
       editorParams: {
-        values: {
-          unidades: "unidades",
-          gramos: "gramos",
-          kilogramos: "kilogramos",
-          mililitros: "mililitros",
-          litros: "litros",
-          paquetes: "paquetes",
-          docenas: "docenas",
-          botellas: "botellas",
-          latas: "latas",
-          bolsas: "bolsas",
-          cajas: "cajas",
-          bandejas: "bandejas",
-          frascos: "frascos",
-          tubos: "tubos",
-          sachets: "sachets",
-        },
+        values: getUnidadesMedida(),
       },
     },
     {

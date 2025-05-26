@@ -1,0 +1,85 @@
+.glass-float-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 115, 255, 0.963);
+  box-shadow: 0 8px 22px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgb(253, 253, 253);
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+.glass-float-button:focus {
+  outline: none;
+  box-shadow: 0 0 10px 3px rgba(0, 48, 152, 0.7); /* sombra rosa */
+}
+.glass-float-button:hover {
+  background: rgba(0, 95, 154, 0.87);
+  transform: scale(1.1);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: 5px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+
+}
+
+
+
+  /* Contenedor del tooltip */
+  .tooltip {
+    position: relative; /* Necesario para posicionar el tooltip */
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  /* El texto del tooltip oculto por defecto */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Lo posiciona arriba */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 14px;
+  }
+
+  /* Triángulo pequeño debajo del tooltip */
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* justo debajo del tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+  }
+
+  /* Mostrar el tooltip al pasar el mouse */
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }

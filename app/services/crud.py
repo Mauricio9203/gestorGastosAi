@@ -17,6 +17,20 @@ def get_record(table: str, filters: dict, select_columns: str ):
     response = query.execute()
     return response.data
 
+def get_record_function(function_name: str, params: dict = None):
+    """
+    Llama a una función RPC en Supabase con los parámetros dados y devuelve los datos.
+
+    :param function_name: Nombre de la función RPC en la base de datos.
+    :param params: Diccionario con parámetros para la función.
+    :return: Lista de resultados (response.data) o None si no hay resultados.
+    """
+    params = params or {}
+
+    response = supabase.rpc(function_name, params).execute()
+
+    return response.data
+
 @login_required
 def create_record(table_name: str, data: dict):
     data["created_at"] = datetime.now(timezone.utc).isoformat()

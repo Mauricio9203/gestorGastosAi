@@ -49,4 +49,31 @@ const showProcessingToast = (show = true) => {
   }
 };
 
-export { notificationToastify, showProcessingToast };
+const showProcessingToastMessage = (show = true, mensaje) => {
+  if (show) {
+    // Si ya hay uno mostrándose, no volver a crearlo
+    if (!processingToast) {
+      processingToast = Toastify({
+        text: '<i class="fas fa-circle-notch fa-spin" style="margin-right: 8px;"></i> ' + mensaje,
+        duration: -1, // permanece hasta cerrarlo manualmente
+        gravity: "bottom",
+        position: "right",
+        style: {
+          background: "#1e88e5",
+        },
+        stopOnFocus: false,
+        escapeMarkup: false,
+      });
+
+      processingToast.showToast();
+    }
+  } else {
+    // Si existe una instancia, la cerramos y la eliminamos
+    if (processingToast) {
+      processingToast.hideToast();
+      processingToast = null;
+    }
+  }
+};
+
+export { notificationToastify, showProcessingToast, showProcessingToastMessage };

@@ -22,6 +22,12 @@ const loadTable = async () => {
       },
     },
     {
+      title: "ID",
+      field: "id",
+      headerFilter: "input",
+      minWidth: 150,
+    },
+    {
       title: "Comercio",
       field: "nombre_comercio",
       editor: "input",

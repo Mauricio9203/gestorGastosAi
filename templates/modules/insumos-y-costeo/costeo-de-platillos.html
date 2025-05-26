@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block title %}Data Analysis{% endblock %} {% block body %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='modules/insumos-y-costeo/costeo-de-platillos/css/costeo-de-platillos.css') }}" />
+
+<div class="container-fluid py-4">
+  <h3 class="text-dark d-flex align-items-center text-shadow">
+    <i class="fas fa-calculator mr-2"></i>
+    Costeo de Platillos
+  </h3>
+
+  <div class="row mt-3">
+    <div class="col-md-12 mt-2">
+      <div class="card rounded-lg border-0">
+        <div class="card-body text-dark">
+          <div class="col-12 mb-3" style="padding-left: 0%">
+            <input type="text" class="form-control form-control-sm border-0" placeholder="Ingrese el nombre del platillo..." aria-label="Nombre de platillo" style="background-color: transparent; font-size: 20px; padding-left: 0%" />
+          </div>
+          <div class="row align-items-end">
+            <div class="col-md-3 mt-2">
+              <div class="d-flex justify-content-between align-items-center">
+                <label for="ingredienteSelect" class="form-label mb-0"> Listado de Ingredientes </label>
+                <button type="button" class="btn btn-outline-primary btn-xs btn-sm py-0 px-1 ml-2" style="font-size: 0.8em; line-height: 1" title="Agregar ingrediente">nuevo</button>
+              </div>
+              <select id="ingredienteSelect" class="form-control form-control-sm mt-1">
+                <option value="" disabled selected>Selecciona un ingrediente</option>
+                <!-- opciones -->
+              </select>
+            </div>
+
+            <div class="col-md-3 mt-2">
+              <label for="unidadMedidaSelect" class="form-label">Unidad de Medida</label>
+              <select id="unidadMedidaSelect" class="form-control form-control-sm">
+                <option value="" disabled selected>Selecciona una unidad</option>
+                <!-- opciones -->
+              </select>
+            </div>
+
+            <div class="col-md-3 mt-2">
+              <label for="cantidadUtilizada" class="form-label">Cantidad Utilizada</label>
+              <input type="number" step="0.01" min="0" id="cantidadUtilizada" class="form-control form-control-sm" placeholder="0.00" />
+            </div>
+
+            <div class="col-md-3 mt-3">
+              <button id="agregarIngredienteBtn" class="btn btn-primary btn-sm w-100"><i class="fa-solid fa-plus mr-1"></i> Agregar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="{{ url_for('static', filename='modules/insumos-y-costeo/costeo-de-platillos/js/index.js') }}"></script>
+{% endblock %}

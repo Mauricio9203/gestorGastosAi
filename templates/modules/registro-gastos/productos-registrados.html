@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block title %}Data Analysis{% endblock %} {% block body %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='modules/registro-gastos/productos-registrados/css/productos-registrados.css') }}" />
+
+<div class="container-fluid py-4">
+  <h3 class="text-dark d-flex align-items-center text-shadow">
+    <i class="fas fa-cart-shopping mr-2"></i>
+    Productos Registrados
+  </h3>
+
+  <div class="row mt-3">
+    <div class="col-md-12 mt-2">
+      <div class="card rounded-lg border-0">
+        <div class="card-body">
+          <!-- Flex container para alinear los botones -->
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <div>
+              <!-- Botones de exportación con Font Awesome -->
+              <button id="download-csv-productos-registrados" class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i> <span class="span_exportacion">CSV</span></button>
+              <button id="download-xlsx-productos-registrados" class="btn btn-outline-success btn-sm"><i class="fas fa-file-excel"></i> <span class="span_exportacion">Excel</span></button>
+              <button id="download-json-productos-registrados" class="btn btn-outline-info btn-sm"><i class="fas fa-file-alt"></i> <span class="span_exportacion">JSON</span></button>
+            </div>
+
+            <!-- Botones Add y Eliminar a la derecha -->
+            <div class="d-flex">
+              <!-- Botón para eliminar selección -->
+              <button id="delete-rows-productos-registrados" class="btn btn-outline-danger btn-sm ms-2 ml-2" style="display: none"><i class="fas fa-trash-alt"></i> <span class="span_exportacion">Eliminar</span></button>
+            </div>
+          </div>
+
+          <!-- Tabla de productos registrados -->
+          <div id="productos-registrados-table" class="ml-2 mr-2 mb-2 custom-tabulator mt-3" style="display: block">
+            <!-- <i class="fas fa-circle-notch fa-spin fa-3x color-spin d-flex justify-content-center align-items-center"></i> -->
+            <i class="fas fa-circle-notch fa-spin fa-3x color-spin d-flex justify-content-center align-items-center"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="{{ url_for('static', filename='modules/registro-gastos/productos-registrados/js/index.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,18 @@
+export const getUnidadesMedida = () => ({
+  unidades: "unidades",
+  gramos: "gramos",
+  kilogramos: "kilogramos",
+  mililitros: "mililitros",
+  litros: "litros",
+  paquetes: "paquetes",
+  docenas: "docenas",
+  botellas: "botellas",
+  latas: "latas",
+  bolsas: "bolsas",
+  cajas: "cajas",
+  bandejas: "bandejas",
+  frascos: "frascos",
+  tubos: "tubos",
+  sachets: "sachets",
+  otro: "otro",
+});

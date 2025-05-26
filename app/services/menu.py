@@ -26,8 +26,14 @@ modulos = [
               {
                 "id": "gastos-registrados",
                 "icono": "fa-file-invoice",
-                "nombre": "Gastos Registrados",
+                "nombre": "Boletas Registradas",
                 "url": "gastos_registrados"
+            },
+              {
+                "id": "productos-registrados",
+                "icono": "fa-cart-shopping",
+                "nombre": "Productos Registrados",
+                "url": "productos_registrados"
             }
         ]
     },
@@ -47,6 +53,25 @@ modulos = [
                 "icono": "fa-cubes",
                 "nombre": "Creación de módulos",
                 "url": "creacion_modulos"
+            }
+        ]
+    },
+        {
+        "id": "insumos-y-costeo",
+        "icono": "fa-box-open",
+        "nombre": "Insumos y Costeo",
+        "submodulos": [
+            {
+                "id": "costeo-de-platillos",
+                "icono": "fa-calculator",
+                "nombre": "Costeo de Platillos",
+                "url": "costeo_de_platillos"
+            },
+            {
+                "id": "listado-de-ingredientes",
+                "icono": "fa-carrot",
+                "nombre": "Listado de Ingredientes",
+                "url": "listado_de_ingredientes"
             }
         ]
     }

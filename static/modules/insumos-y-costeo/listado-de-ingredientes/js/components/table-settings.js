@@ -1,9 +1,8 @@
-import { table } from "../../../gastos-registrados/js/controllers/load-table.js";
-import { tableEvents } from "../../../gastos-registrados/js/components/table-events.js";
+import { tableEvents } from "./table-events.js";
 
 //configurar Tabla
 const tableSettings = (tabledata, paginationSize, initialSort, column) => {
-  const table = new Tabulator("#gastos-registrados-table", {
+  const table = new Tabulator("#ingredientes-maestros-table", {
     data: tabledata, //load row data from array
     layout: "fitColumns", //fit columns to width of table
     addRowPos: "top", //when adding a new row, add it to the top of the table
@@ -32,21 +31,21 @@ const tableSettings = (tabledata, paginationSize, initialSort, column) => {
 };
 
 // Configuración Botones de exportación
-const exportButtonsBoleta = () => {
+const exportButtons = () => {
   //cambiar nombre a los archivos de exportación
   let fileName = "datos";
   // CSV
-  document.getElementById("download-csv-gastos-registrados").addEventListener("click", function () {
+  document.getElementById("download-csv-productos-registrados").addEventListener("click", function () {
     table.download("csv", fileName + ".csv");
   });
   // Excel (XLSX)
-  document.getElementById("download-xlsx-gastos-registrados").addEventListener("click", function () {
+  document.getElementById("download-xlsx-productos-registrados").addEventListener("click", function () {
     table.download("xlsx", fileName + ".xlsx", { sheetName: "Reporte" });
   });
   // JSON
-  document.getElementById("download-json-gastos-registrados").addEventListener("click", function () {
+  document.getElementById("download-json-productos-registrados").addEventListener("click", function () {
     table.download("json", fileName + ".json");
   });
 };
 
-export { tableSettings, exportButtonsBoleta };
+export { tableSettings, exportButtons };
