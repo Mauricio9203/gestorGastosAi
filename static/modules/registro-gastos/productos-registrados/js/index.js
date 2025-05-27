@@ -1,7 +1,7 @@
 import { addCustomActiveClass } from "../../../../utils/sidebarConfig.js";
 import { exportButtons } from "./components/table-settings.js";
 import { loadTable } from "./controllers/load-table.js";
-import { getIngredientesMaestrosDetalleBoleta } from "./services/get-productos-cargados.js";
+import { getCoincidenciasIngredientes } from "./services/get-coincidencias-ingredientes.js";
 
 window.addEventListener("DOMContentLoaded", function () {
   const linkId = "productos-registradosLink";
@@ -13,4 +13,5 @@ window.addEventListener("DOMContentLoaded", function () {
 
   loadTable();
   exportButtons();
+  getCoincidenciasIngredientes();
 });

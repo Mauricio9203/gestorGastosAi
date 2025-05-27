@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request,session
-from app.services.crud import get_record_function, get_record
+from app.services.crud import get_record_function, get_record, actualizacion_masiva_ingredientes_maestros
 
 # Crear un Blueprint para los usuarios
 productos_registrados_bp = Blueprint('productos_registrados', __name__)
@@ -29,4 +29,25 @@ def ingredientes_maestros_detalle_boleta():
         "ingredientes_maestros": response if response else []
     })
     
+@productos_registrados_bp.route('/ingredientes-coincidencias', methods=['GET'])
+def encontrar_coincidencias_ingredientes():
+    response = get_record_function(
+        function_name="db_encontrar_coincidencias_ingredientes_maestros",
+        params={"uid": int(session['id_user'])}
+    )
 
+    return jsonify({
+        "coincidencias_ingredientes": response if response else []
+    })
+    
+@productos_registrados_bp.route('/actualizacion-masiva-ingredientes-maestros', methods=['POST'])
+def actualizacion_masiva_fk_ingrediente_maestro():
+    try:
+        payload = request.get_json()
+        print("Tipo payload:", type(payload))
+        print("Primer elemento payload:", payload[0] if payload else None)
+        resultado = actualizacion_masiva_ingredientes_maestros(payload)
+        return jsonify({"success": True, "result": resultado})
+    except Exception as e:
+        print("Error en actualizacion_masiva_fk_ingrediente_maestro:", e)
+        return jsonify({"error": str(e)}), 400

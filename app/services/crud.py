@@ -1,6 +1,8 @@
 from app.services.supabase_client import get_supabase_client
 from datetime import datetime, timezone
 from app.utils.decorators import login_required
+from flask import request, jsonify
+import json
 
 # Obtener el cliente de Supabase
 supabase = get_supabase_client()
@@ -78,3 +80,26 @@ def delete_records(table_name: str, ids: list):
         raise Exception(str(response_dict["error"]))
     
     return response_dict.get("data")
+
+
+#esta es muy específica para el módulo de productos registrados
+@login_required
+def actualizacion_masiva_ingredientes_maestros(payload: list):
+    if not isinstance(payload, list):
+        raise ValueError("El cuerpo debe ser una lista de objetos con id_detalle_boleta e id_ingrediente_maestro")
+
+    response = supabase.rpc("actualizar_id_ingrediente_maestro_masivo", {
+        "json_data": payload
+    }).execute()
+    
+    print("Response de actualizacion_masiva_ingredientes_maestros:", response)
+
+    # Revisar si hubo error (validar que exista 'error' y no sea None)
+    if hasattr(response, 'error') and response.error:
+        # Intentar acceder a message, si no existe mostrar error completo como string
+        err_msg = getattr(response.error, 'message', str(response.error))
+        raise Exception(err_msg)
+
+    # Retornar solo los datos para que el endpoint arme el jsonify
+    return response.data
+
