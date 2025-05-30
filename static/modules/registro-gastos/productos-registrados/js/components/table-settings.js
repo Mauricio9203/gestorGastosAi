@@ -19,6 +19,29 @@ const tableSettings = (tabledata, paginationSize, initialSort, column) => {
     },
     columns: column,
     headerCssClass: "custom-header",
+    rowFormatter: function (row) {
+      const columnasAResaltar = ["unidad_medida", "cantidad_contenido_unidad", "id_detalle_boleta", "precio_unitario"];
+      const data = row.getData();
+      const el = row.getElement();
+
+      const condicionInvalida = (["kilogramos", "litros", "gramos", "mililitros", "unidades"].includes(data.unidad_medida) && data.cantidad_contenido_unidad <= 0) || data.precio_unitario <= 0;
+
+      columnasAResaltar.forEach((columna) => {
+        const celda = row.getCell(columna);
+        if (celda) {
+          const celdaEl = celda.getElement();
+          if (condicionInvalida) {
+            celdaEl.style.backgroundColor = "#ffe0e0";
+            celdaEl.style.color = "black";
+            celdaEl.style.fontWeight = "bold";
+          } else {
+            celdaEl.style.backgroundColor = "";
+            celdaEl.style.color = "";
+            celdaEl.style.fontWeight = "";
+          }
+        }
+      });
+    },
   });
 
   // Esperar a que la tabla esté completamente construida antes de limpiar los filtros

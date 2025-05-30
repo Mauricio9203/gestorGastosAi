@@ -1,3 +1,4 @@
+import mostrarImagenSweetAlert from "../../../../../utils/sweet-alerts/mostrar-imagen.js";
 import { getUnidadesMedida } from "../../../../../utils/unidades-medida.js";
 import { tableSettings } from "../components/table-settings.js";
 import { getIngredientesMaestrosDetalleBoleta, getProductosCargados } from "../services/get-productos-cargados.js";
@@ -10,7 +11,7 @@ const loadTable = async () => {
   let ingredientesMaestrosLista = {};
 
   ingredientesMaestros.ingredientes_maestros.forEach((element) => {
-    ingredientesMaestrosLista[element.id] = element.nombre;
+    ingredientesMaestrosLista[element.id] = element.id + " - " + element.nombre;
   });
 
   console.log(ingredientesMaestrosLista);
@@ -40,8 +41,20 @@ const loadTable = async () => {
       field: "id_boleta",
       hozAlign: "center",
       minWidth: 90,
+      formatter: function (cell, formatterParams) {
+        const id = cell.getValue();
+        const row = cell.getRow().getData();
+        console.log(row.url_boleta);
+        // Define aquí la URL base o completa a donde quieres que apunte
+        const url = row.url_boleta;
+        return `<a href="#"   rel="noopener noreferrer">${id}</a>`;
+      },
+      cellClick: function (e, cell) {
+        e.preventDefault();
+        const row = cell.getRow().getData();
+        mostrarImagenSweetAlert(row.url_boleta);
+      },
     },
-
     {
       title: "Nombre Ítem",
       field: "nombre_item",
@@ -50,21 +63,21 @@ const loadTable = async () => {
       minWidth: 150,
     },
     {
-      title: "Cantidad",
+      title: "Cantidad Comprada",
       field: "cantidad",
       editor: "number",
       hozAlign: "right",
-      minWidth: 80,
+      minWidth: 150,
     },
     {
-      title: "Cantidad Contenido Unidad",
+      title: "Cantidad por Unidad",
       field: "cantidad_contenido_unidad",
       editor: "number",
       hozAlign: "right",
-      minWidth: 120,
+      minWidth: 150,
     },
     {
-      title: "Unidad Medida",
+      title: "Unidad Base",
       field: "unidad_medida",
       editor: "list",
       editorParams: {
@@ -114,35 +127,16 @@ const loadTable = async () => {
     },
     {
       title: "Ingrediente Maestro",
-      field: "nombre_ingrediente_maestro",
-      editor: "list",
+      field: "fk_ingrediente_maestro",
+
+      editor: "autocomplete",
       editorParams: {
         values: ingredientesMaestrosLista,
+        showListOnEmpty: true, // muestra todas las opciones si el campo está vacío
+        freetext: false, // evita que el usuario escriba algo que no esté en la lista
       },
       headerFilter: "input",
       minWidth: 150,
-      formatter: function (cell) {
-        const value = cell.getValue();
-        return ingredientesMaestrosLista[value] || value;
-      },
-    },
-    {
-      title: "Creado",
-      field: "created_at",
-      minWidth: 160,
-      formatter: function (cell) {
-        const date = new Date(cell.getValue());
-        return date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB");
-      },
-    },
-    {
-      title: "Actualizado",
-      field: "updated_at",
-      minWidth: 160,
-      formatter: function (cell) {
-        const date = new Date(cell.getValue());
-        return date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB");
-      },
     },
   ];
 

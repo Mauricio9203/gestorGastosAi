@@ -76,6 +76,7 @@ const loadTable = async () => {
       field: "fecha_boleta",
       editor: "input",
       headerFilter: "input",
+      headerFilterPlaceholder: "YYYY-MM-DD",
       minWidth: 100,
     },
     {

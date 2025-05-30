@@ -36,7 +36,7 @@ Extrae de una imagen de boleta:
 - Fecha debe ser en este formato siempre yyyy-mm-dd, comercio (nombre y RUT), total neto, total bruto, porcentaje IVA.
 - Lista de ítems en orden: nombre, cantidad_items, cantidad_contenido, unidad_contenido, precio_unitario, precio_total, precio_neto, precio_bruto, categoría, nombre generico, y unidad_medida.
 
-Usa solo estas unidades de medida (en minúscula, sin abreviar): unidades, gramos, kilogramos, mililitros, litros, paquetes, docenas, botellas, latas, bolsas, cajas, bandejas, frascos, tubos, sachets. Si no sabes, usa "unidades".
+Usa solo estas unidades de medida (en minúscula, sin abreviar): unidades, gramos, kilogramos, mililitros, litros. Si no sabes, usa "unidades".
 La categoría debe ser definida por ti. No uses términos genéricos como "alimento" o "lácteos". Usa categorías específicas pero no excesivamente detalladas. Por ejemplo, si ves queso y yogurth, deben clasificarse como "quesos" y "yogurth", no ambos como "lácteos". Si no puedes clasificarlo, usa "otros".
 El resultado debe ser un JSON válido. Si falta información, usa null. No incluyas texto adicional.
 En el nombre genérico, por ejemplo "SALCHICHAS 1 KG. A/V CAJA 6 U" debe quedar como "salchichas"
@@ -150,8 +150,6 @@ def analizar_boleta_desde_imagen():
         else:
               # Leer imagen directamente desde el archivo enviado
             imagen = Image.open(BytesIO(file.read())).convert("RGB")
-
-      
 
         # Comprimir usando la función modular
         imagen_comprimida = comprimir_imagen_memoria(imagen)

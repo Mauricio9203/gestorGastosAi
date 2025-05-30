@@ -69,12 +69,27 @@ const loadTable = async () => {
       title: "% Rendimiento",
       field: "porcentaje_rendimiento",
       editor: "number",
-      hozAlign: "right",
+      hozAlign: "left",
       formatterParams: {
         precision: 2,
       },
+      editorParams: {
+        min: 0,
+        max: 100,
+        step: 0.01,
+      },
+      validator: function (cell, value, parameters) {
+        const num = parseFloat(value);
+        return num >= 0 && num <= 100;
+      },
+      validationFailed: function (cell, value, validators) {
+        console.log("Validation failed for cell:", cell, "with value:", value);
+        // Opcional: mensaje o estilo al fallar validación
+        alert("El % rendimiento debe estar entre 0 y 100.");
+      },
       minWidth: 130,
     },
+    /*
     {
       title: "Definido por Humano",
       field: "redimiento_definido_por_humano",
@@ -82,7 +97,8 @@ const loadTable = async () => {
       formatter: "tickCross",
       hozAlign: "center",
       width: 160,
-    },
+    },*/
+    /*
     {
       title: "Creado",
       field: "created_at",
@@ -91,7 +107,8 @@ const loadTable = async () => {
         const date = new Date(cell.getValue());
         return date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB");
       },
-    },
+    },*/
+    /*
     {
       title: "Actualizado",
       field: "updated_at",
@@ -100,7 +117,7 @@ const loadTable = async () => {
         const date = new Date(cell.getValue());
         return date.toLocaleDateString("en-GB") + " " + date.toLocaleTimeString("en-GB");
       },
-    },
+    },*/
   ];
 
   var paginationSize = 10;
