@@ -38,12 +38,21 @@ const tableEvents = (table) => {
 
   //eventos al seleccionar rows
   table.on("rowSelectionChanged", function (data) {
+    console.log("Filas seleccionadas:", data);
+
+    document.getElementById("alerta-modificacion-masiva-db").innerHTML = "Se procederán a modificar <strong>" + data.length + "</strong> registros.";
     if (data.length > 0) {
-      document.getElementById("delete-rows-productos-registrados").style.display = "block";
+      document.getElementById("opciones-detalle-boleta-dropdown").style.display = "block";
+
       document.getElementById("delete-rows-productos-registrados").innerHTML = '<i class="fas fa-trash-alt"></i> <span class="span_exportacion">Eliminar</span> (' + data.length + ")";
+      document.getElementById("edicion-masiva-productos").innerHTML = '<i class="fas fa-edit"></i> <span class="span_edicion_masiva">Edición Masiva</span> (' + data.length + ")";
+      document.getElementById("opciones-detalle-boleta-dropdown").innerHTML = '<i class="fas fa-cog me-1"></i> Acciones (' + data.length + ")";
     } else {
-      document.getElementById("delete-rows-productos-registrados").style.display = "none";
+      document.getElementById("opciones-detalle-boleta-dropdown").style.display = "none";
+
       document.getElementById("delete-rows-productos-registrados").innerHTML = '<i class="fas fa-trash-alt"></i> <span class="span_exportacion">Eliminar</span>"';
+      document.getElementById("edicion-masiva-productos").innerHTML = '<i class="fas fa-edit"></i> <span class="span_edicion_masiva">Edición Masiva</span>';
+      document.getElementById("opciones-detalle-boleta-dropdown").innerHTML = '<i class="fas fa-cog me-1"></i> Acciones';
     }
   });
 };

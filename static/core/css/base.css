@@ -556,6 +556,8 @@ body {
   color: #ffffff !important; /* Color blanco para el texto del elemento seleccionado */
 }
 
+
+
 .btn-primary {
   background-color: #6f42c1; /* Color morado */
   border-color: #6f42c1; /* Borde morado */
@@ -597,4 +599,19 @@ body {
   color: #fff !important;
   border-color: #5a34a1 !important;
   box-shadow: none !important;
+}
+
+
+button.btn.btn-primary:disabled {
+  color: white !important;            /* Texto morado */
+  background-color: #6f42c1 !important;
+  border-color: #6f42c1 !important;     /* Borde morado */
+  opacity: 0.65 !important;
+}
+
+
+
+.btn-outline-warning {
+  color: #856400; /* Color amarillo */
+  border-color: #856400; /* Borde amarillo */
 }

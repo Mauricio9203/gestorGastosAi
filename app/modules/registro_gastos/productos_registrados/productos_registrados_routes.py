@@ -16,6 +16,18 @@ def productos_registrados():
     return jsonify({
         "detalle_boleta": response if response else []
     })
+    
+@productos_registrados_bp.route('/productos-registrados/select-insumo-maestro', methods=['GET'])
+def get_select_insumo_maestro():
+    response = get_record(
+        table="ingredientes_maestros",
+        #filters={"username": "editado"}, ejemplo solo si quiero filtrar es como un where en sql
+        filters={'id_usuario':session['id_user']},
+        select_columns="id,nombre"
+    )
+    return jsonify({
+        "ingredientes_maestros": response if response else []
+    })
 
 @productos_registrados_bp.route('/ingredientes-maestros-detalle-boleta', methods=['GET'])
 def ingredientes_maestros_detalle_boleta():

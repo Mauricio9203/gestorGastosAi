@@ -21,10 +21,16 @@
               <button id="download-json-productos-registrados" class="btn btn-outline-info btn-sm"><i class="fas fa-file-alt"></i> <span class="span_exportacion">JSON</span></button>
             </div>
 
-            <!-- Botones Add y Eliminar a la derecha -->
-            <div class="d-flex">
-              <!-- Botón para eliminar selección -->
-              <button id="delete-rows-productos-registrados" class="btn btn-outline-danger btn-sm ms-2 ml-2" style="display: none"><i class="fas fa-trash-alt"></i> <span class="span_exportacion">Eliminar</span></button>
+            <div class="dropdown">
+              <button style="display: none" class="btn btn-sm btn-dark dropdown-toggle" type="button" id="opciones-detalle-boleta-dropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog me-1"></i> Acciones</button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownOpciones">
+                <li>
+                  <a class="dropdown-item" id="edicion-masiva-productos" href="#" data-bs-toggle="modal" data-bs-target="#modal-actualizacion-masiva"> <i class="fas fa-edit me-2"></i> Edición masiva </a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-danger" id="delete-rows-productos-registrados" href="#"> <i class="fas fa-trash-alt me-2"></i> Eliminar </a>
+                </li>
+              </ul>
             </div>
           </div>
 
