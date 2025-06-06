@@ -2,11 +2,11 @@ import { table } from "../controllers/load-table.js";
 import { getInsumosMaestros } from "../services/get-insumos-maestros.js";
 
 const tipoCampoPorNombre = {
-  "nombre-item": "texto",
-  "cantidad-comprada": "numero",
-  "unidad-base": "select",
-  "insumo-maestro": "select",
-  "nombre-categoria": "texto",
+  nombre_item: "texto",
+  cantidad: "numero",
+  unidad_medida: "select",
+  id_ingrediente_maestro: "select",
+  nombre_categoria: "texto",
 };
 
 const inputPorTipo = {
@@ -16,7 +16,7 @@ const inputPorTipo = {
 };
 
 const boton = document.getElementById("boton-actualizacion-masiva");
-const campoAEditar = document.getElementById("campo-a-editar");
+let campoAEditar = document.getElementById("campo-a-editar");
 
 const verificarHabilitarBoton = () => {
   const campo = campoAEditar.value;
@@ -55,8 +55,6 @@ const botonActualizacionMasivaDetalleBoleta = () => {
     const campo = campoAEditar.value;
     const tipo = tipoCampoPorNombre[campo];
 
-    const selectedRows = table.getSelectedData();
-
     let valor;
     switch (tipo) {
       case "texto":
@@ -82,7 +80,7 @@ Object.values(inputPorTipo).forEach((input) => {
 });
 
 const cargarSelect = async (campo) => {
-  if (campo === "unidad-base") {
+  if (campo === "unidad_medida") {
     inputPorTipo.select.innerHTML = `
       <option value="kilogramos">Kilogramo</option>
       <option value="gramos">Gramo</option>
@@ -90,7 +88,7 @@ const cargarSelect = async (campo) => {
       <option value="mililitros">Mililitro</option>
       <option value="unidad">Unidad</option>
     `;
-  } else if (campo === "insumo-maestro") {
+  } else if (campo === "id_ingrediente_maestro") {
     let campoSelect = document.getElementById("input-select");
 
     campoSelect.disabled = true;
@@ -107,7 +105,6 @@ const cargarSelect = async (campo) => {
       select.appendChild(option);
     });
   }
-  console.log("funcion cargarSelect", campo);
 };
 
-export { mostrarInputCorrespondiente, botonActualizacionMasivaDetalleBoleta };
+export { mostrarInputCorrespondiente, botonActualizacionMasivaDetalleBoleta, verificarHabilitarBoton };

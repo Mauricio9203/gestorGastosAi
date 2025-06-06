@@ -14,7 +14,6 @@ const createIngredientesNuevosMasivo = async (ingredientes) => {
       throw new Error(data.error || "Error al insertar ingredientes");
     }
 
-    console.log("Ingredientes insertados:", data.insertados);
     return data.insertados;
   } catch (error) {
     console.error("Error:", error.message);

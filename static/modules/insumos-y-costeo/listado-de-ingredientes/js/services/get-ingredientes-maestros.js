@@ -9,7 +9,7 @@ const getIngredientesMaestros = async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log("ingredientes maestros:", data.ingredientes_maestros);
+
     return data.ingredientes_maestros;
   } catch (error) {
     console.error("Error fetching detalle boleta:", error);
@@ -23,7 +23,7 @@ const getIngredientesNuevos = async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log("ingredientes nuevos:", data.ingredientes_nuevos);
+
     if (data.ingredientes_nuevos.length > 0) {
       showProcessingToastMessage(true, "Se han detectado " + data.ingredientes_nuevos.length + " ingredientes nuevos, procediendo a actualizar...");
       await createIngredientesNuevosMasivo(data.ingredientes_nuevos);

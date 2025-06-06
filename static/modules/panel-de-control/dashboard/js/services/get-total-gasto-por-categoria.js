@@ -3,7 +3,7 @@ import { validarFiltros } from "../controllers/filtros.js";
 const getTotalGastoPorCategoria = async () => {
   let filtros = validarFiltros();
   let validacion = filtros["validacion"];
-  console.log(validacion);
+
   if (validacion != false) {
     const queryString = new URLSearchParams(filtros).toString();
     try {
@@ -15,7 +15,6 @@ const getTotalGastoPorCategoria = async () => {
       }
 
       const data = await response.json();
-      console.log("Data de gasto por categoria:", data);
 
       if (!Array.isArray(data) || data.length === 0) {
         let datos = [

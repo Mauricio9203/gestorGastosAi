@@ -17,15 +17,12 @@ const getCoincidenciasIngredientes = async () => {
     }
 
     const data = await response.json();
-    console.log(data.coincidencias_ingredientes);
 
     //se envían las coincidencias de ingredientes a la función que las actualiza
-    console.log("Coincidencias de ingredientes obtenidas:", data.coincidencias_ingredientes.length);
     if (data.coincidencias_ingredientes.length > 0) {
       showProcessingToastMessage(true, "Se han obtenido " + data.coincidencias_ingredientes.length + " coincidencias de ingredientes, enlazando ingredientes...");
       let respuesta_actualizacion = await actualizarIngredientesMasivos(data.coincidencias_ingredientes);
       if (respuesta_actualizacion.success === true) {
-        console.log(respuesta_actualizacion.result);
         showProcessingToastMessage(false, "Se han enlazado " + respuesta_actualizacion.result + " con su respectivo ingrediente maestro.");
         // Notificación de éxito
         notificationToastify("Se han enlazado " + respuesta_actualizacion.result + " con su respectivo ingrediente maestro.", 2000, "bottom", "right", "success");

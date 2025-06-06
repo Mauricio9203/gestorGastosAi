@@ -16,7 +16,6 @@ const actualizarIngredientesMasivos = async (lista) => {
       throw new Error(data.error || `Error HTTP ${response.status}`);
     }
 
-    console.log("Actualización exitosa:", data);
     return data;
   } catch (error) {
     console.error("Error al actualizar ingredientes masivos:", error);

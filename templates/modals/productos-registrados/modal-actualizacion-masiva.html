@@ -5,7 +5,7 @@
       <!-- Header -->
       <div class="modal-header bg-lilac text-white header-modal">
         <h6 class="modal-title" id="modal-actualizacion-masivaLabel">Actualizacion Masiva</h6>
-        <button type="button" class="btn-close btn-close-white mt-3" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <button type="button" class="btn-close btn-close-white mt-3" id="cerrar-modal-actualizacion-masiva-db" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
 
       <!-- Body -->
@@ -17,33 +17,32 @@
             <label for="campo-a-editar" class="form-label">Nombre del campo</label>
             <select class="form-control form-control-sm" id="campo-a-editar">
               <option value="" selected disabled>Selecciona un campo</option>
-              <option value="cantidad-comprada">Cantidad Comprada</option>
-              <option value="insumo-maestro">Insumo Maestro</option>
-              <option value="nombre-item">Nombre Item</option>
-              <option value="nombre-categoria">Nombre Categoría</option>
-              <option value="unidad-base">Unidad Base</option>
-              <!-- Agrega dinámicamente opciones como "nombre", "precio", "categoría", etc. -->
+              <option value="cantidad">Cantidad Comprada</option>
+              <option value="id_ingrediente_maestro">Insumo Maestro</option>
+              <option value="nombre_item">Nombre Item</option>
+              <option value="nombre_categoria">Nombre Categoría</option>
+              <option value="unidad_medida">Unidad Base</option>
             </select>
           </div>
 
           <div class="mb-3 input-actualizacion-masiva-detalle-de-boleta" style="display: none">
-            <label for="input-texto" class="form-label">Texto</label>
+            <label for="input-texto" class="form-label">Ingrese un valor</label>
             <input type="text" class="form-control form-control-sm" id="input-texto" placeholder="Ingrese valor textual" />
           </div>
 
           <div class="mb-3 input-actualizacion-masiva-detalle-de-boleta" style="display: none">
-            <label for="input-decimal" class="form-label">Número con 2 decimales</label>
+            <label for="input-decimal" class="form-label">Defina un cantidad</label>
             <input type="number" class="form-control form-control-sm" id="input-decimal" step="0.01" placeholder="Ej: 9.99" />
           </div>
 
           <div class="mb-3 input-actualizacion-masiva-detalle-de-boleta" style="display: none">
-            <label for="input-select" class="form-label">Opción</label>
+            <label for="input-select" class="form-label">Seleccione una Opción</label>
             <select class="form-control select2-normal-container" id="input-select">
               <option selected disabled value="">Selecciona una opción</option>
               <!-- Agrega opciones dinámicamente si es necesario -->
             </select>
           </div>
-          <button type="button" id="boton-actualizacion-masiva" class="btn btn-primary w-100 mt-3" disabled>Aplicar cambios masivos</button>
+          <button type="button" id="boton-actualizacion-masiva" class="btn btn-sm btn-primary w-100 mt-3" disabled>Aplicar cambios masivos</button>
         </div>
       </div>
     </div>

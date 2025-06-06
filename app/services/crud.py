@@ -103,3 +103,13 @@ def actualizacion_masiva_ingredientes_maestros(payload: list):
     # Retornar solo los datos para que el endpoint arme el jsonify
     return response.data
 
+
+def actualizacion_masiva_lista_id(nombre_tabla, campo_actualizar, nuevo_valor, lista_ids):
+    response = supabase.from_(nombre_tabla).update({campo_actualizar: nuevo_valor}).in_('id', lista_ids).execute()
+
+    if response:
+       print(f"✅ {len(response.data)} filas actualizadas correctamente.")
+       return response.data
+    else:
+       print("❌ Error al actualizar las filas.")
+       return 0

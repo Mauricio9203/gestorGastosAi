@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request,session
-from app.services.crud import get_record_function, get_record, actualizacion_masiva_ingredientes_maestros, update_record
+from app.services.crud import get_record_function, get_record, actualizacion_masiva_ingredientes_maestros, update_record, actualizacion_masiva_lista_id
 
 # Crear un Blueprint para los usuarios
 productos_registrados_bp = Blueprint('productos_registrados', __name__)
@@ -56,8 +56,6 @@ def encontrar_coincidencias_ingredientes():
 def actualizacion_masiva_fk_ingrediente_maestro():
     try:
         payload = request.get_json()
-        print("Tipo payload:", type(payload))
-        print("Primer elemento payload:", payload[0] if payload else None)
         resultado = actualizacion_masiva_ingredientes_maestros(payload)
         return jsonify({"success": True, "result": resultado})
     except Exception as e:
@@ -85,3 +83,20 @@ def actualizar_campo_boleta():  # <- agregar aquí
         
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+
+
+@productos_registrados_bp.route('/detalle_boleta/actualizacion_masiva_campo', methods=['POST'])
+def actualizacion_masiva_campo():
+    data = request.get_json()
+
+    response = actualizacion_masiva_lista_id(
+        nombre_tabla=data.get('nombre_tabla'),
+        campo_actualizar=data.get('campo_actualizar'),
+        nuevo_valor=data.get('nuevo_valor'),
+        lista_ids=data.get('lista_ids')
+    )
+
+    return jsonify({
+        "filas_actualizadas": response or [], "ok": True
+    })

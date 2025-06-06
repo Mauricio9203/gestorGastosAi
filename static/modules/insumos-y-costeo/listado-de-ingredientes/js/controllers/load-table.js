@@ -82,11 +82,7 @@ const loadTable = async () => {
         const num = parseFloat(value);
         return num >= 0 && num <= 100;
       },
-      validationFailed: function (cell, value, validators) {
-        console.log("Validation failed for cell:", cell, "with value:", value);
-        // Opcional: mensaje o estilo al fallar validación
-        alert("El % rendimiento debe estar entre 0 y 100.");
-      },
+      validationFailed: function (cell, value, validators) {},
       minWidth: 130,
     },
     /*

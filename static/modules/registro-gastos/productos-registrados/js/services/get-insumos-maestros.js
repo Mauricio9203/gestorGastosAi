@@ -5,7 +5,6 @@ const getInsumosMaestros = async () => {
 
     const insumos = data.ingredientes_maestros || [];
 
-    console.log("Insumos maestros:", insumos);
     return insumos;
   } catch (error) {
     console.error("Error al obtener insumos maestros:", error);

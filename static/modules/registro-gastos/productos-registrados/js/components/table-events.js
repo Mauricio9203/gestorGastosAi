@@ -12,12 +12,6 @@ const tableEvents = (table) => {
     let id_detalle_boleta = cell.getRow().getData().id_detalle_boleta;
     let fieldName = cell.getField();
 
-    console.log("Celda editada:", {
-      value: value,
-      id_detalle_boleta: id_detalle_boleta,
-      fieldName: fieldName,
-    });
-
     if (value === null || value === undefined || value === "") {
       notificationToastify("El valor no puede ser nulo", 2000, "bottom", "right", "warning");
       cell.restoreOldValue();
@@ -33,13 +27,10 @@ const tableEvents = (table) => {
     } else {
       notificationToastify(formatearNombreCampo(fieldName) + " actualizado correctamente.", 2000, "bottom", "center", "success");
     }
-    console.log("Resultado de updateDetalleBoleta:", resultado);
   });
 
   //eventos al seleccionar rows
   table.on("rowSelectionChanged", function (data) {
-    console.log("Filas seleccionadas:", data);
-
     document.getElementById("alerta-modificacion-masiva-db").innerHTML = "Se procederán a modificar <strong>" + data.length + "</strong> registros.";
     if (data.length > 0) {
       document.getElementById("opciones-detalle-boleta-dropdown").style.display = "block";

@@ -1,6 +1,8 @@
 import { addCustomActiveClass } from "../../../../utils/sidebarConfig.js";
-import { botonActualizacionMasivaDetalleBoleta, mostrarInputCorrespondiente } from "./components/eventos-display.js";
+import { botonActualizacionMasivaDetalleBoleta, mostrarInputCorrespondiente, verificarHabilitarBoton } from "./components/eventos-display.js";
+import { ejecutarSelect2 } from "./components/select2-config.js";
 import { exportButtons } from "./components/table-settings.js";
+import { validarFormularioActualizacionMasiva } from "./controllers/actualizacion-masiva.js";
 import { loadTable } from "./controllers/load-table.js";
 import { getCoincidenciasIngredientes } from "./services/get-coincidencias-ingredientes.js";
 
@@ -17,11 +19,6 @@ window.addEventListener("DOMContentLoaded", function () {
   getCoincidenciasIngredientes();
   mostrarInputCorrespondiente();
   botonActualizacionMasivaDetalleBoleta();
-
-  $("#input-select").select2({
-    dropdownParent: $("#modal-actualizacion-masiva"),
-    placeholder: "Selecciona un valor",
-    allowClear: true,
-    width: "100%",
-  });
+  ejecutarSelect2();
+  validarFormularioActualizacionMasiva();
 });

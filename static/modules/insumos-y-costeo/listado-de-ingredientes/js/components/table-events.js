@@ -4,12 +4,6 @@ const tableEvents = (table) => {
     let value = cell.getValue();
     let id_detalle_boleta = cell.getRow().getData().id_detalle_boleta;
     let fieldName = cell.getField();
-
-    console.log("Celda editada:", {
-      value: value,
-      id_detalle_boleta: id_detalle_boleta,
-      fieldName: fieldName,
-    });
   });
 
   //eventos al seleccionar rows

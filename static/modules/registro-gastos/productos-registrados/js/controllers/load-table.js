@@ -7,6 +7,10 @@ let table;
 
 //Iniciar Tabla
 const loadTable = async () => {
+  if (table) {
+    table.destroy();
+    table = null;
+  }
   var ingredientesMaestros = await getIngredientesMaestrosDetalleBoleta();
   let ingredientesMaestrosLista = {};
 
@@ -14,7 +18,6 @@ const loadTable = async () => {
     ingredientesMaestrosLista[element.id] = element.id + " - " + element.nombre;
   });
 
-  console.log(ingredientesMaestrosLista);
   var data = await getProductosCargados();
   var tabledata = data;
 
@@ -44,7 +47,6 @@ const loadTable = async () => {
       formatter: function (cell, formatterParams) {
         const id = cell.getValue();
         const row = cell.getRow().getData();
-        console.log(row.url_boleta);
         // Define aquí la URL base o completa a donde quieres que apunte
         const url = row.url_boleta;
         return `<a href="#"   rel="noopener noreferrer">${id}</a>`;
@@ -141,7 +143,7 @@ const loadTable = async () => {
   ];
 
   var paginationSize = 10;
-  var initialSort = [{ column: "created_at", dir: "desc" }];
+  var initialSort = [{ column: "nombre_item", dir: "asc" }];
 
   table = tableSettings(tabledata, paginationSize, initialSort, column);
 };

@@ -3,7 +3,7 @@ import { validarFiltros } from "../controllers/filtros.js";
 const getTotalGastado = async () => {
   let filtros = validarFiltros();
   let validacion = filtros["validacion"];
-  console.log(validacion);
+
   if (validacion != false) {
     // Convertir el objeto filtros en string de parámetros de URL
     const queryString = new URLSearchParams(filtros).toString();
